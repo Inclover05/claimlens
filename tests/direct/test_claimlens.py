@@ -82,3 +82,23 @@ def test_insufficient_evidence_can_be_an_honest_result(case):
     contract.check_claim(payload)
     assert vm.run_validator() is True
 
+def test_large_page_assets_do_not_displace_article_evidence(case):
+    vm,contract,payload=case
+    body='<html><head><style>'+('.asset{color:red}'*16000)+'</style></head><body><nav>Navigation only</nav><main><article><p>'+TEXT.replace('sunlight','sunlight &amp; reflected light')+'</p></article></main></body></html>'
+    value=answer();value['evidence'][0]['quote']=QUOTE.replace('sunlight','sunlight & reflected light')
+    vm.mock_web('nasa.gov',{'status':200,'body':body})
+    vm.mock_llm('^Adjudicate ONE',json.dumps(value));vm.mock_llm('^Verify the proposed',json.dumps({'valid':True}))
+    contract.check_claim(payload)
+    assert vm.run_validator() is True
+
+def test_title_and_incomplete_styles_cannot_be_evidence(case):
+    vm,contract,payload=case
+    body='<html><head><title>'+QUOTE+'</title><style>'+('.asset{color:red}'*5000)+'</style></head><body><main>'+('A page about telescope manufacture. '*10)+'</main></body></html>'
+    mocks(vm,body=body)
+    with pytest.raises(Exception,match='UNGROUNDED_QUOTE'):
+        contract.check_claim(payload)
+    vm.clear_mocks()
+    mocks(vm,body='<style>'+('This is not article evidence. '*40000))
+    with pytest.raises(Exception,match='SOURCE_ACCESS_FAILED'):
+        contract.check_claim(payload)
+

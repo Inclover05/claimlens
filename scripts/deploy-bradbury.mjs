@@ -14,7 +14,9 @@ const consensus = chain.consensusMainContract;
 const publicClient = createPublicClient({ chain, transport: http(EVM_RPC, { retryCount: 0, timeout: 15000 }) });
 const lifecycleClient = createClient({ chain: { ...testnetBradbury, rpcUrls: { default: { http: [GEN_RPC] } } } });
 const directory = new URL('../.claimlens-wallet/', import.meta.url);
-const journalFile = new URL('deployment.json', directory);
+const revision = process.argv[3] || '';
+if (revision && !/^[a-z][a-z0-9-]{0,39}$/.test(revision)) throw new Error('Invalid explicit deployment revision.');
+const journalFile = new URL(revision ? `deployment-${revision}.json` : 'deployment.json', directory);
 const sourceFile = new URL('../contracts/claimlens.py', import.meta.url);
 const expectedPolicy = 'claimlens-evidence-v1';
 const sourceHash = source => createHash('sha256').update(source).digest('hex');
@@ -52,7 +54,7 @@ async function prepare() {
   const report = {
     checkedAt: new Date().toISOString(), sdkVersion: '1.1.8', network: 'testnet-bradbury', chainId: 4221,
     address: account.address, consensusAddress: consensus.address, sourceSha256: sourceHash(source),
-    policy: expectedPolicy, constructorArgs: [], leaderOnly: false, balanceGEN: formatEther(balance),
+    policy: expectedPolicy, revision: revision || 'initial', constructorArgs: [], leaderOnly: false, balanceGEN: formatEther(balance),
     fundingRequired: balance === 0n, validUntil, protocolValueWei: '0', chainWriteSent: false,
   };
   let gas, gasPrice;

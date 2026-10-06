@@ -6,7 +6,7 @@
 - Changed application files: focused ESLint check passes (warnings for ordinary image tags are non-blocking).
 - Fourteen Node regression tests pass: public HTTPS origins, cross-origin rejection, malformed forwarding headers, PostgreSQL placeholders, concurrent request isolation, wallet restoration, account/chain checks, uncertain transaction recovery, lifecycle handling, unsafe source rejection, and deployment encoding compared with the pinned SDK before signing or broadcast.
 - Official GenVM linter: contract schema valid, three methods, two views, one write, no constructor parameters.
-- Five direct contract tests: payload/source provenance, duplicate guard, successful captured validator replay, changed source/disagreement rejection, source-access failure, invented quote/malformed output rejection, and legitimate insufficient evidence.
+- Seven direct contract tests: payload/source provenance, duplicate guard, successful captured validator replay, changed source/disagreement rejection, source-access failure, invented quote/malformed output rejection, legitimate insufficient evidence, large page assets, HTML entity decoding, title-only evidence and incomplete styles.
 - Browser fixtures: input validation, wallet dialog, mobile menu/help navigation, dashboard, reduced motion, pause control, selected-provider restoration, uncertain-outcome retry lock, refresh, API outage after a returned hash, local hash restoration and manual attachment. No chain write occurred.
 - Real local API/D1: ephemeral account signed the actual nonce; signature verified; used nonce rejected; profile and private draft persisted; SHA-256 matched immutable payload; guest access denied; public feed excluded the draft; missing contract blocked submission; logout invalidated the session. Fixture rows were removed afterward.
 - Visual inspection: dark desktop, light desktop, 390px mobile, and brand reveal start/mid/end. Mobile document width equals viewport width; no horizontal overflow. Heavy 3D is omitted for reduced motion and small screens.
@@ -48,7 +48,7 @@ A new local test signer was created at the user's request. Its private key is en
 
 The wallet received 5 test GEN. Deployment used a successful live gas estimate and the pinned SDK encoding; the local journal saved its deterministic EVM hash before broadcast and prevents an automatic duplicate deployment after an uncertain outcome.
 
-## Finalized Bradbury deployment
+## Initial finalized Bradbury deployment — superseded
 
 - Contract: `0x9C3F33ab49Cf6F806cB4A1254F6770f42f7337Bf`.
 - EVM transaction: `0x8d825baead1b57c0e3a7822c23579feaa667848a3b5c25445f00baf79fb5360b`; receipt success.
@@ -58,3 +58,9 @@ The wallet received 5 test GEN. Deployment used a successful live gas estimate a
 - Vercel contract address configured for production, preview and development. Real website verdict checks are in progress.
 
 See `bradbury-deployment.json` and `deployment-preflight.json` for machine-readable evidence. The saved-session composer fix disables Review claim until sign-in restoration completes; its browser regression holds the session response deliberately.
+
+## Source extraction correction
+
+The first paid production check reached GenLayer but ended `UNDETERMINED` with `FINISHED_WITH_ERROR`. Independently reading the supplied NASA page showed the fact-bearing article started after the old 50,000-character raw HTML cutoff. A proposed result also used page titles as evidence; it is not counted as a verified verdict. See `live-website-verification-initial.json` for its identifiers.
+
+The corrected source bounds raw input at 1 MB, removes scripts/styles before limiting evidence, prefers article/main content, decodes entities and marks truncated text. The rubric explicitly rejects titles/navigation as evidence and inference from omitted content. The official linter and all seven direct tests pass. Replacement contract `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598` is accepted with successful execution and exact source/policy read-back; finalization and real verdict tests remain in progress.

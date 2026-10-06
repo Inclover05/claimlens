@@ -1,8 +1,10 @@
 # ClaimLens deployment preparation
 
-Status: Bradbury deployment finalized with successful execution; exact deployed source and policy verified. Real website verdict checks are in progress.
+Status: corrected Bradbury deployment accepted with successful execution and exact source/policy verification. Finalization and real website verdict checks are in progress.
 
-Contract: `0x9C3F33ab49Cf6F806cB4A1254F6770f42f7337Bf`. Deployment evidence, EVM/GenLayer identifiers and measured network fee are recorded in `reports/bradbury-deployment.json`. Vercel's production, preview and development environments now contain this address; each running deployment receives it at build time.
+Contract: `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598`. This replaces the initial contract after real testing found that raw HTML truncation excluded the NASA article. Assets are now removed before the evidence-text limit, article/main content is preferred, entities are decoded and truncation is disclosed. The seven direct runtime tests include large page assets, title-only evidence and incomplete styles. Historical deployment and live-test evidence is retained in `reports/bradbury-deployment-initial.json` and `reports/live-website-verification-initial.json`.
+
+For this explicit replacement revision, use `node scripts/deploy-bradbury.mjs status source-extraction`. The revision preserves the initial attempt journal and prevents duplicate replacement deployments. Run `node scripts/finalize-bradbury.mjs <GenLayer-ID>` only when normal protocol finalization is available; it records any submitted hash before broadcast.
 
 ClaimLens asks whether one factual claim is supported by sources independently fetched and assessed inside the Intelligent Contract. The website discovers candidates, saves the immutable request, signs through the selected wallet, and tracks the contract's result. The contract uses custom leader/validator comparison, not exact equality between freely worded AI responses.
 

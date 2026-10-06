@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-06T17:59:40.733Z",
+  "checkedAt": "2026-10-06T20:11:09.256Z",
   "sdkVersion": "1.1.8",
   "network": "Bradbury",
   "chainId": 4221,
@@ -7,8 +7,8 @@
   "genRpc": "https://rpc-bradbury.genlayer.com",
   "consensusAddress": "0x0112Bf6e83497965A5fdD6Dad1E447a6E004271D",
   "policy": "claimlens-evidence-v1",
-  "sourceSha256": "4ea3783af35968355028637f47c52de4664a8f93e95e059a51177404240625da",
-  "contractAddress": "0x9C3F33ab49Cf6F806cB4A1254F6770f42f7337Bf",
+  "sourceSha256": "62054246cfd48fdfd8d4e00aa4b668d0d70b897901345549b400292e9aabc1e2",
+  "contractAddress": "0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598",
   "checks": [
     "EVM chain ID with a wallet-style string request ID",
     "Consensus contract exists at the pinned SDK address",

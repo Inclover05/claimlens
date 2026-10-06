@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-10-06T20:09:29.041Z",
+  "ok": false,
+  "liveDecisionVerified": false,
+  "contract": "0x9C3F33ab49Cf6F806cB4A1254F6770f42f7337Bf",
+  "claimId": "1474c910-bf6c-407f-ae7e-9f22c2e52371",
+  "evmHash": "0x5ab0989bc538f65ed8d499070766d9c9a71cc5eb02be67212319c1ce8ec0e92a",
+  "genHash": "0x6608d1164d9deccc851baaf842ab380ac9a0dbd9ceac087cdfde6576adbb9c75",
+  "status": "UNDETERMINED",
+  "execution": "FINISHED_WITH_ERROR",
+  "issue": "Raw HTML was truncated before removing page assets, excluding the NASA article. Testing stopped; revised extraction and redeployment required.",
+  "checks": [
+    "Production wallet sign-in",
+    "Private claim creation",
+    "Real signed claim broadcast",
+    "Source extraction failure reproduced against NASA HTML"
+  ]
+}
