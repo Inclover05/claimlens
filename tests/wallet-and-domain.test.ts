@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { restoreWallet, switchToBradbury, submissionMessage, type WalletChoice, type Provider } from '../lib/wallet.ts';
-import { lifecycle, safeSource, validateClaim } from '../lib/domain.ts';
+import { lifecycle, safeSource, validateClaim, submissionContractError } from '../lib/domain.ts';
+import { executionErrorMessage, genericExecutionError, isExecutionErrorMessage } from '../lib/execution-errors.ts';
 const account='0x00000000000000000000000000000000000000ab';
 function wallet(name:string,address=account):WalletChoice{return {info:{uuid:name,name,rdns:name,icon:''},provider:{request:async({method})=>method==='eth_accounts'?[address]:null}};}
 test('refresh restores the selected provider among three wallets without requesting a signature',async()=>{
@@ -53,4 +54,19 @@ test('source validation blocks local, credentialed and non-HTTPS fetch targets',
  assert.equal(safeSource('https://www.nasa.gov/path#fragment'),'https://www.nasa.gov/path');
  assert.throws(()=>validateClaim('a'.repeat(601),''));
  assert.doesNotThrow(()=>validateClaim('a'.repeat(601),'https://www.nasa.gov/'));
+});
+
+test('retired drafts cannot obtain a new quote or start a wallet attempt',()=>{
+ assert.match(submissionContractError('','0xactive')!,/awaiting deployment/);
+ assert.match(submissionContractError('0xretired','0xactive')!,/retired contract/);
+ assert.match(submissionContractError('0xretired',undefined)!,/awaiting deployment/);
+ assert.equal(submissionContractError('0xAbC','0xaBc'),null);
+});
+
+test('public execution errors are explicit and never expose unrecognized debug data',()=>{
+ assert.match(executionErrorMessage('UNGROUNDED_QUOTE'),/exact-quotation validation/);
+ assert.match(executionErrorMessage('SOURCE_ACCESS_FAILED'),/could not read/);
+ for(const value of ['database.private.internal secret','__proto__','constructor',{},undefined])assert.equal(executionErrorMessage(value),genericExecutionError);
+ assert.equal(isExecutionErrorMessage(executionErrorMessage('UNGROUNDED_QUOTE')),true);
+ assert.equal(isExecutionErrorMessage('arbitrary error'),false);
 });

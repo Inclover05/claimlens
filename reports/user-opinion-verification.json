@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-10-06T21:46:49.990Z",
+  "id": "781a3205-26f4-4b91-92aa-7cf7b474d4d4",
+  "url": "https://claimlens-inclover05s-projects.vercel.app/checks/781a3205-26f4-4b91-92aa-7cf7b474d4d4",
+  "claim": "are democrats the best party ever in usa",
+  "contract": "0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598",
+  "genHash": "0x5a0a898c6e8965a0bb1cb2a0f3b8fdc27189ebd8ab84dc5e98ad3e804fd9d674",
+  "evmHash": "0x06621949aa38aeb01848fe91a083fc3ac8b36df00a352eec661d49c9f5069740",
+  "status": "ACCEPTED",
+  "execution": "FINISHED_WITH_RETURN",
+  "consensus": "AGREE",
+  "votes": [
+    "DETERMINISTIC_VIOLATION",
+    "AGREE",
+    "TIMEOUT",
+    "AGREE",
+    "AGREE"
+  ],
+  "verdict": "Not a factual claim",
+  "result": {
+    "as_of": "2026-10-06",
+    "caveats": "The claim is an opinion, not a verifiable assertion. No evidence can determine which party is 'best' as it depends on individual values and criteria.",
+    "evidence": [],
+    "explanation": "The claim asserts a subjective value judgment ('best') that cannot be objectively verified or refuted with factual evidence.",
+    "input_hash": "24851773f76660374c2fb822225b737ee67df627d547bdcec88c67000a2fe109",
+    "owner": "0x2b01a6d4731d1603269b4ffb686522a3ed9d5f3e",
+    "policy": "claimlens-evidence-v1",
+    "verdict": "Not a factual claim"
+  },
+  "stateVariant": "latest-nonfinal",
+  "independentReadBackMatched": true,
+  "scope": "Actual public user check on the existing deployed contract; read-only verification, no new transaction. This verifies the opinion classification path, not the failing evidence-quotation path."
+}

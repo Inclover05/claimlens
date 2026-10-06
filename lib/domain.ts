@@ -4,6 +4,11 @@ export type Verdict = typeof VERDICTS[number];
 export type Evidence = { url:string; title:string; quote:string; relation:'supports'|'contradicts'|'context'; };
 export type CheckResult = { verdict:Verdict; explanation:string; caveats:string; evidence:Evidence[]; as_of:string; input_hash:string; policy:string; owner:string; };
 export type SavedCheck = {id:string; claim:string; source:string; visibility:string; topic:string; created_at:number; state:string; evm_hash?:string; gen_hash?:string; input_hash:string; contract:string; result?:string; error?:string; payload?:string; owner:string; verdict?:string;};
+export function submissionContractError(saved:string,active?:string):string|null {
+ if(!saved||!active)return 'The Bradbury contract is awaiting deployment. Your draft is saved.';
+ if(saved.toLowerCase()!==active.toLowerCase())return 'This draft uses a retired contract. Create a new check with the current contract before paying.';
+ return null;
+}
 export function safeSource(value:string):string {
  if (!value) return '';
  const url = new URL(value);

@@ -11,7 +11,6 @@ from genlayer import *
 
 POLICY = "claimlens-evidence-v1"
 LABELS = ["Supported", "Contradicted", "Misleading", "Insufficient evidence", "Not a factual claim"]
-EXECUTION_ERRORS = ["SOURCE_ACCESS_FAILED", "MODEL_OUTPUT_INVALID", "UNGROUNDED_QUOTE", "UNGROUNDED_VERDICT"]
 
 def clean(value: str) -> str:
     value = re.sub(r"(?is)<(script|style|noscript|svg|template)\b[^>]*>.*?(?:</\1\s*>|$)", " ", value)
@@ -77,53 +76,11 @@ def shape(answer: dict, pages: list[dict]) -> dict:
     return {"verdict": answer["verdict"], "explanation": answer["explanation"], "caveats": answer["caveats"], "evidence": evidence}
 
 
-def passages(text: str) -> list[dict]:
-    # The model selects existing passages rather than copying or paraphrasing quotes.
-    # Keep exact text, including punctuation and Unicode, within the citation bound.
-    result = []
-    for sentence in re.split(r"(?<=[.!?])\s+", text):
-        while sentence:
-            end = len(sentence) if len(sentence) <= 160 else sentence.rfind(" ", 0, 161)
-            if end < 10:
-                end = min(160, len(sentence))
-            quote = sentence[:end].strip()
-            if len(quote) >= 10:
-                result.append({"id": "p" + str(len(result)), "text": quote})
-            sentence = sentence[end:].lstrip()
-    return result
-
-
-def resolve_evidence(answer: dict, sources: list[dict], pages: list[dict]) -> dict:
-    if not isinstance(answer, dict) or not isinstance(answer.get("evidence"), list):
-        raise gl.vm.UserError("MODEL_OUTPUT_INVALID")
-    available = {source["url"]: {part["id"]: part["text"] for part in source["passages"]} for source in sources}
-    evidence = []
-    for entry in answer["evidence"]:
-        if not isinstance(entry, dict):
-            raise gl.vm.UserError("MODEL_OUTPUT_INVALID")
-        url = entry.get("url")
-        reference = entry.get("passage_id")
-        if not isinstance(url, str) or not isinstance(reference, str) or reference not in available.get(url, {}):
-            raise gl.vm.UserError("UNGROUNDED_QUOTE")
-        evidence.append({"url": url, "title": entry.get("title"), "relation": entry.get("relation"), "quote": available[url][reference]})
-    return shape({**answer, "evidence": evidence}, pages)
-
-
 def evaluate(pages: list[dict], claim: str, as_of: str, rubric: str) -> dict:
-    sources = [{"url": page["url"], "truncated": page["truncated"], "passages": passages(page["text"])} for page in pages]
-    prompt = rubric + "\nREQUEST_DATA=" + json.dumps({"claim": claim, "as_of": as_of, "sources": sources})
-    error_code = "MODEL_OUTPUT_INVALID"
-    for attempt in range(2):
-        current = prompt if attempt == 0 else "Repair the invalid structured answer. Previous validation error: " + error_code + ". Select only passage_id values actually supplied for that exact URL. Do not write quotation text.\n" + prompt
-        response = gl.nondet.exec_prompt(current, response_format="json")
-        try:
-            answer = json.loads(response) if isinstance(response, str) else response
-            return resolve_evidence(answer, sources, pages)
-        except json.JSONDecodeError:
-            error_code = "MODEL_OUTPUT_INVALID"
-        except gl.vm.UserError as error:
-            error_code = error.message if error.message in EXECUTION_ERRORS else "MODEL_OUTPUT_INVALID"
-    raise gl.vm.UserError(error_code)
+    prompt = rubric + "\nREQUEST_DATA=" + json.dumps({"claim": claim, "as_of": as_of, "sources": pages})
+    response = gl.nondet.exec_prompt(prompt, response_format="json")
+    answer = json.loads(response) if isinstance(response, str) else response
+    return shape(answer, pages)
 
 
 class ClaimLens(gl.Contract):
@@ -182,33 +139,19 @@ Avoid partisan language. Do not infer intent, motive or guilt from allegations.
 Publication dates may precede the requested date; state time limitations explicitly.
 Return JSON only: {"verdict": one label, "explanation": concise evidence-based reasoning,
 "caveats": limits and missing context, "evidence": [{"url": exact fetched URL,
-"title": source title, "passage_id": exact ID of a supplied substantive passage,
+"title": source title, "quote": exact short verbatim excerpt of 10–160 characters,
 "relation": "supports" or "contradicts" or "context"}]}.
-Use at most four citations. Select passage IDs from the supplied source, not text or invented IDs.
-The contract resolves each selected ID to its exact source quotation. Assess complete surrounding
-passages before selecting evidence; a snippet alone can omit critical qualifications.
-Do not invent URLs, quotations, dates or certainty scores."""
+Use at most four citations. Do not invent URLs, quotations, dates or certainty scores."""
 
         def leader_fn() -> str:
-            try:
-                return json.dumps(evaluate(fetch_sources(urls), claim, as_of, rubric), sort_keys=True)
-            except gl.vm.UserError as error:
-                if error.message not in EXECUTION_ERRORS:
-                    raise
-                # Expected validation failures cross the boundary as immutable data,
-                # never as a nondeterministic exception carrying VM stack fingerprints.
-                return json.dumps({"execution_error": error.message}, sort_keys=True)
+            return json.dumps(evaluate(fetch_sources(urls), claim, as_of, rubric), sort_keys=True)
 
         def validator_fn(leader_result) -> bool:
             if not isinstance(leader_result, gl.vm.Return):
                 return False
             try:
-                decoded = json.loads(leader_result.calldata)
-                if isinstance(decoded, dict) and decoded.get("execution_error") in EXECUTION_ERRORS:
-                    # Independently reproduce a processing failure; never call it a verdict.
-                    return json.loads(leader_fn()) == decoded
                 pages = fetch_sources(urls)
-                proposed = shape(decoded, pages)
+                proposed = shape(json.loads(leader_result.calldata), pages)
                 independent = evaluate(pages, claim, as_of, rubric)
                 if proposed["verdict"] != independent["verdict"]:
                     return False
@@ -221,10 +164,7 @@ Do not invent URLs, quotations, dates or certainty scores."""
                 return False
 
         # Cross the replay boundary as immutable JSON, then create fresh deterministic metadata.
-        decision_json = gl.vm.run_nondet(leader_fn, validator_fn)
-        decision = json.loads(decision_json)
-        if decision.get("execution_error") in EXECUTION_ERRORS:
-            raise gl.vm.UserError(decision["execution_error"])
-        result = {**decision, "input_hash": input_hash, "owner": owner, "policy": POLICY, "as_of": as_of}
+        decision_json = gl.vm.run_nondet_unsafe(leader_fn, validator_fn)
+        result = {**json.loads(decision_json), "input_hash": input_hash, "owner": owner, "policy": POLICY, "as_of": as_of}
         self.checks[key] = json.dumps(result, sort_keys=True)
 

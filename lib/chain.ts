@@ -4,6 +4,7 @@ import { testnetBradbury } from 'genlayer-js/chains';
 import { createPublicClient, http, encodeFunctionData, parseEventLogs, toHex, fromHex, type Hex } from 'viem';
 import { db, now, HttpError } from './server';
 import { lifecycle, VERDICTS, type SavedCheck, type CheckResult } from './domain';
+import { executionErrorMessage, isExecutionErrorMessage } from './execution-errors';
 export const EVM_RPC='https://rpc.testnet-chain.genlayer.com';
 export const GEN_RPC='https://rpc-bradbury.genlayer.com';
 export const evmChain={...testnetBradbury,rpcUrls:{default:{http:[EVM_RPC]}}};
@@ -63,7 +64,20 @@ export async function reconcile(check:SavedCheck):Promise<SavedCheck> {
   const state=lifecycle(String(transaction.statusName||''),execution,String(transaction.resultName||'UNKNOWN'));
   let result:string|null=null; let verdict:string|null=null;
   if(['accepted','finalized'].includes(state)) {const value=await readResult({...check,gen_hash:genHash},state==='finalized');result=JSON.stringify(value);verdict=value.verdict;}
-  const error=state==='execution_failed'?'GenLayer execution failed. This is not a fact-check verdict.':null;
+  let error:string|null=null;
+  if(execution==='ERROR'&&['execution_failed','undetermined','finalized_no_consensus'].includes(state)){
+   error=isExecutionErrorMessage(check.error)?check.error!:executionErrorMessage();
+   if(!isExecutionErrorMessage(check.error)){
+    try{
+     const trace=await genRpc('gen_dbg_traceTransaction',[{txID:genHash,round:Number(transaction.lastRound?.round||0)}]) as {return_data?:string};
+     if(trace.return_data&&/^0x[0-9a-f]+$/i.test(trace.return_data)&&trace.return_data.length<65536){
+      const decoded=abi.calldata.decode(fromHex(trace.return_data as Hex,'bytes'));
+      const detail=decoded instanceof Map?Object.fromEntries(decoded):decoded as {kind?:string;data?:unknown};
+      if(detail&&typeof detail==='object'&&'kind' in detail&&detail.kind==='UserError'&&'data' in detail)error=executionErrorMessage(detail.data);
+     }
+    }catch{/* Trace availability must not change transaction state or trigger a resend. */}
+   }
+  }
   await db().prepare('UPDATE checks SET state = ?, result = ?, verdict = ?, gen_hash = ?, error = ?, updated_at = ? WHERE id = ?').bind(state,result,verdict,genHash,error,now(),check.id).run();
   return {...check,gen_hash:genHash,state,result:result||undefined,verdict:verdict||undefined,error:error||undefined};
  }catch(error){

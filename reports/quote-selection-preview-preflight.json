@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-10-06T21:49:24.275Z",
+  "address": "0x56Aa2086c64EB0E8098dfB486aab6e850058bBc6",
+  "genHash": "0xc4476ef334f0058895c8062b04938ee89b9a0d8d8ae396380f2cd704e5d7010d",
+  "policy": "claimlens-evidence-v1",
+  "sourceSHA256": "f89401d0180950e61bedb1c822014bb1d89749935c71af8320613f2d0acaccab",
+  "deploymentStatus": "ACCEPTED",
+  "exactSourceVerified": true,
+  "scope": "Provisional replacement contract verified for isolated preview testing; production continues using the prior contract until release gates pass."
+}

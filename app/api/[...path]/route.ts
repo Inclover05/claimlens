@@ -1,7 +1,7 @@
 import { isAddress } from 'viem';
 import { authenticate, body, clientIp, db, digest, HttpError, identity, json, now, rate, requireUser, requestUrl, runtime, sameOrigin } from '@/lib/server';
 import { discover } from '@/lib/discovery';
-import { POLICY, safeSource, validateClaim, type SavedCheck } from '@/lib/domain';
+import { POLICY, safeSource, validateClaim, submissionContractError, type SavedCheck } from '@/lib/domain';
 import { quote, reconcile } from '@/lib/chain';
 export const dynamic='force-dynamic';
 type Context={params:Promise<{path:string[]}>};
@@ -74,6 +74,10 @@ async function handler(req:Request,ctx:Context){
     const check=await db().prepare('SELECT * FROM checks WHERE id = ? AND owner = ?').bind(path[1],user.address).first<SavedCheck>();if(!check)throw new HttpError(404,'This check is unavailable.');
     if(path[2]==='visibility'){
      const visibility=data.visibility==='private'?'private':'public';await db().prepare('UPDATE checks SET visibility = ?, updated_at = ? WHERE id = ?').bind(visibility,now(),check.id).run();return json({ok:true});
+    }
+    if(['prepare','attempt'].includes(path[2])){
+     const contractError=submissionContractError(check.contract,runtime().GENLAYER_CONTRACT);
+     if(contractError)throw new HttpError(runtime().GENLAYER_CONTRACT&&check.contract?409:503,contractError);
     }
     if(path[2]==='prepare'){
      if(!check.contract||!isAddress(check.contract))throw new HttpError(503,'The Bradbury contract is awaiting deployment. Your draft is saved.');

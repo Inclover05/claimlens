@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-10-06T21:38:00.767Z",
+  "id": "7d8f6793-b864-49c4-91bc-f870884bb4bd",
+  "claim": "neymar has scored more goals than CR7",
+  "source": "",
+  "contract": "0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598",
+  "owner": "0x2b01a6d4731d1603269b4ffb686522a3ed9d5f3e",
+  "inputHash": "af54c61ef95affe4b48d12110d6350b5532a6ac211f7a4b794010ec3b5f31784",
+  "evmHash": "0x4d50063641b08c262fd9a23a2a72be83921be1ed28dd17da3861726d9bf22f77",
+  "genHash": "0xd6fec246919a1fec881e943b61b38554bcc02218239cd2b15c580436a05640c6",
+  "status": "UNDETERMINED",
+  "execution": "FINISHED_WITH_ERROR",
+  "consensus": "DISAGREE",
+  "votes": [
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION"
+  ],
+  "executionHash": "0x011c85717ef3a02072f9c1c5f74bebc81e265ce675e18536aa671ef386020bf6",
+  "resultHashes": [
+    "0x0262fc8c6c996081ad357dfde4113eb5c612823eb8864cdfa267ff01ad0b68b7",
+    "0x0262fc8c6c996081ad357dfde4113eb5c612823eb8864cdfa267ff01ad0b68b7",
+    "0x0262fc8c6c996081ad357dfde4113eb5c612823eb8864cdfa267ff01ad0b68b7",
+    "0x0262fc8c6c996081ad357dfde4113eb5c612823eb8864cdfa267ff01ad0b68b7",
+    "0x0262fc8c6c996081ad357dfde4113eb5c612823eb8864cdfa267ff01ad0b68b7"
+  ],
+  "debugTrace": {
+    "resultCode": 1,
+    "kind": "UserError",
+    "data": "UNGROUNDED_QUOTE",
+    "storageChanges": []
+  },
+  "scope": "Read-only diagnosis of a public user check; no signing or resubmission."
+}
