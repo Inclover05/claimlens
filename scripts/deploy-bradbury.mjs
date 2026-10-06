@@ -54,7 +54,7 @@ async function prepare() {
   const report = {
     checkedAt: new Date().toISOString(), sdkVersion: '1.1.8', network: 'testnet-bradbury', chainId: 4221,
     address: account.address, consensusAddress: consensus.address, sourceSha256: sourceHash(source),
-    policy: expectedPolicy, revision: revision || 'initial', constructorArgs: [], leaderOnly: false, balanceGEN: formatEther(balance),
+    policy: expectedPolicy, revision: revision || 'initial', constructorArgs: [], leaderOnly: false, balanceBeforeDeploymentGEN: formatEther(balance),
     fundingRequired: balance === 0n, validUntil, protocolValueWei: '0', chainWriteSent: false,
   };
   let gas, gasPrice;
@@ -73,6 +73,10 @@ async function prepare() {
 async function status() {
   const journal = await readJournal();
   if (!journal) return { state: 'not_submitted', chainWriteSent: false };
+  if (journal.balanceGEN !== undefined) {
+    journal.balanceBeforeDeploymentGEN = journal.balanceGEN;
+    delete journal.balanceGEN;
+  }
   if (!journal.evmHash) return { ...journal, reviewRequired: 'An interrupted attempt is recorded. Inspect it before signing again.' };
   if (!journal.genHash) {
     let receipt;
@@ -109,7 +113,9 @@ async function status() {
     ]);
     if (policy !== expectedPolicy || sourceHash(deployedSource) !== journal.sourceSha256) throw new Error('Deployed source or policy verification failed.');
     journal.sourceAndPolicyVerified = true;
-    await writeFile(new URL('../reports/bradbury-deployment.json', import.meta.url), serialize(journal));
+    // Inspecting a retired deployment must not replace the current source's release record.
+    journal.sourceMatchesCurrent = sourceHash(await readFile(sourceFile)) === journal.sourceSha256;
+    if (journal.sourceMatchesCurrent) await writeFile(new URL('../reports/bradbury-deployment.json', import.meta.url), serialize(journal));
   }
   await saveJournal(journal);
   return journal;

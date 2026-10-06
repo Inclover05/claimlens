@@ -1,0 +1,43 @@
+{
+  "checkedAt": "2026-10-06T21:07:03.312Z",
+  "genHash": "0xa53ce63cf01caf5819784bfae0684a35cf2befd4e3ade06fa9310e3ea5342efb",
+  "status": "UNDETERMINED",
+  "result": "DISAGREE",
+  "execution": "FINISHED_WITH_ERROR",
+  "round": "0",
+  "votesCommitted": "5",
+  "votesRevealed": "5",
+  "lastVoteTimestamp": "1791320506",
+  "votes": [
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION"
+  ],
+  "resultHashes": [
+    "0x23d39945ae416b3e4d3e2b0caf98161cac5a457956050f8df1317656e900387e",
+    "0x23d39945ae416b3e4d3e2b0caf98161cac5a457956050f8df1317656e900387e",
+    "0x23d39945ae416b3e4d3e2b0caf98161cac5a457956050f8df1317656e900387e",
+    "0x23d39945ae416b3e4d3e2b0caf98161cac5a457956050f8df1317656e900387e",
+    "0x23d39945ae416b3e4d3e2b0caf98161cac5a457956050f8df1317656e900387e"
+  ],
+  "readStateBlockRange": {
+    "activationBlock": "23671764",
+    "processingBlock": "23672225",
+    "proposalBlock": "23672228"
+  },
+  "id": "b252cdb1-67d7-47b2-bae8-fce59137ea01",
+  "claim": "Argentina won the 2022 FIFA World Cup.",
+  "source": "https://x.com/FIFAWorldCup/status/1604535989480955908",
+  "evmHash": "0x9f5e48ff4302a0d75c55fa367aa8e0d68e8d2d7f265b9170b9f0c48db9d58bf3",
+  "debugTrace": {
+    "checkedAt": "2026-10-06T21:08:56.451Z",
+    "resultCode": 1,
+    "errorKind": "UserError",
+    "error": "UNGROUNDED_QUOTE",
+    "storageChanges": [],
+    "scope": "Debug replay of the existing transaction, not a new check or an agreed verdict. The quote itself is absent from the trace; the receipt does not establish the cause of the validator fingerprint mismatch."
+  },
+  "conclusion": "No verdict reached. Recorded execution error is UNGROUNDED_QUOTE; exact-quote validation rejected the candidate. All five votes report deterministic violations. Preserve identifiers; do not resubmit this check."
+}

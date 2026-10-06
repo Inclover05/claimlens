@@ -1,0 +1,31 @@
+{
+  "checkedAt": "2026-10-06T20:43:35.636Z",
+  "contract": "0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598",
+  "genHash": "0x90af1c84dfb2dcce87655e398603216ed7fba740a0c5d877e955ef56fc658ec1",
+  "status": "UNDETERMINED",
+  "execution": "FINISHED_WITH_RETURN",
+  "consensus": "DISAGREE",
+  "executionHash": "0x70525f4adbd07d5d83129cc45e0e9850c52cf55322187b3ea9fc60795090681e",
+  "round": "0",
+  "votes": [
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION",
+    "AGREE",
+    "DETERMINISTIC_VIOLATION",
+    "AGREE"
+  ],
+  "resultHashes": [
+    "0xf48d24d5bad176714101d6b401a3a80c74d4a4b7c2deda841c5a9912bca7609c",
+    "0xf48d24d5bad176714101d6b401a3a80c74d4a4b7c2deda841c5a9912bca7609c",
+    "0x51586e7aeead420e5ccbefa8db40b35f784b8b312f2d3b78828f0d8fecddf70f",
+    "0xf48d24d5bad176714101d6b401a3a80c74d4a4b7c2deda841c5a9912bca7609c",
+    "0x51586e7aeead420e5ccbefa8db40b35f784b8b312f2d3b78828f0d8fecddf70f"
+  ],
+  "readStateBlockRange": {
+    "activationBlock": "23663384",
+    "processingBlock": "23664170",
+    "proposalBlock": "23664171"
+  },
+  "conclusion": "No agreed fact-check verdict. Three votes report a deterministic-result disagreement and two agree. The observed receipt does not establish the semantic cause. The application displays no verdict and retains the original transaction.",
+  "nextTest": "Create a separate irrelevant-evidence request only after preceding deployment and Supported state are final. This tests a pending-state hypothesis without changing policy or resending the existing attempt."
+}

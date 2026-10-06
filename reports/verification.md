@@ -14,9 +14,9 @@
 
 The direct runner needed a Windows-only adapter to defer deleting its stdin message file until the descriptor was released. SDK and contract bytes were not altered for testing. Mock prompt patterns were anchored so the validator's rubric did not accidentally match the leader fixture.
 
-## Not yet verified
+## Live coverage and limits
 
-The corrected contract deployment is finalized with successful execution and exact source/policy read-back. The Supported test result is accepted with independent result read-back; claim finality is pending. The irrelevant-evidence attempt ended without consensus and remains an explicit failed test. A real X-post draft passes source preservation, independent candidate discovery, privacy and fee estimation; its paid verdict test is pending. See the current reports for precise states.
+The corrected contract deployment is finalized with successful execution and exact source/policy read-back. The Supported test result is finalized with independent final-state read-back. A separate irrelevant-evidence check submitted after that state was final reached agreement and returned Insufficient evidence; its accepted result remains provisional. The earlier irrelevant-evidence attempt ended without consensus and remains an explicit failed test. A real X-post draft passed source preservation, independent candidate discovery, privacy and fee estimation. Its first paid check ended UNDETERMINED with FINISHED_WITH_ERROR; the debug replay returned UNGROUNDED_QUOTE, and all five votes reported deterministic violations. No agreed verdict is claimed. See x-post-consensus-investigation.json and the preserved x-post-live-first-attempt.json. The receipt and replay do not establish why the deterministic fingerprints differed.
 
 Before portal submission, follow DEPLOYMENT.md. Preserve actual EVM/GenLayer identifiers, wallet/browser, fee, source/hash, execution, result read-back and finality. Claims with unavailable or irrelevant evidence must remain explicit gaps or insufficient evidence. Do not reuse OpenProof's deployment or acceptance as ClaimLens evidence.
 
@@ -25,7 +25,7 @@ Before portal submission, follow DEPLOYMENT.md. Preserve actual EVM/GenLayer ide
 - Selected provider vanished after full navigation -> reconnect state and session-only provider identity added -> three-provider restore fixture and browser reload pass.
 - Refresh erased uncertain-broadcast warning -> status updates preserve submission warnings and server retry lock -> browser timeout/reload fixture passes.
 - Returned hash could be lost before API persistence -> save it locally immediately and make attachment idempotent -> API-outage and reload recovery fixture passes.
-- Lifecycle SDK inherited EVM RPC -> separate GenLayer read endpoint -> confirmed against installed SDK transport implementation; live decision still pending.
+- Lifecycle SDK inherited EVM RPC -> separate GenLayer read endpoint -> confirmed against the installed SDK transport implementation and actual accepted/finalized result reads.
 - Contract mutated a nondeterministic return -> return immutable JSON and parse fresh deterministic metadata -> linter and captured validator replay pass.
 
 
@@ -37,7 +37,7 @@ The standard Next.js production build and Cloudflare Worker build both pass. The
 
 The initial eight checks passed against the then-protected Vercel production API: cross-origin rejection, correct HTTPS nonce domain/URI, verified EOA signature and secure session cookie, replay rejection, persisted private draft and matching SHA-256, guest denial and feed privacy, missing-contract submission gate, and logout. The current api-verification-vercel.json records eleven passing checks, including the funded-contract configuration and unfunded-wallet gate, invalid-source and short-claim validation. All temporary fixture rows were removed from the local D1 and Neon databases.
 
-Production is now public after explicit user approval. Fresh browser checks without Vercel cookies or bypass headers pass: wallet sign-in, accepted result rendering, private guest denial, public search/result access, owner visibility controls and restoration to private. Anonymous desktop/mobile, themes, 3D pause and reduced-motion checks pass with no browser errors or failed application requests. See public-site-verification.json and x-post-draft-verification.json.
+Production is now public after explicit user approval. Fresh browser checks without Vercel cookies or bypass headers pass: wallet sign-in, accepted/finalized result rendering, private guest denial, public search/result access, owner visibility controls and restoration to private. Anonymous desktop/mobile, themes, 3D pause and reduced-motion checks pass with no browser errors or failed application requests. The finalized NASA example was then deliberately republished for guest review and remains public; see public-example-verification.json. See public-site-verification.json and x-post-draft-verification.json for the other anonymous checks.
 
 - Next.js normalized the request URL to localhost -> derive the public origin from the request host and trusted Vercel forwarding metadata, with Worker context isolation -> cross-origin tests and real loopback nonce/signature flow pass.
 - PostgreSQL rejected an ambiguous upsert column -> qualify limits.count -> repeated sign-in/verification and replay checks pass.
@@ -57,13 +57,13 @@ The wallet received 5 test GEN. Deployment used a successful live gas estimate a
 - Measured deployment network fee: 0.0013934664375 test GEN. This is the EVM receipt fee, not a general claim execution cost estimate.
 - Vercel contract address configured for production, preview and development. Real website verdict checks are in progress.
 
-See `bradbury-deployment.json` and `deployment-preflight.json` for machine-readable evidence. The saved-session composer fix disables Review claim until sign-in restoration completes; its browser regression holds the session response deliberately.
+See `bradbury-deployment-initial.json` for the retired deployment; `bradbury-deployment.json` records the corrected active source. The saved-session composer fix disables Review claim until sign-in restoration completes; its browser regression holds the session response deliberately.
 
 ## Source extraction correction
 
 The first paid production check reached GenLayer but ended `UNDETERMINED` with `FINISHED_WITH_ERROR`. Independently reading the supplied NASA page showed the fact-bearing article started after the old 50,000-character raw HTML cutoff. A proposed result also used page titles as evidence; it is not counted as a verified verdict. See `live-website-verification-initial.json` for its identifiers.
 
-The corrected source bounds raw input at 1 MB, removes scripts/styles before limiting evidence, prefers article/main content, decodes entities and marks truncated text. The rubric explicitly rejects titles/navigation as evidence and inference from omitted content. The official linter and all seven direct tests pass. Replacement contract `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598` is accepted with successful execution and exact source/policy read-back; finalization and real verdict tests remain in progress.
+The corrected source bounds raw input at 1 MB, removes scripts/styles before limiting evidence, prefers article/main content, decodes entities and marks truncated text. The rubric explicitly rejects titles/navigation as evidence and inference from omitted content. The official linter and all seven direct tests pass. Replacement contract `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598` is finalized with successful execution and exact source/policy read-back; the NASA-backed Supported result is also finalized.
 
 ## Consensus and finality handling
 
@@ -74,3 +74,25 @@ The user explicitly approved anonymous website access on 6 October 2026; Vercel 
 ## Corrected finalized deployment
 
 Contract `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598` reached `FINALIZED` with `FINISHED_WITH_RETURN`, verified 6 October 2026 at 20:40 UTC. Exact source SHA-256 is `62054246cfd48fdfd8d4e00aa4b668d0d70b897901345549b400292e9aabc1e2`, with policy `claimlens-evidence-v1`. Normal finalization completed without the test wallet sending a finalization transaction. See bradbury-deployment.json for the corrected active deployment; bradbury-deployment-initial.json retains the retired contract.
+
+## Release record integrity
+
+The public GitHub source, local bytes and finalized on-chain source have identical SHA-256, verified independently in source-integrity-verification.json. The deployment helper now prevents a retired journal from overwriting the active release record; inspecting both actual deployments confirms the guard. Saved pre-deployment balances are labeled explicitly, and test-wallet-costs.json reconciles current balance with actual receipt fees.
+
+## Fresh negative-evidence test
+
+A new request was submitted only after the deployment and previous Supported result were finalized. It returned Insufficient evidence with FINISHED_WITH_RETURN and AGREE; the final round records four AGREE votes and one TIMEOUT. See consensus-investigation-after-finality.json. This successful separate test does not establish why the earlier committee reported deterministic violations. The original failed attempt and its no-verdict display are retained. No normal idleness transaction was sent: the helper stopped before creating a signing journal while the network continued handling timeouts.
+
+## X-post access and first paid test
+
+The selected real FIFA post is https://x.com/FIFAWorldCup/status/1604535989480955908, published on 18 December 2022. Its official embed and one direct response contain the Argentina world-champions claim. Current contract extraction of that response retains the claim in 200 characters; this local observation does not prove identical validator access. The app preserves the link and asks the user to quote one claim manually. See x-post-source-access.json and x-post-draft-verification.json.
+
+The first claim, “Argentina won the 2022 FIFA World Cup,” did not produce an agreed result. A separate test used “Argentina won the 2022 FIFA World Cup final” with the same real post and more specific candidate discovery. Both ended UNDETERMINED / FINISHED_WITH_ERROR / DISAGREE; all five votes in each report deterministic violations. Both debug replays returned UNGROUNDED_QUOTE with no storage changes. The traces do not include the rejected quote and do not prove why the execution fingerprints differed. No contract rule or deployed source was changed for these tests.
+
+Both original identifiers and payments are preserved. Independent contract reads return no saved result. Actual owner browser checks display no verdict or resubmission button, and guest access is denied. See x-post-live-verification.json for the failure-handling checks, x-post-live-first-attempt.json and x-post-live-second-attempt.json for the unsuccessful expected-verdict runs, and x-post-final-consensus-investigation.json for the second receipt. A passing failure-handling check does not certify successful X fact-checking. The overall requested-verdict report remains unsuccessful.
+
+X verdicts remain a release gap. Further work must establish why generated quotations fail the exact, bounded-source check and why rejected outputs produce cross-validator fingerprint disagreements, while preserving strict evidence validation. No additional paid retry is implied by this report.
+
+## Measured test-wallet costs
+
+Eight actual EVM transactions reconcile the initial 5 test GEN to a balance of 4.99616293349511755 GEN and total receipt fees of 0.00383706650488245 GEN. This includes both deployments and all six paid checks, including failures. See test-wallet-costs.json for individual receipts. No finalization or idleness transaction was sent by this wallet.

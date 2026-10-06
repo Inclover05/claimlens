@@ -4,9 +4,9 @@ A fact-checking application built for GenLayer Bradbury. People submit one Engli
 
 ## Current state
 
-The cinematic interface, private/public drafts, wallet sign-in, profile, source discovery, lifecycle display and transaction recovery are implemented. The corrected Bradbury contract is deployed at `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598`, finalized with successful execution and matching source/policy. A real NASA-backed check has an accepted Supported result with independent read-back; claim finality and the remaining paid tests are in progress. It replaces an initial deployment whose live test exposed premature HTML truncation.
+The cinematic interface, private/public drafts, wallet sign-in, profile, source discovery, lifecycle display and transaction recovery are implemented. The corrected Bradbury contract is deployed at `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598`, finalized with successful execution and matching source/policy. It replaces an initial deployment whose live test exposed premature HTML truncation. A real NASA-backed check has a finalized Supported result with independent final-state read-back. A fresh irrelevant-evidence check returned Insufficient evidence and is accepted. Two separate paid X-post checks produced no consensus; both debug traces record UNGROUNDED_QUOTE, and the app displays no verdict. X verdicts are not verified as working.
 
-The [public GitHub repository](https://github.com/Inclover05/claimlens) deploys automatically to [Vercel](https://claimlens-inclover05s-projects.vercel.app). A dedicated Neon Free-plan database is connected and the deployed sign-in and private draft API checks pass. The website is publicly accessible without Vercel sign-in. Fresh anonymous browser checks pass for the homepage, themes, mobile layout, motion controls, configuration and public feed.
+The [public GitHub repository](https://github.com/Inclover05/claimlens) deploys automatically to [Vercel](https://claimlens-inclover05s-projects.vercel.app). A dedicated Neon Free-plan database is connected and the deployed sign-in and private draft API checks pass. The website is publicly accessible without Vercel sign-in. A [real finalized example](https://claimlens-inclover05s-projects.vercel.app/checks/65ad7eca-ffa7-419b-8053-791ce0773550) is available for review. Fresh anonymous browser checks pass for the homepage, themes, mobile layout, motion controls, configuration and public feed.
 
 See [PROJECT_BRIEF.md](PROJECT_BRIEF.md) for the accepted design brief, [DEPLOYMENT.md](DEPLOYMENT.md) for network and deployment preparation, and [reports/verification.md](reports/verification.md) for verified capabilities and remaining live checks.
 
@@ -44,6 +44,8 @@ The contract tooling adapter uses the official cached GenVM manager artifact and
 The interface combines a short masked brand reveal, selective translucent glass controls, and a lazy React Three Fiber evidence lens. Dark and light themes, pause controls, reduced motion, mobile static fallback and bounded canvas resolution are supported. The original GenLayer SVG is preserved. The standalone reveal at `/brand/logo-reveal.html` supports `?t=0`, `?t=0.55` and `?t=1.3` for frame inspection.
 
 ## Privacy and protocol
+
+To check an X post, select **Paste a link**, paste the public post URL and quote one factual claim. The app preserves the post URL and discovers independent candidate evidence. It does not automatically extract X text. Post access varies across requests; unavailable pages, failed quotation validation or absent consensus can prevent a verdict. Real test outcomes, including failures, are recorded in `reports/verification.md`.
 
 Website privacy does not hide on-chain claims, source links, wallet addresses or results. The contract fetches and judges evidence independently. A draft, fee quote, receipt or Accepted status alone is not a finalized fact-check. After an uncertain wallet response, resolve the existing transaction rather than submitting again.
 

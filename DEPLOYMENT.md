@@ -1,6 +1,6 @@
 # ClaimLens deployment preparation
 
-Status: corrected Bradbury deployment finalized with successful execution and exact source/policy verification on 6 October 2026 at 20:40 UTC. A real production Supported result is accepted; its finality and the remaining paid evidence tests are in progress.
+Status: corrected Bradbury deployment finalized with successful execution and exact source/policy verification on 6 October 2026 at 20:40 UTC. A real production Supported result is finalized with final-state read-back. A fresh irrelevant-evidence case has an accepted Insufficient evidence result. Two paid X-post checks failed to reach consensus with UNGROUNDED_QUOTE in their debug replays. Their identifiers, fees and no-verdict browser checks are retained in reports/x-post-live-verification.json and the two X consensus-investigation reports. X verdicts are not verified as working.
 
 Contract: `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598`. This replaces the initial contract after real testing found that raw HTML truncation excluded the NASA article. Assets are now removed before the evidence-text limit, article/main content is preferred, entities are decoded and truncation is disclosed. The seven direct runtime tests include large page assets, title-only evidence and incomplete styles. Historical deployment and live-test evidence is retained in `reports/bradbury-deployment-initial.json` and `reports/live-website-verification-initial.json`.
 
@@ -27,10 +27,12 @@ For the dedicated local Bradbury test wallet, Windows encrypts the private key f
 
 ```powershell
 node scripts/bradbury-wallet.mjs status
-node scripts/deploy-bradbury.mjs prepare
-node scripts/deploy-bradbury.mjs deploy
-node scripts/deploy-bradbury.mjs status
+node scripts/deploy-bradbury.mjs prepare source-extraction
+node scripts/deploy-bradbury.mjs deploy source-extraction
+node scripts/deploy-bradbury.mjs status source-extraction
 ```
+
+The active journal revision is `source-extraction`; inspecting the initial journal cannot overwrite the current source's release record. Saved balances are explicitly labeled as before-deployment balances; current wallet status is read separately.
 
 The deployment helper uses the pinned SDK's contract encoding, checks the chain, source hash and available balance, and requires a successful live gas estimate before signing. It records the deterministic EVM hash before broadcasting and resumes an existing attempt rather than signing another deployment. It records a verified contract address only after successful execution, finalization, and exact source/policy read-back. The encrypted signer is local to this Windows account and must never be placed in hosted environment variables or frontend code.
 
@@ -83,4 +85,4 @@ npm run dev:vercel -- --hostname 127.0.0.1
 
 The migration runs atomically and creates the ClaimLens tables and feed indexes. The database adapter keeps values in parameterized queries and preserves the atomic sign-in/session batch. The Cloudflare Worker supplies its own request-scoped D1 database; Vercel uses Neon, so existing data is not automatically copied between hosts.
 
-After future environment changes, redeploy so the running deployment receives them. The earlier production API checks cover a real wallet signature, used-challenge rejection, saved private draft, guest denial, public-feed exclusion, logout, and the pre-deployment missing-contract gate; evidence is recorded in reports/api-verification-vercel.json. GenLayer deployment is finalized; real website consensus verification is in progress.
+After future environment changes, redeploy so the running deployment receives them. The production API checks cover a real wallet signature, used-challenge rejection, saved private draft, guest denial, public-feed exclusion, logout, funded-contract configuration and input validation; evidence is recorded in reports/api-verification-vercel.json. GenLayer deployment and the NASA test result are finalized. Additional accepted checks remain provisional until their own review window closes; failed checks retain no verdict.

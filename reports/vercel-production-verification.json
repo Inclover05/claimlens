@@ -1,22 +1,22 @@
 {
-  "checkedAt": "2026-10-06T20:39:19.618Z",
+  "checkedAt": "2026-10-06T21:12:58.461Z",
   "project": "claimlens",
   "projectId": "prj_9AE3crJA0FmAzQsY1ovJDW29PFOL",
   "teamId": "team_I9rpuV3OfkCf0woCzlxEGbyk",
   "url": "https://claimlens-inclover05s-projects.vercel.app",
-  "deploymentId": "dpl_FuTKhBAVhcMdHJrU3FDK9B8jFYHY",
+  "deploymentId": "dpl_9V632pToidF9mQWGRm3Q1bmvPgmQ",
   "target": "production",
   "state": "READY",
-  "commit": "dfe53cb4b30c69ef69a6373ea7715c24fa9f356e",
+  "commit": "2f182bcb8e3f6c4d1c3615697119a434aca6d5bd",
   "framework": "Next.js 16.3.4",
   "access": "Public; no Vercel sign-in or bypass headers",
   "runtimeErrorScan": {
-    "since": "2026-10-06T20:34:00Z",
-    "until": "2026-10-06T20:39:00.813Z",
-    "records": 5,
-    "expectedGuestPrivateCheckDenials": 5,
+    "since": "2026-10-06T20:40:00Z",
+    "until": "2026-10-06T21:11:10.774Z",
+    "records": 4,
+    "expectedGuestPrivateCheckDenials": 4,
     "unexpectedErrors": 0,
-    "note": "All five error-level log records were expected owner-only check denials verified as HTTP 404 by the browser tests."
+    "note": "All four error-level records were expected guest denials for the NASA or irrelevant-evidence checks, verified as HTTP 404 by the live browser harness."
   },
   "drains": 0,
   "monitoring": "Vercel runtime logs; no external monitoring integration configured"

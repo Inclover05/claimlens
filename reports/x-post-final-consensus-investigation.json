@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-10-06T21:14:06.143Z",
+  "id": "56445d87-4f0d-4dc1-9438-ed04bf362dba",
+  "genHash": "0x11c9700b0a88c148ca43a45d692d104d9e99dd54231a13f455a4237200aa58e6",
+  "evmHash": "0x6a060577e673b446abb537fbb69943dfd2eda9d7cae2e71eaba0929aea6d2746",
+  "claim": "Argentina won the 2022 FIFA World Cup final.",
+  "source": "https://x.com/FIFAWorldCup/status/1604535989480955908",
+  "status": "UNDETERMINED",
+  "result": "DISAGREE",
+  "execution": "FINISHED_WITH_ERROR",
+  "round": "0",
+  "votesCommitted": "5",
+  "votesRevealed": "5",
+  "votes": [
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION"
+  ],
+  "resultHashes": [
+    "0xa5ac294b7985adafd170e73b40a0802910928a6543007d6863c4805b9e68e780",
+    "0xa5ac294b7985adafd170e73b40a0802910928a6543007d6863c4805b9e68e780",
+    "0xa5ac294b7985adafd170e73b40a0802910928a6543007d6863c4805b9e68e780",
+    "0xa5ac294b7985adafd170e73b40a0802910928a6543007d6863c4805b9e68e780",
+    "0xa5ac294b7985adafd170e73b40a0802910928a6543007d6863c4805b9e68e780"
+  ],
+  "readStateBlockRange": {
+    "activationBlock": "23673897",
+    "processingBlock": "23674530",
+    "proposalBlock": "23674532"
+  },
+  "debugTrace": {
+    "resultCode": 1,
+    "errorKind": "UserError",
+    "error": "UNGROUNDED_QUOTE",
+    "storageChanges": [],
+    "scope": "Debug replay of an existing transaction; no new write or agreed verdict. The rejected quote is not included in this trace. The cause of validator fingerprint mismatch remains unproved."
+  },
+  "conclusion": "Separate X test, distinct check and transaction from the first attempt. No agreed verdict. Preserve the transaction and failed result; never automatically resubmit."
+}

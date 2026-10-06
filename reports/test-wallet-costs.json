@@ -1,0 +1,76 @@
+{
+  "checkedAt": "2026-10-06T21:10:48.212Z",
+  "network": "Bradbury testnet",
+  "chainId": 4221,
+  "wallet": "0xfA47B90A45F11e1B8E5f1FeFCC8f248C6ddbcdf1",
+  "initialFundingGEN": "5",
+  "balanceGEN": "4.99616293349511755",
+  "measuredEVMFeesGEN": "0.00383706650488245",
+  "transactions": [
+    {
+      "purpose": "initial-deployment",
+      "hash": "0x8d825baead1b57c0e3a7822c23579feaa667848a3b5c25445f00baf79fb5360b",
+      "status": "success",
+      "gasUsed": "7431821",
+      "gasPriceWei": "187500000",
+      "feeGEN": "0.0013934664375"
+    },
+    {
+      "purpose": "initial-source-test",
+      "hash": "0x5ab0989bc538f65ed8d499070766d9c9a71cc5eb02be67212319c1ce8ec0e92a",
+      "status": "success",
+      "gasUsed": "1177917",
+      "gasPriceWei": "166372350",
+      "feeGEN": "0.00019597281939495"
+    },
+    {
+      "purpose": "corrected-deployment",
+      "hash": "0xbdea7397027c94121aafabbb14084c34e970ef417c123e46795486c7dddc0683",
+      "status": "success",
+      "gasUsed": "7946657",
+      "gasPriceWei": "166919700",
+      "feeGEN": "0.0013264536024429"
+    },
+    {
+      "purpose": "supported",
+      "hash": "0xb8b8e31dcabb13067c3a4ced3d07ab05edf629d1378e78ca9897c88bbaa7bb1a",
+      "status": "success",
+      "gasUsed": "1163635",
+      "gasPriceWei": "162900600",
+      "feeGEN": "0.000189556839681"
+    },
+    {
+      "purpose": "irrelevant-evidence-first-attempt",
+      "hash": "0x57facbf672313a34ee5b8f546b6a3133d84d82137148d77afae4ac40e7bcfeb0",
+      "status": "success",
+      "gasUsed": "1092222",
+      "gasPriceWei": "155604300",
+      "feeGEN": "0.0001699544397546"
+    },
+    {
+      "purpose": "x-post",
+      "hash": "0x9f5e48ff4302a0d75c55fa367aa8e0d68e8d2d7f265b9170b9f0c48db9d58bf3",
+      "status": "success",
+      "gasUsed": "1206568",
+      "gasPriceWei": "160129050",
+      "feeGEN": "0.0001932065876004"
+    },
+    {
+      "purpose": "irrelevant-evidence-after-finality",
+      "hash": "0x9ea3ded2c635399af220852f84b434c4e954352dc5fdfefa4690b4febebe6f37",
+      "status": "success",
+      "gasUsed": "1092222",
+      "gasPriceWei": "149941050",
+      "feeGEN": "0.0001637689135131"
+    },
+    {
+      "purpose": "x-post-final",
+      "hash": "0x6a060577e673b446abb537fbb69943dfd2eda9d7cae2e71eaba0929aea6d2746",
+      "status": "success",
+      "gasUsed": "1206470",
+      "gasPriceWei": "169657650",
+      "feeGEN": "0.0002046868649955"
+    }
+  ],
+  "scope": "Actual EVM receipt fees for this dedicated wallet; test GEN only. Fee quotes are upper bounds and are not measured costs. The contract and its caller transactions sent zero additional value."
+}

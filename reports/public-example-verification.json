@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-10-06T21:14:47.001Z",
+  "url": "https://claimlens-inclover05s-projects.vercel.app/checks/65ad7eca-ffa7-419b-8053-791ce0773550",
+  "id": "65ad7eca-ffa7-419b-8053-791ce0773550",
+  "contract": "0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598",
+  "genHash": "0x300f41768f20694c9379e53c32fa7d8b55fbdb58c123020d7dc06b92dd1eaa69",
+  "claim": "The Moon is Earth's only natural satellite.",
+  "source": "https://science.nasa.gov/moon/facts/",
+  "verdict": "Supported",
+  "state": "finalized",
+  "independentStateReadMatched": true,
+  "stateVariant": "latest-final",
+  "guestReadVerified": true,
+  "publicFeedVerified": true,
+  "guestBrowserRendered": true,
+  "provisionalNoticeVerified": false,
+  "transactionSent": false,
+  "scope": "Publishing an actual verified test-wallet check as a reviewable public example; no invented feed record or additional blockchain transaction."
+}

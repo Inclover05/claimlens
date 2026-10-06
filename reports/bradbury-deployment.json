@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-06T20:40:27.399Z",
+  "checkedAt": "2026-10-06T20:48:01.523Z",
   "sdkVersion": "1.1.8",
   "network": "testnet-bradbury",
   "chainId": 4221,
@@ -10,7 +10,6 @@
   "revision": "source-extraction",
   "constructorArgs": [],
   "leaderOnly": false,
-  "balanceGEN": "4.99841056074310505",
   "fundingRequired": false,
   "validUntil": 1791320999,
   "protocolValueWei": "0",
@@ -29,5 +28,7 @@
   "consensusStatus": "FINALIZED",
   "executionResult": "FINISHED_WITH_RETURN",
   "contractAddress": "0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598",
-  "sourceAndPolicyVerified": true
+  "sourceAndPolicyVerified": true,
+  "balanceBeforeDeploymentGEN": "4.99841056074310505",
+  "sourceMatchesCurrent": true
 }

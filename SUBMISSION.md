@@ -30,13 +30,13 @@ Website-private checks require their owner's session. Blockchain claims, source 
 - Policy: `claimlens-evidence-v1`.
 - Deployed source SHA-256: `62054246cfd48fdfd8d4e00aa4b668d0d70b897901345549b400292e9aabc1e2`.
 
-The website is publicly accessible without Vercel sign-in. Wallet sign-in is required to save and submit a claim, while public results can be viewed as a guest.
+The website is publicly accessible without Vercel sign-in. Review a [real finalized check](https://claimlens-inclover05s-projects.vercel.app/checks/65ad7eca-ffa7-419b-8053-791ce0773550). Wallet sign-in is required to save and submit a claim, while public results can be viewed as a guest.
 
 ## Verification and limits
 
-See `reports/verification.md` for the current evidence ledger, `reports/live-website-verification.json` for real browser/chain checks and `reports/bradbury-deployment.json` for finalized deployment evidence. Verification is still in progress; use the statuses in those reports rather than treating this draft as a release certificate.
+See `reports/verification.md` for the current evidence ledger, `reports/live-website-verification.json` for real browser/chain checks and `reports/bradbury-deployment.json` for finalized deployment evidence. The NASA Supported example is finalized; the separate Insufficient evidence result is accepted and provisional. Two real paid X-post tests failed quote validation and produced no agreed verdict. X verdicts are not verified as working. Use the actual statuses in those reports rather than treating this draft as a release certificate.
 
-The app currently checks one claim in English. Search without a configured search service is limited to the supplied link and Wikipedia candidates. Page text is bounded; inaccessible, irrelevant or unreliable sources may prevent a conclusion. Consensus does not guarantee absolute truth.
+The app currently checks one claim in English. X-post checks accept a public post URL and a manually quoted factual claim; automatic post-text extraction is not implemented. Search without a configured search service is limited to the supplied link and Wikipedia candidates. Page text is bounded; inaccessible, irrelevant or unreliable sources and unsuccessful consensus may prevent a conclusion. Consensus does not guarantee absolute truth.
 
 The interface combines selective glass materials, a short logo reveal and a React Three Fiber lens, with a light theme, responsive layouts, reduced-motion fallbacks and an animation pause control.
 

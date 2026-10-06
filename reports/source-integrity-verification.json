@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-10-06T20:45:46.324Z",
+  "contract": "0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598",
+  "publicSourceURL": "https://raw.githubusercontent.com/Inclover05/claimlens/main/contracts/claimlens.py",
+  "httpStatus": 200,
+  "sourceBytes": 9587,
+  "localSHA256": "62054246cfd48fdfd8d4e00aa4b668d0d70b897901345549b400292e9aabc1e2",
+  "publicGitHubSHA256": "62054246cfd48fdfd8d4e00aa4b668d0d70b897901345549b400292e9aabc1e2",
+  "onChainSHA256": "62054246cfd48fdfd8d4e00aa4b668d0d70b897901345549b400292e9aabc1e2",
+  "policy": "claimlens-evidence-v1",
+  "policyStateVariant": "latest-final",
+  "exactBytesMatched": true
+}
