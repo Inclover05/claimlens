@@ -60,7 +60,9 @@ async function handler(req:Request,ctx:Context){
    if(route==='checks'){
     if(!user.username)throw new HttpError(400,'Choose your username before saving your first claim.');
     await rate(`check:${user.address}`,20);
-    const claim=string(data.claim).trim();const source=safeSource(string(data.source).trim());validateClaim(claim,source);
+    const claim=string(data.claim).trim();let source:string;
+    try{source=safeSource(string(data.source).trim());validateClaim(claim,source);}
+    catch(error){throw new HttpError(400,error instanceof Error?error.message:'Enter a valid claim and public HTTPS source.');}
     const visibility=data.visibility==='private'?'private':'public';const topic=string(data.topic);if(!['Politics','Football','Science','World','General'].includes(topic))throw new HttpError(400,'Select a topic.');
     const discovery=await discover(claim,source);const id=crypto.randomUUID();const contract=runtime().GENLAYER_CONTRACT||'';
     const payload=JSON.stringify({schema:1,policy:POLICY,id,owner:user.address,claim,source,source_urls:discovery.urls,as_of:new Date().toISOString().slice(0,10)});

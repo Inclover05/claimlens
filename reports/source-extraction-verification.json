@@ -1,0 +1,11 @@
+{
+  "source": "https://science.nasa.gov/moon/facts/",
+  "rawBytes": 312927,
+  "sourceBodySha256": "5d9960b12549b90609d041f0e4ac7530bf96f570354c726153d2cdc7ac20f24d",
+  "articleStart": 213650,
+  "mainStart": 213610,
+  "evidenceCharacters": 9326,
+  "truncated": false,
+  "containsNaturalSatellite": true,
+  "scope": "Actual fetched NASA HTML passed through the exact pure extraction helpers; no model or consensus assertion"
+}
