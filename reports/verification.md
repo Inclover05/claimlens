@@ -4,7 +4,7 @@
 
 - TypeScript: noEmit check passes.
 - Changed application files: focused ESLint check passes (warnings for ordinary image tags are non-blocking).
-- Seven Node regression tests: provider restoration among MetaMask/Rabby/OKX fixtures, wrong account/chain, chain addition via EVM RPC, uncertain outcomes vs rejection, lifecycle/execution, unsafe source rejection.
+- Nine Node regression tests: PostgreSQL placeholder handling and overlapping request context isolation, plus provider restoration among MetaMask/Rabby/OKX fixtures, wrong account/chain, chain addition via EVM RPC, uncertain outcomes vs rejection, lifecycle/execution, unsafe source rejection.
 - Official GenVM linter: contract schema valid, three methods, two views, one write, no constructor parameters.
 - Five direct contract tests: payload/source provenance, duplicate guard, successful captured validator replay, changed source/disagreement rejection, source-access failure, invented quote/malformed output rejection, and legitimate insufficient evidence.
 - Browser fixtures: input validation, wallet dialog, mobile menu/help navigation, dashboard, reduced motion, pause control, selected-provider restoration, uncertain-outcome retry lock, refresh, API outage after a returned hash, local hash restoration and manual attachment. No chain write occurred.
@@ -27,3 +27,10 @@ Before portal submission, follow DEPLOYMENT.md. Preserve actual EVM/GenLayer ide
 - Returned hash could be lost before API persistence -> save it locally immediately and make attachment idempotent -> API-outage and reload recovery fixture passes.
 - Lifecycle SDK inherited EVM RPC -> separate GenLayer read endpoint -> confirmed against installed SDK transport implementation; live decision still pending.
 - Contract mutated a nondeterministic return -> return immutable JSON and parse fresh deterministic metadata -> linter and captured validator replay pass.
+
+
+## GitHub and Vercel preparation
+
+Public repository: https://github.com/Inclover05/claimlens. Vercel project: claimlens in inclover05s-projects, linked to main for automatic production deployments. The initial Vercel production build reached READY at commit a4abbc4d51b85b1d9c83a9e40c60dddd7e9cebaa.
+
+The standard Next.js production build and Cloudflare Worker build both pass. The built Worker also passes the real wallet-signature and private-draft API checks after the runtime adaptation; temporary local fixture rows were removed. PostgreSQL provisioning, migration, and live Vercel API verification are pending Vercel CLI sign-in. No deployed ClaimLens contract is configured.

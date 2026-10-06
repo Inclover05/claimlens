@@ -49,3 +49,19 @@ Run one real-wallet check on the deployed domain, then a check with irrelevant e
 Exercise wallet rejection, wrong chain, insufficient GEN, refresh, lost response, and recovered hash. Do not automatically resend after timeout. Measure representative source/LLM execution branches and refresh fees before signing. A mocked browser or direct fixture is not proof of live consensus.
 
 Official references checked 6 October 2026: [CLI deployment](https://docs.genlayer.com/developers/intelligent-contracts/deploying/cli-deployment), [network configuration](https://docs.genlayer.com/developers/intelligent-contracts/deploying/network-configuration), [networks](https://docs.genlayer.com/developers/networks), [writing data](https://docs.genlayer.com/developers/decentralized-applications/writing-data), and [non-determinism](https://docs.genlayer.com/developers/intelligent-contracts/features/non-determinism).
+
+## Website hosting on Vercel
+
+The source is in the public repository https://github.com/Inclover05/claimlens. The Vercel project is https://vercel.com/inclover05s-projects/claimlens, linked to the main branch. Vercel uses vercel.json and npm run build:vercel for the standard Next.js runtime. The existing Sites build remains available separately.
+
+Vercel needs a durable PostgreSQL database. Use the existing Neon Marketplace integration on the Free plan, connect a dedicated ClaimLens resource to this project, and sync its DATABASE_URL to the local ignored .env.local file. Never commit the connection string. Apply the schema before verifying sign-in:
+
+```powershell
+npx vercel env pull .env.local --yes --scope inclover05s-projects
+npm run db:migrate:vercel
+npm run dev:vercel -- --hostname 127.0.0.1
+```
+
+The migration runs atomically and creates the ClaimLens tables and feed indexes. The database adapter keeps values in parameterized queries and preserves the atomic sign-in/session batch. The Cloudflare Worker supplies its own request-scoped D1 database; Vercel uses Neon, so existing data is not automatically copied between hosts.
+
+After setting environment variables, redeploy so the running deployment receives them. Verify a real wallet signature, used-challenge rejection, saved private draft, guest denial, public-feed exclusion, logout, and the missing-contract gate on the Vercel production origin. A successful website build is separate from database verification and from GenLayer deployment.
