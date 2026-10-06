@@ -50,4 +50,4 @@ __pycache__/
 tmp/
 .dev.vars
 *.tsbuildinfo
-/build/
+!.env.example

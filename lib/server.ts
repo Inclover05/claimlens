@@ -1,6 +1,6 @@
-import { env } from 'cloudflare:workers';
+import { runtime } from './runtime';
+export { runtime } from './runtime';
 import { verifyMessage, isAddress } from 'viem';
-export const runtime = () => env as unknown as { DB:D1Database; GENLAYER_CONTRACT?:string; BRAVE_SEARCH_API_KEY?:string; };
 export function db() { const value=runtime().DB; if(!value)throw new Error('Saved checks are temporarily unavailable.');return value; }
 export async function digest(value:string) { const hash=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value));return Array.from(new Uint8Array(hash),x=>x.toString(16).padStart(2,'0')).join(''); }
 export const now = () => Math.floor(Date.now()/1000);
@@ -16,3 +16,4 @@ export async function body(req:Request) {const text=await req.text();if(text.len
 export async function rate(key:string,max:number,window=3600){const k=`${key}:${Math.floor(now()/window)}`;const row=await db().prepare('INSERT INTO limits (key,count) VALUES (?,1) ON CONFLICT(key) DO UPDATE SET count = count + 1 RETURNING count').bind(k).first<{count:number}>();if(!row||row.count>max)throw new HttpError(429,'Please wait before trying again.');}
 export function json(value:unknown,status=200,headers:Record<string,string>={}){return Response.json(value,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...headers}});}
 export async function authenticate(address:string,message:string,signature:string) {if(!isAddress(address)||!/^0x[0-9a-f]+$/i.test(signature))return false;return verifyMessage({address:address as `0x${string}`,message,signature:signature as `0x${string}`});}
+

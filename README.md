@@ -14,10 +14,13 @@ Node.js 22.13 or later is required. Dependencies are pinned in package-lock.json
 
 ```powershell
 npm ci
-npm run dev -- --hostname 127.0.0.1
+Copy-Item .env.example .env.local
+npm run dev:vercel -- --hostname 127.0.0.1
 ```
 
-The portable preview uses http://127.0.0.1:5173. The existing local D1 database uses drizzle/0000_moaning_ares.sql. Runtime settings are listed in `.dev.vars.example`; actual `.dev.vars` values stay outside Git. BRAVE_SEARCH_API_KEY is optional.
+The Next.js preview uses http://127.0.0.1:5173. Set DATABASE_URL to a Neon PostgreSQL connection string in .env.local, then run npm run db:migrate:vercel. GENLAYER_CONTRACT stays empty until the contract is deployed; BRAVE_SEARCH_API_KEY is optional. Environment secrets stay outside Git.
+
+The existing Cloudflare preview is available with npm run dev. It uses drizzle/0000_moaning_ares.sql and .dev.vars.example. Its request-scoped database binding is kept separate from the Vercel database.
 
 ## Checks
 
@@ -42,4 +45,7 @@ The interface combines a short masked brand reveal, selective translucent glass 
 
 Website privacy does not hide on-chain claims, source links, wallet addresses or results. The contract fetches and judges evidence independently. A draft, fee quote, receipt or Accepted status alone is not a finalized fact-check. After an uncertain wallet response, resolve the existing transaction rather than submitting again.
 
-The site is hosted through its existing Sites project and Cloudflare-compatible Worker/D1 build. `.openai/hosting.json` retains the project identity; hosting audience and runtime secrets are managed outside the source repository.
+Vercel builds the app with npm run build:vercel using vercel.json. Connect the GitHub repository, provision a free Neon database, set DATABASE_URL for production and preview, and apply db/postgres.sql with npm run db:migrate:vercel before testing wallet sign-in. Pushes to main deploy production; pull requests receive preview deployments. Keep the database URL and tokens in Vercel environment settings.
+
+The existing Sites project and Cloudflare-compatible Worker/D1 build remain supported. .openai/hosting.json retains that project identity; its hosting audience and runtime secrets are managed outside the source repository. Each hosting provider uses its own database.
+
