@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-06T15:51:14.841Z",
+  "scope": "Real loopback API and local D1; ephemeral sign-in signature; no blockchain transaction",
+  "fixtureAddress": "0x99269bb4855f6bdc3f6c005221864559dfae9a29",
+  "checks": [
+    "Nonce sign-in and verified EOA signature",
+    "Used challenge cannot be replayed",
+    "Private draft stored with exact payload SHA-256",
+    "Private draft denied to guests and excluded from the public feed",
+    "No configured contract cannot be submitted as a live check",
+    "Logout invalidates the server session"
+  ],
+  "liveDecisionVerified": false,
+  "ok": true
+}

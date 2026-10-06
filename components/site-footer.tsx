@@ -1,0 +1,2 @@
+import { ArrowUpRight } from 'lucide-react';
+export default function SiteFooter(){return <footer className="site-footer"><div className="footer-brand"><span>Powered by</span><a href="https://genlayer.com" target="_blank" rel="noopener noreferrer"><img src="/brand/genlayer-logo.svg" alt="GenLayer" width={105} height={25}/></a></div><p>Evidence can change. Check the sources and the date.</p><div><a href="/how-it-works">How it works <ArrowUpRight size={12}/></a><span>© {new Date().getFullYear()} ClaimLens</span></div></footer>;}
