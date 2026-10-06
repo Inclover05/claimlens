@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-10-06T21:57:29.414Z",
+  "origin": "https://claimlens-dytxpfv10-inclover05s-projects.vercel.app",
+  "id": "7d8f6793-b864-49c4-91bc-f870884bb4bd",
+  "state": "undetermined",
+  "evmHash": "0x4d50063641b08c262fd9a23a2a72be83921be1ed28dd17da3861726d9bf22f77",
+  "genHash": "0xd6fec246919a1fec881e943b61b38554bcc02218239cd2b15c580436a05640c6",
+  "error": "The generated answer failed exact-quotation validation. No verdict was saved. This is an execution failure, not evidence that your claim is false.",
+  "noVerdict": true,
+  "renderedError": true,
+  "noResubmissionButton": true,
+  "transactionSent": false,
+  "ok": true
+}

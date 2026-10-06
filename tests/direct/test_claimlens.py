@@ -72,6 +72,40 @@ def test_unavailable_sources_never_store_a_verdict(case):
     assert contract.get_check(request['owner'],request['id'])==''
     assert vm.run_validator() is True
 
+
+def test_processing_error_requires_independent_reproduction(case):
+    vm,contract,payload=case
+    mocks(vm,status=403)
+    with pytest.raises(Exception,match='SOURCE_ACCESS_FAILED'):
+        contract.check_claim(payload)
+    vm.clear_mocks();mocks(vm)
+    assert vm.run_validator() is False
+    request=json.loads(payload)
+    assert contract.get_check(request['owner'],request['id'])==''
+
+
+def test_one_unavailable_candidate_does_not_hide_accessible_evidence(case):
+    vm,contract,payload=case
+    request=json.loads(payload)
+    request['source_urls']=['https://unavailable.gov/record',URL]
+    vm.mock_web('unavailable.gov',{'status':503,'body':'unavailable'})
+    mocks(vm)
+    contract.check_claim(json.dumps(request,separators=(',',':')))
+    result=json.loads(contract.get_check(request['owner'],request['id']))
+    assert [entry['url'] for entry in result['evidence']]==[URL]
+    assert vm.run_validator() is True
+
+
+def test_consensus_compares_substance_without_requiring_identical_wording(case):
+    vm,contract,payload=case
+    mocks(vm);contract.check_claim(payload)
+    vm.clear_mocks();mocks(vm)
+    independent=answer()
+    independent['explanation']='Visible moonlight comes from sunlight reflected by the lunar surface.'
+    independent['caveats']='The evidence concerns visible light.'
+    mock_answer(vm,independent)
+    assert vm.run_validator() is True
+
 def test_invented_quote_and_malformed_model_response_fail(case):
     vm,contract,payload=case
     vm.mock_web('nasa.gov',{'status':200,'body':TEXT})
