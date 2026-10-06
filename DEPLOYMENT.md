@@ -54,7 +54,9 @@ Official references checked 6 October 2026: [CLI deployment](https://docs.genlay
 
 The source is in the public repository https://github.com/Inclover05/claimlens. The Vercel project is https://vercel.com/inclover05s-projects/claimlens, linked to the main branch. Vercel uses vercel.json and npm run build:vercel for the standard Next.js runtime. The existing Sites build remains available separately.
 
-Vercel needs a durable PostgreSQL database. Use the existing Neon Marketplace integration on the Free plan, connect a dedicated ClaimLens resource to this project, and sync its DATABASE_URL to the local ignored .env.local file. Never commit the connection string. Apply the schema before verifying sign-in:
+A dedicated Neon Free-plan database, claimlens-db, is connected in Frankfurt to this project's production, preview and development environments. Its schema is applied, and production wallet sign-in and private draft storage pass the API checks. Production still requires Vercel sign-in pending approval to open website access.
+
+To refresh a local environment from this project, sync DATABASE_URL to the ignored .env.local file and apply the idempotent schema. Never commit the connection string:
 
 ```powershell
 npx vercel env pull .env.local --yes --scope inclover05s-projects
@@ -64,4 +66,4 @@ npm run dev:vercel -- --hostname 127.0.0.1
 
 The migration runs atomically and creates the ClaimLens tables and feed indexes. The database adapter keeps values in parameterized queries and preserves the atomic sign-in/session batch. The Cloudflare Worker supplies its own request-scoped D1 database; Vercel uses Neon, so existing data is not automatically copied between hosts.
 
-After setting environment variables, redeploy so the running deployment receives them. Verify a real wallet signature, used-challenge rejection, saved private draft, guest denial, public-feed exclusion, logout, and the missing-contract gate on the Vercel production origin. A successful website build is separate from database verification and from GenLayer deployment.
+After future environment changes, redeploy so the running deployment receives them. The production API checks cover a real wallet signature, used-challenge rejection, saved private draft, guest denial, public-feed exclusion, logout, and the missing-contract gate; evidence is recorded in reports/api-verification-vercel.json. GenLayer deployment and real consensus verification remain pending.

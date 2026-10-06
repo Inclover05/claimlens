@@ -6,6 +6,8 @@ A fact-checking application built for GenLayer Bradbury. People submit one Engli
 
 The cinematic interface, private/public drafts, wallet sign-in, profile, source discovery, lifecycle display and transaction recovery are implemented. The contract is prepared and tested in direct mode. No Bradbury contract has been deployed or configured yet; the app explicitly keeps checks as drafts until deployment.
 
+The [public GitHub repository](https://github.com/Inclover05/claimlens) deploys automatically to [Vercel](https://claimlens-inclover05s-projects.vercel.app). A dedicated Neon Free-plan database is connected and the deployed sign-in and private draft API checks pass. The website currently requires Vercel sign-in pending approval for public access.
+
 See [PROJECT_BRIEF.md](PROJECT_BRIEF.md) for the accepted design brief, [DEPLOYMENT.md](DEPLOYMENT.md) for network and deployment preparation, and [reports/verification.md](reports/verification.md) for verified capabilities and remaining live checks.
 
 ## Run locally
@@ -45,7 +47,7 @@ The interface combines a short masked brand reveal, selective translucent glass 
 
 Website privacy does not hide on-chain claims, source links, wallet addresses or results. The contract fetches and judges evidence independently. A draft, fee quote, receipt or Accepted status alone is not a finalized fact-check. After an uncertain wallet response, resolve the existing transaction rather than submitting again.
 
-Vercel builds the app with npm run build:vercel using vercel.json. Connect the GitHub repository, provision a free Neon database, set DATABASE_URL for production and preview, and apply db/postgres.sql with npm run db:migrate:vercel before testing wallet sign-in. Pushes to main deploy production; pull requests receive preview deployments. Keep the database URL and tokens in Vercel environment settings.
+Vercel builds the app with npm run build:vercel using vercel.json. This project is already linked to GitHub and a dedicated free Neon database with DATABASE_URL configured. The schema in db/postgres.sql is applied with npm run db:migrate:vercel. Pushes to main deploy production; pull requests receive preview deployments. Keep the database URL and tokens in Vercel environment settings.
 
 The existing Sites project and Cloudflare-compatible Worker/D1 build remain supported. .openai/hosting.json retains that project identity; its hosting audience and runtime secrets are managed outside the source repository. Each hosting provider uses its own database.
 

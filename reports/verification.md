@@ -4,7 +4,7 @@
 
 - TypeScript: noEmit check passes.
 - Changed application files: focused ESLint check passes (warnings for ordinary image tags are non-blocking).
-- Thirteen Node regression tests: request host/HTTPS handling, cross-origin rejection and malformed forwarding headers, plus PostgreSQL placeholder handling and overlapping request context isolation, plus provider restoration among MetaMask/Rabby/OKX fixtures, wrong account/chain, chain addition via EVM RPC, uncertain outcomes vs rejection, lifecycle/execution, unsafe source rejection.
+- Thirteen Node regression tests pass: public HTTPS origins, cross-origin rejection, malformed forwarding headers, PostgreSQL placeholders, concurrent request isolation, wallet restoration, account/chain checks, uncertain transaction recovery, lifecycle handling and unsafe source rejection.
 - Official GenVM linter: contract schema valid, three methods, two views, one write, no constructor parameters.
 - Five direct contract tests: payload/source provenance, duplicate guard, successful captured validator replay, changed source/disagreement rejection, source-access failure, invented quote/malformed output rejection, and legitimate insufficient evidence.
 - Browser fixtures: input validation, wallet dialog, mobile menu/help navigation, dashboard, reduced motion, pause control, selected-provider restoration, uncertain-outcome retry lock, refresh, API outage after a returned hash, local hash restoration and manual attachment. No chain write occurred.
@@ -29,11 +29,15 @@ Before portal submission, follow DEPLOYMENT.md. Preserve actual EVM/GenLayer ide
 - Contract mutated a nondeterministic return -> return immutable JSON and parse fresh deterministic metadata -> linter and captured validator replay pass.
 
 
-## GitHub and Vercel preparation
+## GitHub and Vercel verification
 
-Public repository: https://github.com/Inclover05/claimlens. Vercel project: claimlens in inclover05s-projects, linked to main for automatic production deployments. The initial Vercel production build reached READY at commit a4abbc4d51b85b1d9c83a9e40c60dddd7e9cebaa.
+Public repository: https://github.com/Inclover05/claimlens. Vercel project: claimlens in inclover05s-projects, linked to main for automatic production deployments. The tested production deployment reached READY at application commit 73d7f9d077d74ffb8d0b55a5c24b74f70dd7ebd5. Its canonical origin is https://claimlens-inclover05s-projects.vercel.app.
 
-The standard Next.js production build and Cloudflare Worker build both pass. The built Worker also passes the real wallet-signature and private-draft API checks after the runtime adaptation; temporary local fixture rows were removed. A dedicated Neon Free-plan resource, claimlens-db, is connected in Frankfurt. PostgreSQL migration and the real loopback Next.js/Neon sign-in and private-draft checks pass; temporary fixture rows were removed. Live Vercel API verification follows the runtime correction deployment. No deployed ClaimLens contract is configured.
+The standard Next.js production build and Cloudflare Worker build both pass. The built Worker passes the real wallet-signature and private-draft API checks after the final runtime corrections. A dedicated Neon Free-plan resource, claimlens-db, is connected in Frankfurt. PostgreSQL migration and the real loopback Next.js/Neon checks pass.
+
+Eight checks also pass against the actual protected Vercel production API: cross-origin rejection, correct HTTPS nonce domain/URI, verified EOA signature and secure session cookie, replay rejection, persisted private draft and matching SHA-256, guest denial and feed privacy, missing-contract submission gate, and logout. See api-verification-vercel.json. All temporary fixture rows were removed from the local D1 and Neon databases.
+
+Production remains behind Vercel sign-in pending explicit approval to make the website public. Authenticated CLI verification proves the deployed API behavior; it does not prove anonymous website access or a rendered production browser session. No deployed ClaimLens contract is configured, and no blockchain transaction was sent.
 
 - Next.js normalized the request URL to localhost -> derive the public origin from the request host and trusted Vercel forwarding metadata, with Worker context isolation -> cross-origin tests and real loopback nonce/signature flow pass.
 - PostgreSQL rejected an ambiguous upsert column -> qualify limits.count -> repeated sign-in/verification and replay checks pass.

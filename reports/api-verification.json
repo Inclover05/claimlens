@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-06T16:30:25.024Z",
+  "checkedAt": "2026-10-06T17:19:42.62Z",
   "scope": "Real loopback API and local D1; ephemeral sign-in signature; no blockchain transaction",
-  "fixtureAddress": "0x86a21322789a27e22c5106ab7f0ab72584d53de2",
+  "fixtureAddress": "0x709211c3039d43baf43c3422f24683618ea57d3a",
   "checks": [
     "Nonce sign-in and verified EOA signature",
     "Used challenge cannot be replayed",
@@ -11,5 +11,6 @@
     "Logout invalidates the server session"
   ],
   "liveDecisionVerified": false,
-  "ok": true
+  "ok": true,
+  "fixtureRemoved": true
 }
