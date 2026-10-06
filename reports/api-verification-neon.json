@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-10-06T17:13:45.150Z",
+  "scope": "Real loopback Next.js API and Neon PostgreSQL; ephemeral sign-in signature; no blockchain transaction",
+  "fixtureAddress": "0x67b59bbb1f316c366a27473114e820b0bed7f0bb",
+  "checks": [
+    "Nonce sign-in and verified EOA signature",
+    "Used challenge cannot be replayed",
+    "Private draft stored with exact payload SHA-256",
+    "Private draft denied to guests and excluded from the public feed",
+    "No configured contract cannot be submitted as a live check",
+    "Logout invalidates the server session"
+  ],
+  "liveDecisionVerified": false,
+  "ok": true,
+  "fixtureRemoved": true
+}

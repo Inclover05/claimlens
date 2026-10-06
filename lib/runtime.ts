@@ -67,3 +67,5 @@ const nodeEnv: RuntimeEnv = {
 };
 export function runtime(): RuntimeEnv { return requests.getStore() ?? nodeEnv; }
 
+
+export function usesVercelProxy(): boolean { return !requests.getStore() && process.env.VERCEL === '1'; }

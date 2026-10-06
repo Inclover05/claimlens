@@ -1,5 +1,5 @@
 import { isAddress } from 'viem';
-import { authenticate, body, db, digest, HttpError, identity, json, now, rate, requireUser, runtime, sameOrigin } from '@/lib/server';
+import { authenticate, body, clientIp, db, digest, HttpError, identity, json, now, rate, requireUser, requestUrl, runtime, sameOrigin } from '@/lib/server';
 import { discover } from '@/lib/discovery';
 import { POLICY, safeSource, validateClaim, type SavedCheck } from '@/lib/domain';
 import { quote, reconcile } from '@/lib/chain';
@@ -8,7 +8,7 @@ type Context={params:Promise<{path:string[]}>};
 const string=(value:unknown)=>typeof value==='string'?value:'';
 async function handler(req:Request,ctx:Context){
  try {
-  const {path}=await ctx.params;const route=path.join('/');const url=new URL(req.url);
+  const {path}=await ctx.params;const route=path.join('/');const url=requestUrl(req);
   if(req.method==='GET'){
    if(route==='config')return json({chainId:4221,contract:runtime().GENLAYER_CONTRACT||null,searchEnabled:!!runtime().BRAVE_SEARCH_API_KEY,policy:POLICY});
    if(route==='auth/me')return json({user:await identity(req)});
@@ -31,13 +31,13 @@ async function handler(req:Request,ctx:Context){
    sameOrigin(req);const data=await body(req);
    if(route==='auth/nonce'){
     const address=string(data.address).toLowerCase();if(!isAddress(address))throw new HttpError(400,'Choose a valid wallet account.');
-    await rate(`nonce:${req.headers.get('cf-connecting-ip')||'local'}`,40,600);
+    await rate(`nonce:${clientIp(req)}`,40,600);
     const id=crypto.randomUUID();const expiry=now()+300;
     const message=`${url.host} wants you to sign in with your Ethereum account:\n${address}\n\nSign in to ClaimLens. This signature does not authorize a payment.\n\nURI: ${url.origin}\nVersion: 1\nChain ID: 4221\nNonce: ${id.replaceAll('-','')}\nIssued At: ${new Date().toISOString()}\nExpiration Time: ${new Date(expiry*1000).toISOString()}`;
     await db().prepare('INSERT INTO challenges (id,address,message,expires_at,consumed) VALUES (?,?,?,?,0)').bind(id,address,message,expiry).run();return json({id,message});
    }
    if(route==='auth/verify'){
-    await rate(`verify:${req.headers.get('cf-connecting-ip')||'local'}`,80,600);
+    await rate(`verify:${clientIp(req)}`,80,600);
     const challenge=await db().prepare('SELECT * FROM challenges WHERE id = ? AND expires_at > ? AND consumed = 0').bind(string(data.id),now()).first<{id:string;address:string;message:string}>();
     if(!challenge||!await authenticate(challenge.address,challenge.message,string(data.signature)))throw new HttpError(401,'Signature was invalid or expired. Sign in again.');
     const consumed=await db().prepare('UPDATE challenges SET consumed = 1 WHERE id = ? AND consumed = 0 RETURNING id').bind(challenge.id).first();if(!consumed)throw new HttpError(401,'This sign-in request has already been used.');
@@ -99,4 +99,5 @@ async function handler(req:Request,ctx:Context){
 }
 export const GET=handler;
 export const POST=handler;
+
 
