@@ -1,4 +1,4 @@
 # The deployed contract is fingerprinted byte for byte. Keep its exact bytes
 # across Windows and Linux checkouts rather than applying automatic CRLF changes.
-/contracts/claimlens.py -text
-/contracts/releases/*.py -text
+/contracts/claimlens.py -text whitespace=cr-at-eol
+/contracts/releases/*.py -text whitespace=cr-at-eol,-blank-at-eof
