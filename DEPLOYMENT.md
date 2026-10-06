@@ -19,6 +19,19 @@ The SDK's network definition supplies the consensus address. Run `node scripts/v
 
 ## Deploy and verify
 
+For the dedicated local Bradbury test wallet, Windows encrypts the private key for the current account in the Git-ignored .claimlens-wallet directory. The directory permits only its owner and SYSTEM. Creation is idempotent, and the saved encrypted signer was verified with an EOA message signature. Use only Bradbury test GEN for this wallet.
+
+```powershell
+node scripts/bradbury-wallet.mjs status
+node scripts/deploy-bradbury.mjs prepare
+node scripts/deploy-bradbury.mjs deploy
+node scripts/deploy-bradbury.mjs status
+```
+
+The deployment helper uses the pinned SDK's contract encoding, checks the chain, source hash and available balance, and requires a successful live gas estimate before signing. It records the deterministic EVM hash before broadcasting and resumes an existing attempt rather than signing another deployment. It records a verified contract address only after successful execution, finalization, and exact source/policy read-back. The encrypted signer is local to this Windows account and must never be placed in hosted environment variables or frontend code.
+
+The official CLI is also available as a deployment option:
+
 Use the official CLI with a funded Bradbury test wallet. Select and inspect the effective network before signing. Record the actual CLI version in the live evidence ledger; do not silently move this app to a preview network or SDK major version.
 
 ```powershell

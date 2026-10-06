@@ -48,6 +48,7 @@ next-env.d.ts
 __pycache__/
 .pytest_cache/
 tmp/
+/.claimlens-wallet/
 .dev.vars
 *.tsbuildinfo
 !.env.example

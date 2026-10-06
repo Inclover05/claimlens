@@ -4,7 +4,7 @@
 
 - TypeScript: noEmit check passes.
 - Changed application files: focused ESLint check passes (warnings for ordinary image tags are non-blocking).
-- Thirteen Node regression tests pass: public HTTPS origins, cross-origin rejection, malformed forwarding headers, PostgreSQL placeholders, concurrent request isolation, wallet restoration, account/chain checks, uncertain transaction recovery, lifecycle handling and unsafe source rejection.
+- Fourteen Node regression tests pass: public HTTPS origins, cross-origin rejection, malformed forwarding headers, PostgreSQL placeholders, concurrent request isolation, wallet restoration, account/chain checks, uncertain transaction recovery, lifecycle handling, unsafe source rejection, and deployment encoding compared with the pinned SDK before signing or broadcast.
 - Official GenVM linter: contract schema valid, three methods, two views, one write, no constructor parameters.
 - Five direct contract tests: payload/source provenance, duplicate guard, successful captured validator replay, changed source/disagreement rejection, source-access failure, invented quote/malformed output rejection, and legitimate insufficient evidence.
 - Browser fixtures: input validation, wallet dialog, mobile menu/help navigation, dashboard, reduced motion, pause control, selected-provider restoration, uncertain-outcome retry lock, refresh, API outage after a returned hash, local hash restoration and manual attachment. No chain write occurred.
@@ -41,3 +41,9 @@ Production remains behind Vercel sign-in pending explicit approval to make the w
 
 - Next.js normalized the request URL to localhost -> derive the public origin from the request host and trusted Vercel forwarding metadata, with Worker context isolation -> cross-origin tests and real loopback nonce/signature flow pass.
 - PostgreSQL rejected an ambiguous upsert column -> qualify limits.count -> repeated sign-in/verification and replay checks pass.
+
+## Dedicated Bradbury test wallet
+
+A new local test signer was created at the user's request. Its private key is encrypted with Windows DPAPI for the user's account in .claimlens-wallet, which is excluded from Git. File permissions were verified: only the owner and SYSTEM have access. Loading the encrypted key and verifying its EOA message signature passes.
+
+The read-only deployment preflight confirms chain 4221, deployed consensus code, the existing tested contract source hash, and the pinned SDK encoding. The wallet had 0 test GEN at preparation, so no deployment or live claim transaction was sent. Live gas estimation, contract execution, finalization, source/policy read-back and website consensus tests remain pending funding. The local deployment journal records the deterministic EVM hash before broadcast and prevents automatic duplicate deployment after an uncertain outcome.
