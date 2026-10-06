@@ -4,7 +4,7 @@ A fact-checking application built for GenLayer Bradbury. People submit one Engli
 
 ## Current state
 
-The cinematic interface, private/public drafts, wallet sign-in, profile, source discovery, lifecycle display and transaction recovery are implemented. The contract is prepared and tested in direct mode. No Bradbury contract has been deployed or configured yet; the app explicitly keeps checks as drafts until deployment.
+The cinematic interface, private/public drafts, wallet sign-in, profile, source discovery, lifecycle display and transaction recovery are implemented. The Bradbury contract is deployed and finalized at `0x9C3F33ab49Cf6F806cB4A1254F6770f42f7337Bf`; its source and policy match the tested code. Real website consensus checks are in progress.
 
 The [public GitHub repository](https://github.com/Inclover05/claimlens) deploys automatically to [Vercel](https://claimlens-inclover05s-projects.vercel.app). A dedicated Neon Free-plan database is connected and the deployed sign-in and private draft API checks pass. The website currently requires Vercel sign-in pending approval for public access.
 

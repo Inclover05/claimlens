@@ -1,6 +1,8 @@
 # ClaimLens deployment preparation
 
-Status: contract prepared and tested locally; no Bradbury deployment or live verdict yet.
+Status: Bradbury deployment finalized with successful execution; exact deployed source and policy verified. Real website verdict checks are in progress.
+
+Contract: `0x9C3F33ab49Cf6F806cB4A1254F6770f42f7337Bf`. Deployment evidence, EVM/GenLayer identifiers and measured network fee are recorded in `reports/bradbury-deployment.json`. Vercel's production, preview and development environments now contain this address; each running deployment receives it at build time.
 
 ClaimLens asks whether one factual claim is supported by sources independently fetched and assessed inside the Intelligent Contract. The website discovers candidates, saves the immutable request, signs through the selected wallet, and tracks the contract's result. The contract uses custom leader/validator comparison, not exact equality between freely worded AI responses.
 
@@ -79,4 +81,4 @@ npm run dev:vercel -- --hostname 127.0.0.1
 
 The migration runs atomically and creates the ClaimLens tables and feed indexes. The database adapter keeps values in parameterized queries and preserves the atomic sign-in/session batch. The Cloudflare Worker supplies its own request-scoped D1 database; Vercel uses Neon, so existing data is not automatically copied between hosts.
 
-After future environment changes, redeploy so the running deployment receives them. The production API checks cover a real wallet signature, used-challenge rejection, saved private draft, guest denial, public-feed exclusion, logout, and the missing-contract gate; evidence is recorded in reports/api-verification-vercel.json. GenLayer deployment and real consensus verification remain pending.
+After future environment changes, redeploy so the running deployment receives them. The earlier production API checks cover a real wallet signature, used-challenge rejection, saved private draft, guest denial, public-feed exclusion, logout, and the pre-deployment missing-contract gate; evidence is recorded in reports/api-verification-vercel.json. GenLayer deployment is finalized; real website consensus verification is in progress.

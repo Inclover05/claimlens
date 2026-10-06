@@ -46,10 +46,11 @@ try{
   const announce=()=>wallets.forEach(detail=>window.dispatchEvent(new CustomEvent('eip6963:announceProvider',{detail})));
   window.addEventListener('eip6963:requestProvider',announce);
  },{address});
+ let sessionGate=null,sessionRequested=null;
  await page.route('**/api/**',async route=>{
   const path=new URL(route.request().url()).pathname;
   let data={};let status=200;
-  if(path==='/api/auth/me')data={user:{address,username:'fixture'}};
+  if(path==='/api/auth/me'){if(sessionGate){sessionRequested();await sessionGate;}data={user:{address,username:'fixture'}};}
   else if(path===`/api/checks/${checkId}`)data={check:{id:checkId,owner:address,claim:'The Moon produces its own visible light.',source:'https://www.nasa.gov/',visibility:'private',topic:'Science',created_at:1791300000,state,input_hash:'fixture-only',contract:'0x'+'b'.repeat(40),payload:JSON.stringify({source_urls:['https://www.nasa.gov/']})}};
   else if(path.endsWith('/prepare'))data={transaction:{from:address,to:'0x'+'c'.repeat(40),data:'0x00',value:'0x0',gas:'0x10000',chainId:'0x107d',gasPrice:'0x1',feeGen:.01,expiresAt:Date.now()/1000+300}};
   else if(path.endsWith('/attempt')){if(state!=='draft'){status=409;data={error:'A wallet attempt is already in progress.'};}else{state='awaiting_wallet';data={ok:true};}}
@@ -57,6 +58,17 @@ try{
   else if(path.endsWith('/checks'))data={checks:[]};
   await route.fulfill({status,contentType:'application/json',body:JSON.stringify(data)});
  });
+ // A fast composer interaction must wait for a delayed restored session.
+ let releaseSession;
+ sessionGate=new Promise(resolve=>{releaseSession=resolve;});
+ const sessionStarted=new Promise(resolve=>{sessionRequested=resolve;});
+ await page.goto(base);await sessionStarted;
+ await page.getByLabel('What would you like to fact-check?').fill('The Moon is a natural satellite of Earth.');
+ assert.equal(await page.getByRole('button',{name:'Review claim'}).isEnabled(),false);
+ releaseSession();sessionGate=null;
+ await page.getByRole('button',{name:'Wallet profile for fixture',exact:true}).waitFor();
+ assert.equal(await page.getByRole('button',{name:'Review claim'}).isEnabled(),true);
+ assert.equal(await page.getByRole('dialog').count(),0);
  const begin=async()=>{await page.goto(base+'/checks/'+checkId);await page.getByLabel('I understand that my claim').check();await page.getByRole('button',{name:'Estimate GEN fee'}).click();await page.getByRole('button',{name:'Pay GEN & check claim'}).click();};
  await begin();await page.getByRole('alert').filter({hasText:'wallet outcome is uncertain'}).waitFor();
  await page.getByRole('button',{name:'Refresh status'}).click();
@@ -72,7 +84,7 @@ try{
  assert.equal(hashSaved,'0x'+'a'.repeat(64));
  const calls=await page.evaluate(()=>window.fixtureCalls);assert.equal(calls.some(call=>call.name!=='Rabby'),false);
  assert.deepEqual(errors,[]);
- console.log(JSON.stringify({passed:true,checks:['composer validation','wallet dialog','mobile navigation','help and dashboard','reduced motion','three-provider restoration','uncertain outcome lock','hash persistence and recovery'],scope:'Browser fixtures; no real wallet or GenLayer transaction'},null,2));
+ console.log(JSON.stringify({passed:true,checks:['composer validation','wallet dialog','mobile navigation','help and dashboard','reduced motion','delayed session restoration','three-provider restoration','uncertain outcome lock','hash persistence and recovery'],scope:'Browser fixtures; no real wallet or GenLayer transaction'},null,2));
 }finally{await browser.close();}
 
 

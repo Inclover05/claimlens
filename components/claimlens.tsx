@@ -18,7 +18,7 @@ const examples = [
 const topics = ['All topics','Politics','Football','Science','World'];
 
 export default function ClaimLens() {
-  const {user,openWallet} = useWallet();
+  const {user,loading:walletLoading,openWallet} = useWallet();
   const [claim,setClaim] = useState('');
   const [source,setSource] = useState('');
   const [privateCheck,setPrivateCheck] = useState(false);
@@ -36,7 +36,7 @@ export default function ClaimLens() {
   let sourceError = '';
   if (source.trim()) {try {safeSource(source.trim());} catch {sourceError='Use a public HTTPS link, such as https://x.com/…';}}
   const tooLong = claim.length > lengthLimit;
-  const ready = claim.trim().length >= 8 && !tooLong && !sourceError && (mode!=='link' || !!source.trim());
+  const ready = !walletLoading && claim.trim().length >= 8 && !tooLong && !sourceError && (mode!=='link' || !!source.trim());
 
   useEffect(()=>{
     const controller = new AbortController();

@@ -16,7 +16,7 @@ The direct runner needed a Windows-only adapter to defer deleting its stdin mess
 
 ## Not yet verified
 
-No ClaimLens contract address is configured. There is no deployed source/policy comparison, real-wallet deployment or paid claim transaction, execution result, accepted/finalized verdict, production-domain wallet compatibility, or measured protocol fee profile. Read-only RPC success and passing fixtures do not prove these capabilities.
+The contract deployment is finalized and source/policy verified, as recorded below. Paid claim transactions, accepted/finalized fact-check results and rendered production verdicts remain under verification. Deployment success and passing fixtures do not prove those capabilities.
 
 Before portal submission, follow DEPLOYMENT.md. Preserve actual EVM/GenLayer identifiers, wallet/browser, fee, source/hash, execution, result read-back and finality. Claims with unavailable or irrelevant evidence must remain explicit gaps or insufficient evidence. Do not reuse OpenProof's deployment or acceptance as ClaimLens evidence.
 
@@ -37,7 +37,7 @@ The standard Next.js production build and Cloudflare Worker build both pass. The
 
 Eight checks also pass against the actual protected Vercel production API: cross-origin rejection, correct HTTPS nonce domain/URI, verified EOA signature and secure session cookie, replay rejection, persisted private draft and matching SHA-256, guest denial and feed privacy, missing-contract submission gate, and logout. See api-verification-vercel.json. All temporary fixture rows were removed from the local D1 and Neon databases.
 
-Production remains behind Vercel sign-in pending explicit approval to make the website public. Authenticated CLI verification proves the deployed API behavior; it does not prove anonymous website access or a rendered production browser session. No deployed ClaimLens contract is configured, and no blockchain transaction was sent.
+Production remains behind Vercel sign-in pending explicit approval to make the website public. These earlier authenticated CLI checks prove the deployed API behavior; they do not prove anonymous website access or a rendered production browser session. The contract has since been deployed and configured for the next production build.
 
 - Next.js normalized the request URL to localhost -> derive the public origin from the request host and trusted Vercel forwarding metadata, with Worker context isolation -> cross-origin tests and real loopback nonce/signature flow pass.
 - PostgreSQL rejected an ambiguous upsert column -> qualify limits.count -> repeated sign-in/verification and replay checks pass.
@@ -46,4 +46,15 @@ Production remains behind Vercel sign-in pending explicit approval to make the w
 
 A new local test signer was created at the user's request. Its private key is encrypted with Windows DPAPI for the user's account in .claimlens-wallet, which is excluded from Git. File permissions were verified: only the owner and SYSTEM have access. Loading the encrypted key and verifying its EOA message signature passes.
 
-The read-only deployment preflight confirms chain 4221, deployed consensus code, the existing tested contract source hash, and the pinned SDK encoding. The wallet had 0 test GEN at preparation, so no deployment or live claim transaction was sent. Live gas estimation, contract execution, finalization, source/policy read-back and website consensus tests remain pending funding. The local deployment journal records the deterministic EVM hash before broadcast and prevents automatic duplicate deployment after an uncertain outcome.
+The wallet received 5 test GEN. Deployment used a successful live gas estimate and the pinned SDK encoding; the local journal saved its deterministic EVM hash before broadcast and prevents an automatic duplicate deployment after an uncertain outcome.
+
+## Finalized Bradbury deployment
+
+- Contract: `0x9C3F33ab49Cf6F806cB4A1254F6770f42f7337Bf`.
+- EVM transaction: `0x8d825baead1b57c0e3a7822c23579feaa667848a3b5c25445f00baf79fb5360b`; receipt success.
+- GenLayer ID: `0x5e6cb750e7e4d3b86d5fda2ff21bb3390fda14063127101f8e0e780c19ae14e3`; `FINALIZED`, `FINISHED_WITH_RETURN`, confirmed 6 October 2026 at 20:00 UTC.
+- Exact source SHA-256: `4ea3783af35968355028637f47c52de4664a8f93e95e059a51177404240625da`; policy read-back: `claimlens-evidence-v1`.
+- Measured deployment network fee: 0.0013934664375 test GEN. This is the EVM receipt fee, not a general claim execution cost estimate.
+- Vercel contract address configured for production, preview and development. Real website verdict checks are in progress.
+
+See `bradbury-deployment.json` and `deployment-preflight.json` for machine-readable evidence. The saved-session composer fix disables Review claim until sign-in restoration completes; its browser regression holds the session response deliberately.
