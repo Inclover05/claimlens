@@ -4,9 +4,9 @@ A fact-checking application built for GenLayer Bradbury. People submit one Engli
 
 ## Current state
 
-The cinematic interface, private/public drafts, wallet sign-in, profile, source discovery, lifecycle display and transaction recovery are implemented. The corrected Bradbury contract is deployed at `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598`, accepted with successful execution and matching source/policy; finalization and real website verdict checks are in progress. It replaces an initial deployment whose live test exposed premature HTML truncation.
+The cinematic interface, private/public drafts, wallet sign-in, profile, source discovery, lifecycle display and transaction recovery are implemented. The corrected Bradbury contract is deployed at `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598`, finalized with successful execution and matching source/policy. A real NASA-backed check has an accepted Supported result with independent read-back; claim finality and the remaining paid tests are in progress. It replaces an initial deployment whose live test exposed premature HTML truncation.
 
-The [public GitHub repository](https://github.com/Inclover05/claimlens) deploys automatically to [Vercel](https://claimlens-inclover05s-projects.vercel.app). A dedicated Neon Free-plan database is connected and the deployed sign-in and private draft API checks pass. The website currently requires Vercel sign-in pending approval for public access.
+The [public GitHub repository](https://github.com/Inclover05/claimlens) deploys automatically to [Vercel](https://claimlens-inclover05s-projects.vercel.app). A dedicated Neon Free-plan database is connected and the deployed sign-in and private draft API checks pass. The website is publicly accessible without Vercel sign-in. Fresh anonymous browser checks pass for the homepage, themes, mobile layout, motion controls, configuration and public feed.
 
 See [PROJECT_BRIEF.md](PROJECT_BRIEF.md) for the accepted design brief, [DEPLOYMENT.md](DEPLOYMENT.md) for network and deployment preparation, and [reports/verification.md](reports/verification.md) for verified capabilities and remaining live checks.
 

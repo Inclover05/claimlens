@@ -1,6 +1,6 @@
 # ClaimLens deployment preparation
 
-Status: corrected Bradbury deployment accepted with successful execution and exact source/policy verification. Finalization and real website verdict checks are in progress.
+Status: corrected Bradbury deployment finalized with successful execution and exact source/policy verification on 6 October 2026 at 20:40 UTC. A real production Supported result is accepted; its finality and the remaining paid evidence tests are in progress.
 
 Contract: `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598`. This replaces the initial contract after real testing found that raw HTML truncation excluded the NASA article. Assets are now removed before the evidence-text limit, article/main content is preferred, entities are decoded and truncation is disclosed. The seven direct runtime tests include large page assets, title-only evidence and incomplete styles. Historical deployment and live-test evidence is retained in `reports/bradbury-deployment-initial.json` and `reports/live-website-verification-initial.json`.
 
@@ -71,7 +71,7 @@ Official references checked 6 October 2026: [CLI deployment](https://docs.genlay
 
 The source is in the public repository https://github.com/Inclover05/claimlens. The Vercel project is https://vercel.com/inclover05s-projects/claimlens, linked to the main branch. Vercel uses vercel.json and npm run build:vercel for the standard Next.js runtime. The existing Sites build remains available separately.
 
-A dedicated Neon Free-plan database, claimlens-db, is connected in Frankfurt to this project's production, preview and development environments. Its schema is applied, and production wallet sign-in and private draft storage pass the API checks. Production still requires Vercel sign-in pending approval to open website access.
+A dedicated Neon Free-plan database, claimlens-db, is connected in Frankfurt to this project's production, preview and development environments. Its schema is applied, and production wallet sign-in and private draft storage pass the API checks. The user explicitly approved public website access. Production now opens without Vercel sign-in, as verified in a fresh browser without bypass headers.
 
 To refresh a local environment from this project, sync DATABASE_URL to the ignored .env.local file and apply the idempotent schema. Never commit the connection string:
 

@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-10-06T20:37:42.797Z",
+  "url": "https://x.com/FIFAWorldCup/status/1604535989480955908",
+  "environment": "Direct Node HTTP; validator access may differ",
+  "direct": {
+    "status": 200,
+    "bytes": 147282,
+    "containsPostClaim": true
+  },
+  "officialEmbed": {
+    "status": 200,
+    "endpoint": "https://publish.x.com/oembed?omit_script=true&url=https%3A%2F%2Fx.com%2FFIFAWorldCup%2Fstatus%2F1604535989480955908",
+    "author": "FIFA World Cup",
+    "containsPostClaim": true,
+    "claimText": "ARGENTINA ARE WORLD CHAMPIONS!!",
+    "date": "2022-12-18"
+  },
+  "limitation": "Raw HTML access can differ between requests and does not establish what validators can read. The official embed confirmed the test input. The application currently asks users to quote one claim manually; it does not fetch embed text.",
+  "currentContractExtraction": {
+    "characters": 200,
+    "truncated": false,
+    "containsPostClaim": true,
+    "preview": "FIFA World Cup @FIFAWorldCup ARGENTINA ARE WORLD CHAMPIONS!! \ud83c\udde6\ud83c\uddf7 #FIFAWorldCup | #Qatar2022 Find all your World Cup content on FIFA+ From fifa.com 5:56 PM \u00b7 Dec 18, 2022 \u00b7 17.5M Views 4.6K 121K 339K 2K"
+  }
+}

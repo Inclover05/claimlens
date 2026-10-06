@@ -4,7 +4,7 @@
 
 - TypeScript: noEmit check passes.
 - Changed application files: focused ESLint check passes (warnings for ordinary image tags are non-blocking).
-- Fourteen Node regression tests pass: public HTTPS origins, cross-origin rejection, malformed forwarding headers, PostgreSQL placeholders, concurrent request isolation, wallet restoration, account/chain checks, uncertain transaction recovery, lifecycle handling, unsafe source rejection, and deployment encoding compared with the pinned SDK before signing or broadcast.
+- Fifteen Node regression tests pass: public HTTPS origins, cross-origin rejection, malformed forwarding headers, PostgreSQL placeholders, concurrent request isolation, wallet restoration, account/chain checks, uncertain transaction recovery, lifecycle handling, unsafe source rejection, and deployment encoding compared with the pinned SDK before signing or broadcast.
 - Official GenVM linter: contract schema valid, three methods, two views, one write, no constructor parameters.
 - Seven direct contract tests: payload/source provenance, duplicate guard, successful captured validator replay, changed source/disagreement rejection, source-access failure, invented quote/malformed output rejection, legitimate insufficient evidence, large page assets, HTML entity decoding, title-only evidence and incomplete styles.
 - Browser fixtures: input validation, wallet dialog, mobile menu/help navigation, dashboard, reduced motion, pause control, selected-provider restoration, uncertain-outcome retry lock, refresh, API outage after a returned hash, local hash restoration and manual attachment. No chain write occurred.
@@ -16,7 +16,7 @@ The direct runner needed a Windows-only adapter to defer deleting its stdin mess
 
 ## Not yet verified
 
-The contract deployment is finalized and source/policy verified, as recorded below. Paid claim transactions, accepted/finalized fact-check results and rendered production verdicts remain under verification. Deployment success and passing fixtures do not prove those capabilities.
+The corrected contract deployment is finalized with successful execution and exact source/policy read-back. The Supported test result is accepted with independent result read-back; claim finality is pending. The irrelevant-evidence attempt ended without consensus and remains an explicit failed test. A real X-post draft passes source preservation, independent candidate discovery, privacy and fee estimation; its paid verdict test is pending. See the current reports for precise states.
 
 Before portal submission, follow DEPLOYMENT.md. Preserve actual EVM/GenLayer identifiers, wallet/browser, fee, source/hash, execution, result read-back and finality. Claims with unavailable or irrelevant evidence must remain explicit gaps or insufficient evidence. Do not reuse OpenProof's deployment or acceptance as ClaimLens evidence.
 
@@ -35,9 +35,9 @@ Public repository: https://github.com/Inclover05/claimlens. Vercel project: clai
 
 The standard Next.js production build and Cloudflare Worker build both pass. The built Worker passes the real wallet-signature and private-draft API checks after the final runtime corrections. A dedicated Neon Free-plan resource, claimlens-db, is connected in Frankfurt. PostgreSQL migration and the real loopback Next.js/Neon checks pass.
 
-Eight checks also pass against the actual protected Vercel production API: cross-origin rejection, correct HTTPS nonce domain/URI, verified EOA signature and secure session cookie, replay rejection, persisted private draft and matching SHA-256, guest denial and feed privacy, missing-contract submission gate, and logout. See api-verification-vercel.json. All temporary fixture rows were removed from the local D1 and Neon databases.
+The initial eight checks passed against the then-protected Vercel production API: cross-origin rejection, correct HTTPS nonce domain/URI, verified EOA signature and secure session cookie, replay rejection, persisted private draft and matching SHA-256, guest denial and feed privacy, missing-contract submission gate, and logout. The current api-verification-vercel.json records eleven passing checks, including the funded-contract configuration and unfunded-wallet gate, invalid-source and short-claim validation. All temporary fixture rows were removed from the local D1 and Neon databases.
 
-Production remains behind Vercel sign-in pending explicit approval to make the website public. These earlier authenticated CLI checks prove the deployed API behavior; they do not prove anonymous website access or a rendered production browser session. The contract has since been deployed and configured for the next production build.
+Production is now public after explicit user approval. Fresh browser checks without Vercel cookies or bypass headers pass: wallet sign-in, accepted result rendering, private guest denial, public search/result access, owner visibility controls and restoration to private. Anonymous desktop/mobile, themes, 3D pause and reduced-motion checks pass with no browser errors or failed application requests. See public-site-verification.json and x-post-draft-verification.json.
 
 - Next.js normalized the request URL to localhost -> derive the public origin from the request host and trusted Vercel forwarding metadata, with Worker context isolation -> cross-origin tests and real loopback nonce/signature flow pass.
 - PostgreSQL rejected an ambiguous upsert column -> qualify limits.count -> repeated sign-in/verification and replay checks pass.
@@ -69,4 +69,8 @@ The corrected source bounds raw input at 1 MB, removes scripts/styles before lim
 
 Fifteen Node tests and ten browser regression checks pass, including finalized receipts with unsuccessful consensus. A receipt must report both successful execution and `AGREE`/`MAJORITY_AGREE` before the website reads a verdict. Finalized negative consensus displays no verdict and records protocol finality separately. Finalized records no longer depend on another RPC read to remain viewable. TypeScript and focused ESLint pass (one existing image optimization warning).
 
-The user explicitly approved anonymous website access on 6 October 2026; Vercel sign-in protection has now been disabled for this project. Fresh unauthenticated access verification is in progress.
+The user explicitly approved anonymous website access on 6 October 2026; Vercel sign-in protection has now been disabled for this project. Fresh unauthenticated access verification passes; see public-site-verification.json.
+
+## Corrected finalized deployment
+
+Contract `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598` reached `FINALIZED` with `FINISHED_WITH_RETURN`, verified 6 October 2026 at 20:40 UTC. Exact source SHA-256 is `62054246cfd48fdfd8d4e00aa4b668d0d70b897901345549b400292e9aabc1e2`, with policy `claimlens-evidence-v1`. Normal finalization completed without the test wallet sending a finalization transaction. See bradbury-deployment.json for the corrected active deployment; bradbury-deployment-initial.json retains the retired contract.

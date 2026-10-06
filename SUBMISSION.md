@@ -30,7 +30,7 @@ Website-private checks require their owner's session. Blockchain claims, source 
 - Policy: `claimlens-evidence-v1`.
 - Deployed source SHA-256: `62054246cfd48fdfd8d4e00aa4b668d0d70b897901345549b400292e9aabc1e2`.
 
-The website currently requires Vercel sign-in. Public reviewer access needs to be enabled before using this link as an unrestricted demo.
+The website is publicly accessible without Vercel sign-in. Wallet sign-in is required to save and submit a claim, while public results can be viewed as a guest.
 
 ## Verification and limits
 

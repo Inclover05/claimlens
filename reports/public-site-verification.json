@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-10-06T20:40:04.597Z",
+  "origin": "https://claimlens-inclover05s-projects.vercel.app",
+  "authenticated": false,
+  "bypassHeaders": false,
+  "checks": [
+    "Anonymous HTTPS homepage, 3D lens and animation pause",
+    "Public light theme",
+    "Mobile static lens, no horizontal overflow and help navigation",
+    "Guest dashboard requests a wallet session",
+    "Reduced motion removes canvas and logo animation",
+    "Anonymous configuration and public feed return 200 with the corrected contract"
+  ],
+  "pageErrors": [],
+  "failedApplicationRequests": [],
+  "ok": true
+}
