@@ -64,3 +64,9 @@ See `bradbury-deployment.json` and `deployment-preflight.json` for machine-reada
 The first paid production check reached GenLayer but ended `UNDETERMINED` with `FINISHED_WITH_ERROR`. Independently reading the supplied NASA page showed the fact-bearing article started after the old 50,000-character raw HTML cutoff. A proposed result also used page titles as evidence; it is not counted as a verified verdict. See `live-website-verification-initial.json` for its identifiers.
 
 The corrected source bounds raw input at 1 MB, removes scripts/styles before limiting evidence, prefers article/main content, decodes entities and marks truncated text. The rubric explicitly rejects titles/navigation as evidence and inference from omitted content. The official linter and all seven direct tests pass. Replacement contract `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598` is accepted with successful execution and exact source/policy read-back; finalization and real verdict tests remain in progress.
+
+## Consensus and finality handling
+
+Fifteen Node tests and ten browser regression checks pass, including finalized receipts with unsuccessful consensus. A receipt must report both successful execution and `AGREE`/`MAJORITY_AGREE` before the website reads a verdict. Finalized negative consensus displays no verdict and records protocol finality separately. Finalized records no longer depend on another RPC read to remain viewable. TypeScript and focused ESLint pass (one existing image optimization warning).
+
+The user explicitly approved anonymous website access on 6 October 2026; Vercel sign-in protection has now been disabled for this project. Fresh unauthenticated access verification is in progress.

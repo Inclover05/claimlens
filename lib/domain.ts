@@ -16,9 +16,13 @@ export function validateClaim(claim:string,source:string) {
  if(claim.trim().length<8) throw new Error('Please enter a clear claim of at least 8 characters.');
  if(claim.length>2400 || (!source && claim.length>600)) throw new Error('Keep short claims under 600 characters. Longer claims need a source link and must stay under 2,400 characters.');
 }
-export function lifecycle(status:string,execution:string):string {
+export function lifecycle(status:string,execution:string,consensus='UNKNOWN'):string {
  if(['CANCELED','UNDETERMINED'].includes(status))return status.toLowerCase();
- if(status==='FINALIZED')return execution==='SUCCESS'?'finalized':'execution_failed';
- if(status==='ACCEPTED')return execution==='SUCCESS'?'accepted':execution==='ERROR'?'execution_failed':'processing';
+ const agreed=['AGREE','MAJORITY_AGREE'].includes(consensus);
+ if(status==='FINALIZED'){
+  if(['DISAGREE','MAJORITY_DISAGREE','NO_MAJORITY','TIMEOUT','DETERMINISTIC_VIOLATION'].includes(consensus))return 'finalized_no_consensus';
+  return execution==='ERROR'?'execution_failed':execution==='SUCCESS'&&agreed?'finalized':'processing';
+ }
+ if(status==='ACCEPTED')return execution==='ERROR'?'execution_failed':execution==='SUCCESS'&&agreed?'accepted':'processing';
  return status.toLowerCase() || 'pending';
 }

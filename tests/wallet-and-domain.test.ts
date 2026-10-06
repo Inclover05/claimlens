@@ -35,12 +35,18 @@ test('lost wallet responses stay uncertain; rejection and returned hashes are di
  assert.match(submissionMessage({code:4001},true,'0xhash'),/do not submit again/);
 });
 test('accepted is only a verdict with successful execution and remains provisional',()=>{
- assert.equal(lifecycle('ACCEPTED','UNKNOWN'),'processing');
- assert.equal(lifecycle('ACCEPTED','ERROR'),'execution_failed');
- assert.equal(lifecycle('ACCEPTED','SUCCESS'),'accepted');
- assert.equal(lifecycle('FINALIZED','ERROR'),'execution_failed');
- assert.equal(lifecycle('FINALIZED','SUCCESS'),'finalized');
- assert.equal(lifecycle('UNDETERMINED','SUCCESS'),'undetermined');
+ assert.equal(lifecycle('ACCEPTED','UNKNOWN','AGREE'),'processing');
+ assert.equal(lifecycle('ACCEPTED','ERROR','AGREE'),'execution_failed');
+ assert.equal(lifecycle('ACCEPTED','SUCCESS','AGREE'),'accepted');
+ assert.equal(lifecycle('FINALIZED','ERROR','AGREE'),'execution_failed');
+ assert.equal(lifecycle('FINALIZED','SUCCESS','AGREE'),'finalized');
+ assert.equal(lifecycle('UNDETERMINED','SUCCESS','DISAGREE'),'undetermined');
+});
+test('finalized rejected consensus never becomes a fact-check verdict',()=>{
+ for(const result of ['DISAGREE','MAJORITY_DISAGREE','NO_MAJORITY','TIMEOUT','DETERMINISTIC_VIOLATION'])assert.equal(lifecycle('FINALIZED','SUCCESS',result),'finalized_no_consensus');
+ assert.equal(lifecycle('FINALIZED','SUCCESS','MAJORITY_AGREE'),'finalized');
+ assert.equal(lifecycle('FINALIZED','SUCCESS'),'processing');
+ assert.equal(lifecycle('ACCEPTED','SUCCESS'),'processing');
 });
 test('source validation blocks local, credentialed and non-HTTPS fetch targets',()=>{
  for(const source of ['http://www.nasa.gov','https://127.0.0.1','https://x.localhost','https://metadata.google.internal','https://user:pass@www.nasa.gov','https://www.nasa.gov:8080'])assert.throws(()=>safeSource(source));

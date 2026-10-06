@@ -22,7 +22,7 @@ async function handler(req:Request,ctx:Context){
     let check=await db().prepare('SELECT * FROM checks WHERE id = ?').bind(path[1]).first<SavedCheck>();
     const user=await identity(req);
     if(!check||check.visibility==='private'&&check.owner!==user?.address)throw new HttpError(404,'This check is unavailable.');
-    if(check.evm_hash&&now()-(check as unknown as {updated_at:number}).updated_at>10)check=await reconcile(check);
+    if(check.evm_hash&&!['finalized','finalized_no_consensus'].includes(check.state)&&now()-(check as unknown as {updated_at:number}).updated_at>10)check=await reconcile(check);
     if(check.owner!==user?.address)delete check.payload;
     return json({check});
    }

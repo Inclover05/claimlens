@@ -60,7 +60,7 @@ export async function reconcile(check:SavedCheck):Promise<SavedCheck> {
   }
   const transaction=await lifecycleClient.getTransaction({hash:genHash as Hash});
   const execution=transaction.txExecutionResultName==='FINISHED_WITH_RETURN'?'SUCCESS':transaction.txExecutionResultName==='FINISHED_WITH_ERROR'?'ERROR':'UNKNOWN';
-  const state=lifecycle(String(transaction.statusName||''),execution);
+  const state=lifecycle(String(transaction.statusName||''),execution,String(transaction.resultName||'UNKNOWN'));
   let result:string|null=null; let verdict:string|null=null;
   if(['accepted','finalized'].includes(state)) {const value=await readResult({...check,gen_hash:genHash},state==='finalized');result=JSON.stringify(value);verdict=value.verdict;}
   const error=state==='execution_failed'?'GenLayer execution failed. This is not a fact-check verdict.':null;

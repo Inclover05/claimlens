@@ -83,8 +83,15 @@ try{
  await page.getByRole('heading',{name:'Following the evidence'}).waitFor();
  assert.equal(hashSaved,'0x'+'a'.repeat(64));
  const calls=await page.evaluate(()=>window.fixtureCalls);assert.equal(calls.some(call=>call.name!=='Rabby'),false);
+ // Protocol finality without an agreed execution must never look like a verdict.
+ state='finalized_no_consensus';await page.reload();
+ await page.getByRole('heading',{name:'Consensus was not reached'}).waitFor();
+ assert.equal(await page.locator('.large-verdict').count(),0);
+ assert.equal(await page.getByRole('button',{name:'Estimate GEN fee'}).count(),0);
+ assert.equal(await page.locator('.progress-list li').filter({hasText:'Protocol finality'}).getAttribute('class'),'complete');
+ assert.notEqual(await page.locator('.progress-list li').filter({hasText:'Validator consensus'}).getAttribute('class'),'complete');
  assert.deepEqual(errors,[]);
- console.log(JSON.stringify({passed:true,checks:['composer validation','wallet dialog','mobile navigation','help and dashboard','reduced motion','delayed session restoration','three-provider restoration','uncertain outcome lock','hash persistence and recovery'],scope:'Browser fixtures; no real wallet or GenLayer transaction'},null,2));
+ console.log(JSON.stringify({passed:true,checks:['composer validation','wallet dialog','mobile navigation','help and dashboard','reduced motion','delayed session restoration','three-provider restoration','uncertain outcome lock','hash persistence and recovery','finalized no-consensus presentation'],scope:'Browser fixtures; no real wallet or GenLayer transaction'},null,2));
 }finally{await browser.close();}
 
 
