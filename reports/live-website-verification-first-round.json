@@ -1,0 +1,51 @@
+{
+  "checkedAt": "2026-10-06T20:13:55.439Z",
+  "origin": "https://claimlens-inclover05s-projects.vercel.app",
+  "contract": "0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598",
+  "address": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
+  "scope": "Real protected Vercel browser, wallet signature, API, Neon and Bradbury writes",
+  "cases": [
+    {
+      "name": "supported",
+      "id": "65ad7eca-ffa7-419b-8053-791ce0773550",
+      "claim": "The Moon is Earth's only natural satellite.",
+      "state": "accepted",
+      "verdict": "Supported",
+      "evmHash": "0xb8b8e31dcabb13067c3a4ced3d07ab05edf629d1378e78ca9897c88bbaa7bb1a",
+      "genHash": "0x300f41768f20694c9379e53c32fa7d8b55fbdb58c123020d7dc06b92dd1eaa69",
+      "inputHash": "facefef4312335c36ebf8acac07fa4452585c030b2d97167c30678570c1762c3",
+      "result": {
+        "as_of": "2026-10-06",
+        "caveats": "Temporary natural satellites (e.g., 2006 RH120) have been captured by Earth's gravity for short periods, but they do not constitute permanent moons. The claim refers to permanent natural satellites.",
+        "evidence": [
+          {
+            "quote": "The Moon is Earth's only natural satellite.",
+            "relation": "supports",
+            "title": "Earth's Moon Facts",
+            "url": "https://science.nasa.gov/moon/facts/"
+          },
+          {
+            "quote": "Although the Moon is Earth's only natural satellite, there are a number of near-Earth objects (NEOs) with orbits that are in resonance with Earth.",
+            "relation": "supports",
+            "title": "Claimed moons of Earth",
+            "url": "https://en.wikipedia.org/wiki/Claimed_moons_of_Earth"
+          }
+        ],
+        "explanation": "NASA's Moon Facts page explicitly states 'The Moon is Earth's only natural satellite.' The Wikipedia article on claimed moons of Earth also confirms this, noting that while temporary captures and co-orbital objects exist, none are permanent natural satellites. The claim is a well-established scientific fact.",
+        "input_hash": "facefef4312335c36ebf8acac07fa4452585c030b2d97167c30678570c1762c3",
+        "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
+        "policy": "claimlens-evidence-v1",
+        "verdict": "Supported"
+      },
+      "guestDenied": true,
+      "publicFeedExcluded": true
+    }
+  ],
+  "checks": [
+    "Real browser wallet sign-in and saved profile"
+  ],
+  "liveDecisionVerified": false,
+  "ok": false,
+  "error": "Live consensus did not produce a verdict for irrelevant-evidence",
+  "consoleErrors": []
+}

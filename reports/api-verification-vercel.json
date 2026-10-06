@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-10-06T17:19:42.904Z",
+  "checkedAt": "2026-10-06T20:21:27.661Z",
   "origin": "https://claimlens-inclover05s-projects.vercel.app",
   "scope": "Real protected Vercel API and Neon PostgreSQL; ephemeral EOA signature; no blockchain transaction",
-  "fixtureAddress": "0x62ea3943defd49bd7c99cef28f3e8b298bb12c2d",
+  "fixtureAddress": "0x31f10a798e77004ebe988c4172f25d7f1bf8e37f",
   "checks": [
     "Cross-origin sign-in rejected",
     "Nonce uses the actual production HTTPS origin",
@@ -10,7 +10,10 @@
     "Used nonce cannot be replayed",
     "Private draft persisted with exact payload SHA-256",
     "Guest denied private draft; public feed excludes it",
-    "Missing GenLayer contract blocks live submission",
+    "Configured contract preserves the unfunded-wallet submission guard",
+    "Guest cannot change another wallet's check visibility",
+    "Private-network source rejected before creating a draft",
+    "Invalid short claim returns a validation error",
     "Logout invalidates the server session"
   ],
   "liveDecisionVerified": false,

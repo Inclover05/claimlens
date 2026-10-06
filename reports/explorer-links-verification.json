@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-06T20:23:38.219Z",
+  "ok": true,
+  "scope": "HTTP reachability and correct explorer routes; chain status verified separately through SDK",
+  "links": [
+    {
+      "name": "Wallet transaction",
+      "url": "https://explorer.testnet-chain.genlayer.com/tx/0xb8b8e31dcabb13067c3a4ced3d07ab05edf629d1378e78ca9897c88bbaa7bb1a",
+      "status": 200,
+      "title": "GenLayer Chain Block Explorer",
+      "indexUnavailable": false
+    },
+    {
+      "name": "GenLayer transaction",
+      "url": "https://explorer-bradbury.genlayer.com/tx/0x300f41768f20694c9379e53c32fa7d8b55fbdb58c123020d7dc06b92dd1eaa69",
+      "status": 200,
+      "title": "Transaction 0x300f41768f20694c9379e53c32fa7d8b55fbdb58c123020d7dc06b92dd1eaa69",
+      "indexUnavailable": false
+    },
+    {
+      "name": "ClaimLens contract",
+      "url": "https://explorer-bradbury.genlayer.com/address/0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598",
+      "status": 200,
+      "title": "Address 0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598",
+      "indexUnavailable": false
+    }
+  ]
+}
