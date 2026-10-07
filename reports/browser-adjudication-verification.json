@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-07T10:06:00.029Z",
+  "origin": "http://127.0.0.1:5174",
+  "scope": "Browser fixtures only; no real wallet, chain transaction or database write.",
+  "checks": [
+    "Evidence selection saves exact source order; adding evidence invalidates the fee quote; stale attempt rejection never calls the wallet",
+    "Appeal requires explicit bond consent, strips display metadata from wallet input and unlocks only after explicit wallet rejection",
+    "Uncertain appeal is persisted before wallet invocation and remains locked after reload"
+  ],
+  "ok": true,
+  "completedAt": "2026-10-07T10:06:01.952Z"
+}

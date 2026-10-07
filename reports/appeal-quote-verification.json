@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-07T10:01:35.243Z",
+  "origin": "https://claimlens-9y1rfov5f-inclover05s-projects.vercel.app",
+  "id": "d7cbe2b5-3639-4efc-adfb-d08f0b92bf0a",
+  "genHash": "0x7cb1b781d8fdb5c898d3438461650d672dc70f48c9db3e11e0f9eaa4fc1274b1",
+  "bondGEN": 0,
+  "estimatedNetworkFeeGEN": 0.0002940494174184,
+  "ownerAuthorized": true,
+  "guestDenied": true,
+  "encodedOperationVerified": true,
+  "gasEstimationSucceeded": true,
+  "transactionSent": false,
+  "scope": "Actual authenticated appeal quote against an accepted Bradbury decision. No appeal was submitted; committee escalation and bond settlement are not live-tested.",
+  "ok": true
+}

@@ -1,264 +1,8 @@
 {
-  "checkedAt": "2026-10-07T10:10:18.899Z",
-  "sourceSha256": "49ddcba217c0b1070ff70bfaf623b24e4c387a190075514165ac5778408b9ca3",
+  "checkedAt": "2026-10-07T10:07:18.495Z",
+  "sourceSha256": "38a2ee2221b706fad8bdd6b81fad06cb704cd987714b7b1632e7a03f457c91ea",
   "scope": "Actual Bradbury GenVM leader and validator simulations. A constructor test wrapper invokes the unmodified check_claim method and prints its result. No blockchain write or GEN payment; this is not committee consensus proof.",
   "cases": [
-    {
-      "name": "football-international",
-      "claim": "As of 7 October 2026, Cristiano Ronaldo has scored more senior international goals than Neymar.",
-      "expected": "Supported",
-      "leader": {
-        "status": {
-          "code": 0,
-          "message": "success"
-        },
-        "elapsedMs": 5904,
-        "eqOutputs": 1,
-        "disagreement": null,
-        "metrics": [
-          {
-            "gvm": {
-              "host": {
-                "time": 1041
-              },
-              "llm_module": {
-                "calls": 1,
-                "time": 3939519
-              },
-              "supervisor": {
-                "compilation_time": 0,
-                "compiled_modules": 0,
-                "precompile_hits": 3
-              },
-              "web_module": {
-                "calls": 2,
-                "time": 167811
-              }
-            },
-            "llm": {
-              "Ok": {
-                "scripting": {
-                  "requests_count": 1,
-                  "requests_time": 3897194
-                }
-              }
-            },
-            "web": {
-              "Ok": {
-                "scripting": {
-                  "requests_count": 0,
-                  "requests_time": 0
-                }
-              }
-            }
-          }
-        ],
-        "runtime": "v0.2.11-x86_64-linux-release"
-      },
-      "result": {
-        "as_of": "2026-10-07",
-        "caveats": "The evidence is from Wikipedia, a user-edited encyclopedia, and the provided passages are truncated. The Ronaldo page mentions he has participated in the '2026' World Cup (p19), suggesting his tally may be updated to at least that point. The Neymar page states his career lasted 'until 2026' (p1), suggesting its tally is final. However, without explicit verification dates on the pages themselves, we cannot definitively confirm these totals are current and accurate as of the specific date '2026-10-07'. The adjudication relies on the data as presented in the fetched evidence.",
-        "evidence": [
-          {
-            "quote": "international goalscorer in history , having scored 146 goals in 234 appearances.",
-            "relation": "supports",
-            "title": "List of international goals scored by Cristiano Ronaldo",
-            "url": "https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Cristiano_Ronaldo"
-          },
-          {
-            "quote": "From Wikipedia, the free encyclopedia Neymar (pictured in 2018) scored 80 goals in 130 caps for Brazil between his debut 2010 and his final game in 2026.",
-            "relation": "supports",
-            "title": "List of international goals scored by Neymar",
-            "url": "https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Neymar"
-          }
-        ],
-        "explanation": "The supplied Wikipedia sources provide explicit senior international goal totals for both players. The page for Cristiano Ronaldo states he has 'scored 146 goals in 234 appearances' (passage p5). The page for Neymar states he 'scored 80 goals in 130 caps' (passage p0). Therefore, as of the information contained in the sources, Ronaldo (146 goals) has scored more senior international goals than Neymar (80 goals).",
-        "input_hash": "a87150518d8415886207c900d16fbf708c41a927700275f19508aa77db47edbe",
-        "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
-        "policy": "claimlens-evidence-v1",
-        "verdict": "Supported"
-      },
-      "validator": {
-        "status": {
-          "code": 0,
-          "message": "success"
-        },
-        "elapsedMs": 3970,
-        "eqOutputs": 0,
-        "disagreement": null,
-        "metrics": [
-          {
-            "gvm": {
-              "host": {
-                "time": 969
-              },
-              "llm_module": {
-                "calls": 1,
-                "time": 2890324
-              },
-              "supervisor": {
-                "compilation_time": 0,
-                "compiled_modules": 0,
-                "precompile_hits": 3
-              },
-              "web_module": {
-                "calls": 2,
-                "time": 158274
-              }
-            },
-            "llm": {
-              "Ok": {
-                "scripting": {
-                  "requests_count": 1,
-                  "requests_time": 2847469
-                }
-              }
-            },
-            "web": {
-              "Ok": {
-                "scripting": {
-                  "requests_count": 0,
-                  "requests_time": 0
-                }
-              }
-            }
-          }
-        ],
-        "runtime": "v0.2.11-x86_64-linux-release"
-      },
-      "ok": true
-    },
-    {
-      "name": "x-independent",
-      "claim": "Argentina won the 2022 FIFA World Cup.",
-      "expected": "Supported",
-      "leader": {
-        "status": {
-          "code": 0,
-          "message": "success"
-        },
-        "elapsedMs": 5321,
-        "eqOutputs": 1,
-        "disagreement": null,
-        "metrics": [
-          {
-            "gvm": {
-              "host": {
-                "time": 1032
-              },
-              "llm_module": {
-                "calls": 1,
-                "time": 4330192
-              },
-              "supervisor": {
-                "compilation_time": 0,
-                "compiled_modules": 0,
-                "precompile_hits": 3
-              },
-              "web_module": {
-                "calls": 1,
-                "time": 169623
-              }
-            },
-            "llm": {
-              "Ok": {
-                "scripting": {
-                  "requests_count": 1,
-                  "requests_time": 4287907
-                }
-              }
-            },
-            "web": {
-              "Ok": {
-                "scripting": {
-                  "requests_count": 0,
-                  "requests_time": 0
-                }
-              }
-            }
-          }
-        ],
-        "runtime": "v0.2.11-x86_64-linux-release"
-      },
-      "result": {
-        "as_of": "2026-10-07",
-        "caveats": "The source is Wikipedia, a publicly editable encyclopedia, though it is widely used for factual reference. The evidence is dated to the tournament period (2022) and is valid for the 'as_of' date of 2026-10 07, as it concerns a past historical event. The provided source text is truncated, but the relevant passages are present.",
-        "evidence": [
-          {
-            "quote": "Teams 32 (from 5 confederations) Venues 8 (in 5 host cities) Final positions Champions Argentina (3rd title) Runners-up France Third place Croatia Fourth place",
-            "relation": "supports",
-            "title": "2022 FIFA World Cup",
-            "url": "https://en.wikipedia.org/wiki/2022_FIFA_World_Cup"
-          },
-          {
-            "quote": "[ 3 ] Argentina were crowned the champions after winning the final against the title holder France 4–2 on penalties following a 3–3 draw after extra time.",
-            "relation": "supports",
-            "title": "2022 FIFA World Cup",
-            "url": "https://en.wikipedia.org/wiki/2022_FIFA_World_Cup"
-          },
-          {
-            "quote": "It was Argentina's third title and their first since 1986 .",
-            "relation": "supports",
-            "title": "2022 FIFA World Cup",
-            "url": "https://en.wikipedia.org/wiki/2022_FIFA_World_Cup"
-          }
-        ],
-        "explanation": "The claim that Argentina won the 2022 FIFA World Cup is directly supported by multiple substantive passages from the provided Wikipedia source, which states Argentina was crowned champion after winning the final.",
-        "input_hash": "45a40c2843b880923a47d5779c44d34db566e6a0fececcd778ffd417723fe964",
-        "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
-        "policy": "claimlens-evidence-v1",
-        "verdict": "Supported"
-      },
-      "validator": {
-        "status": {
-          "code": 0,
-          "message": "success"
-        },
-        "elapsedMs": 8635,
-        "eqOutputs": 0,
-        "disagreement": null,
-        "metrics": [
-          {
-            "gvm": {
-              "host": {
-                "time": 882
-              },
-              "llm_module": {
-                "calls": 1,
-                "time": 7556483
-              },
-              "supervisor": {
-                "compilation_time": 0,
-                "compiled_modules": 0,
-                "precompile_hits": 3
-              },
-              "web_module": {
-                "calls": 1,
-                "time": 171038
-              }
-            },
-            "llm": {
-              "Ok": {
-                "scripting": {
-                  "requests_count": 1,
-                  "requests_time": 7514850
-                }
-              }
-            },
-            "web": {
-              "Ok": {
-                "scripting": {
-                  "requests_count": 0,
-                  "requests_time": 0
-                }
-              }
-            }
-          }
-        ],
-        "runtime": "v0.2.11-x86_64-linux-release"
-      },
-      "ok": true
-    },
     {
       "name": "supported",
       "claim": "The Moon is Earth's only natural satellite.",
@@ -268,18 +12,18 @@
           "code": 0,
           "message": "success"
         },
-        "elapsedMs": 3923,
+        "elapsedMs": 8403,
         "eqOutputs": 1,
         "disagreement": null,
         "metrics": [
           {
             "gvm": {
               "host": {
-                "time": 908
+                "time": 992
               },
               "llm_module": {
                 "calls": 1,
-                "time": 3022098
+                "time": 6830867
               },
               "supervisor": {
                 "compilation_time": 0,
@@ -288,14 +32,14 @@
               },
               "web_module": {
                 "calls": 1,
-                "time": 112126
+                "time": 103844
               }
             },
             "llm": {
               "Ok": {
                 "scripting": {
                   "requests_count": 1,
-                  "requests_time": 2980074
+                  "requests_time": 6788741
                 }
               }
             },
@@ -313,7 +57,7 @@
       },
       "result": {
         "as_of": "2026-10-07",
-        "caveats": "The evidence is from a single source (NASA). The publication date of the source is not provided, so it is not possible to confirm if this information was current as of the 'as_of' date (2026-10-07). However, the fact that Earth has only one natural moon is a long-established, stable astronomical fact unlikely to change.",
+        "caveats": "The evidence is from a single, authoritative source (NASA). The 'as_of' date is 2026-10-07, but the source text does not have a visible publication date, so it is unknown if this information is current as of that requested date. The scope is limited to Earth's natural satellites; it does not address artificial satellites.",
         "evidence": [
           {
             "quote": "The Moon is Earth's only natural satellite.",
@@ -322,8 +66,8 @@
             "url": "https://science.nasa.gov/moon/facts/"
           }
         ],
-        "explanation": "The provided evidence from NASA's Moon facts page directly states 'The Moon is Earth's only natural satellite.' (passage p4). This is a clear, factual assertion that matches the claim exactly. The source is a primary scientific authority on the topic, and the statement is presented as a definitive fact within its educational content.",
-        "input_hash": "de1e57b463883ff0e971182871fab34b716fdbf56591f4c5483aaf523bd6d137",
+        "explanation": "The supplied evidence from NASA's Moon facts page explicitly states 'The Moon is Earth's only natural satellite' (passage p4). This directly and fully supports the factual claim. No evidence from this source contradicts this statement.",
+        "input_hash": "405f1cd02e1b4e0c0d891d16a098197d3667ed672ba48ada5e5c6a59cff922ef",
         "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
         "policy": "claimlens-evidence-v1",
         "verdict": "Supported"
@@ -333,18 +77,18 @@
           "code": 0,
           "message": "success"
         },
-        "elapsedMs": 2732,
+        "elapsedMs": 6701,
         "eqOutputs": 0,
         "disagreement": null,
         "metrics": [
           {
             "gvm": {
               "host": {
-                "time": 970
+                "time": 914
               },
               "llm_module": {
                 "calls": 1,
-                "time": 1755405
+                "time": 5738348
               },
               "supervisor": {
                 "compilation_time": 0,
@@ -353,14 +97,14 @@
               },
               "web_module": {
                 "calls": 1,
-                "time": 99523
+                "time": 103112
               }
             },
             "llm": {
               "Ok": {
                 "scripting": {
                   "requests_count": 1,
-                  "requests_time": 1713057
+                  "requests_time": 5695848
                 }
               }
             },
@@ -387,18 +131,18 @@
           "code": 0,
           "message": "success"
         },
-        "elapsedMs": 3839,
+        "elapsedMs": 22840,
         "eqOutputs": 1,
         "disagreement": null,
         "metrics": [
           {
             "gvm": {
               "host": {
-                "time": 1002
+                "time": 908
               },
               "llm_module": {
                 "calls": 1,
-                "time": 2990035
+                "time": 22013164
               },
               "supervisor": {
                 "compilation_time": 0,
@@ -407,14 +151,14 @@
               },
               "web_module": {
                 "calls": 1,
-                "time": 97918
+                "time": 99636
               }
             },
             "llm": {
               "Ok": {
                 "scripting": {
                   "requests_count": 1,
-                  "requests_time": 2947572
+                  "requests_time": 21971003
                 }
               }
             },
@@ -432,7 +176,7 @@
       },
       "result": {
         "as_of": "2026-10-07",
-        "caveats": "The source is a NASA facts page, which is a reliable authority on basic astronomy. The evidence is not time-sensitive for this fundamental fact. The provided text is truncated, but the relevant passages are clear and substantive.",
+        "caveats": "The evidence is limited to one source, though it is a reliable primary source. The source does not explicitly state 'the Moon does not produce its own light,' but the description of its illumination being solely from sunlight is a direct and sufficient contradiction. The claim's date ('2026-10-07') is irrelevant as the astronomical fact is timeless.",
         "evidence": [
           {
             "quote": "During a \"full moon,\" the hemisphere of the Moon we can see from Earth is fully illuminated by the Sun.",
@@ -442,13 +186,19 @@
           },
           {
             "quote": "As the Moon orbits Earth, different parts are in sunlight or darkness at different times.",
+            "relation": "contradicts",
+            "title": "Moon Facts",
+            "url": "https://science.nasa.gov/moon/facts/"
+          },
+          {
+            "quote": "The changing illumination is why, from our perspective, the Moon goes through phases .",
             "relation": "context",
             "title": "Moon Facts",
             "url": "https://science.nasa.gov/moon/facts/"
           }
         ],
-        "explanation": "The claim that the Moon produces its own visible light is directly contradicted by the provided NASA source, which explains that the Moon's illumination comes from the Sun.",
-        "input_hash": "21b85979e7f182470650dee980e08da3a66c83d4ae59bd806687ac7acae7eab2",
+        "explanation": "The provided evidence from NASA's Moon facts page directly states that the Moon's illumination comes from the Sun, not from the Moon producing its own light. Passage p38 explicitly notes that during a full moon, the hemisphere we see is 'fully illuminated by the Sun.' Passage p36 further explains that as the Moon orbits, 'different parts are in sunlight or darkness at different times,' and p37 attributes the changing phases to this 'changing illumination.' This refutes the claim that the Moon produces its own visible light.",
+        "input_hash": "f051669d855007c56391c2a38962b1d700556f5d2da4f740611c062233737df6",
         "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
         "policy": "claimlens-evidence-v1",
         "verdict": "Contradicted"
@@ -458,18 +208,18 @@
           "code": 0,
           "message": "success"
         },
-        "elapsedMs": 2345,
+        "elapsedMs": 7145,
         "eqOutputs": 0,
         "disagreement": null,
         "metrics": [
           {
             "gvm": {
               "host": {
-                "time": 950
+                "time": 891
               },
               "llm_module": {
                 "calls": 1,
-                "time": 1400122
+                "time": 6140380
               },
               "supervisor": {
                 "compilation_time": 0,
@@ -478,14 +228,14 @@
               },
               "web_module": {
                 "calls": 1,
-                "time": 98668
+                "time": 110210
               }
             },
             "llm": {
               "Ok": {
                 "scripting": {
                   "requests_count": 1,
-                  "requests_time": 1358015
+                  "requests_time": 6098224
                 }
               }
             },
@@ -512,18 +262,18 @@
           "code": 0,
           "message": "success"
         },
-        "elapsedMs": 3162,
+        "elapsedMs": 5181,
         "eqOutputs": 1,
         "disagreement": null,
         "metrics": [
           {
             "gvm": {
               "host": {
-                "time": 923
+                "time": 981
               },
               "llm_module": {
                 "calls": 1,
-                "time": 2234166
+                "time": 4361929
               },
               "supervisor": {
                 "compilation_time": 0,
@@ -532,14 +282,14 @@
               },
               "web_module": {
                 "calls": 1,
-                "time": 100805
+                "time": 98465
               }
             },
             "llm": {
               "Ok": {
                 "scripting": {
                   "requests_count": 1,
-                  "requests_time": 2191580
+                  "requests_time": 4319952
                 }
               }
             },
@@ -557,10 +307,17 @@
       },
       "result": {
         "as_of": "2026-10-07",
-        "caveats": "The claim is inherently non-factual as it depends on individual taste perception. The provided evidence is irrelevant to the claim's subject matter. The 'as_of' date is not applicable as the claim is not time-sensitive.",
-        "evidence": [],
-        "explanation": "The claim 'Chocolate tastes better than vanilla' expresses a personal preference or opinion about taste, which is subjective and not verifiable through objective evidence. The provided source is a NASA webpage containing factual information about the Moon, which is entirely unrelated to the claim about food flavor preferences. No evidence within the source addresses, supports, or contradicts assertions about the comparative taste of chocolate and vanilla.",
-        "input_hash": "827f8e242228be7b9102944211fbca7999b0ac60aed5ec3e3925cf72f617244d",
+        "caveats": "The evidence is limited to a single, irrelevant source about lunar science. No sources about food, taste, or consumer preferences were provided. The verdict is based on the claim's inherent subjectivity, not on an absence of supporting evidence.",
+        "evidence": [
+          {
+            "quote": "Earth's Moon Moon Facts Earth's Moon records evidence of our solar system's history in the form of impact craters , cooled lava landforms , ancient ice deposits",
+            "relation": "context",
+            "title": "Moon Facts",
+            "url": "https://science.nasa.gov/moon/facts/"
+          }
+        ],
+        "explanation": "The claim 'Chocolate tastes better than vanilla' expresses a subjective preference or opinion, not a verifiable factual assertion about the world. The provided evidence source, a NASA page about the Moon, contains no information relevant to the taste of chocolate or vanilla, confirming the claim's non-factual nature.",
+        "input_hash": "fe81e1ff10dcbe874039b58b4b8384b7450c5278d10f01e3434d0fc788884d61",
         "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
         "policy": "claimlens-evidence-v1",
         "verdict": "Not a factual claim"
@@ -570,18 +327,18 @@
           "code": 0,
           "message": "success"
         },
-        "elapsedMs": 2461,
+        "elapsedMs": 7503,
         "eqOutputs": 0,
         "disagreement": null,
         "metrics": [
           {
             "gvm": {
               "host": {
-                "time": 1005
+                "time": 1001
               },
               "llm_module": {
                 "calls": 1,
-                "time": 1512290
+                "time": 6584450
               },
               "supervisor": {
                 "compilation_time": 0,
@@ -590,14 +347,14 @@
               },
               "web_module": {
                 "calls": 1,
-                "time": 99855
+                "time": 100380
               }
             },
             "llm": {
               "Ok": {
                 "scripting": {
                   "requests_count": 1,
-                  "requests_time": 1469502
+                  "requests_time": 6542546
                 }
               }
             },
@@ -624,18 +381,18 @@
           "code": 0,
           "message": "success"
         },
-        "elapsedMs": 2933,
+        "elapsedMs": 9884,
         "eqOutputs": 1,
         "disagreement": null,
         "metrics": [
           {
             "gvm": {
               "host": {
-                "time": 882
+                "time": 960
               },
               "llm_module": {
                 "calls": 1,
-                "time": 2058986
+                "time": 9047722
               },
               "supervisor": {
                 "compilation_time": 0,
@@ -644,14 +401,14 @@
               },
               "web_module": {
                 "calls": 1,
-                "time": 100955
+                "time": 106786
               }
             },
             "llm": {
               "Ok": {
                 "scripting": {
                   "requests_count": 1,
-                  "requests_time": 2017067
+                  "requests_time": 9005234
                 }
               }
             },
@@ -669,7 +426,7 @@
       },
       "result": {
         "as_of": "2026-10-07",
-        "caveats": "The evidence is irrelevant to the claim. The source discusses astronomy, not personal events or visitor statistics. No evidence about the claimant's garden or its visitors is present. The adjudication is limited to the single, irrelevant source provided.",
+        "caveats": "The source is completely irrelevant to the claim's subject matter and date. The evidence is about astronomical facts, not personal or local events. The 'as_of' date of 2026-10-07 is in the future relative to the current context, but the source content is from a general science page with no temporal relevance to the claim.",
         "evidence": [
           {
             "quote": "The Moon is Earth's only natural satellite.",
@@ -678,8 +435,8 @@
             "url": "https://science.nasa.gov/moon/facts/"
           }
         ],
-        "explanation": "The claim states 'Exactly 327 people visited my garden yesterday.' The provided source is a NASA webpage containing factual information about the Moon. There is no information in the source about any garden, visitor counts, or events related to the claimant. The source is completely irrelevant to the claim.",
-        "input_hash": "176dba4d34ab10e494d849815c9194063ff325ba821d1b03a619252eadb556b4",
+        "explanation": "The provided evidence is a NASA webpage about the Moon, containing no information about any specific garden, visitor counts, or dates related to the claim.",
+        "input_hash": "1c4e38eab3ab98ef7930f55c61314983bedda9151000fb9221ea99533a73613c",
         "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
         "policy": "claimlens-evidence-v1",
         "verdict": "Insufficient evidence"
@@ -689,18 +446,18 @@
           "code": 0,
           "message": "success"
         },
-        "elapsedMs": 2474,
+        "elapsedMs": 10247,
         "eqOutputs": 0,
         "disagreement": null,
         "metrics": [
           {
             "gvm": {
               "host": {
-                "time": 849
+                "time": 875
               },
               "llm_module": {
                 "calls": 1,
-                "time": 1511859
+                "time": 9268421
               },
               "supervisor": {
                 "compilation_time": 0,
@@ -709,14 +466,14 @@
               },
               "web_module": {
                 "calls": 1,
-                "time": 104840
+                "time": 97518
               }
             },
             "llm": {
               "Ok": {
                 "scripting": {
                   "requests_count": 1,
-                  "requests_time": 1469181
+                  "requests_time": 9226315
                 }
               }
             },
@@ -743,18 +500,18 @@
           "code": 0,
           "message": "success"
         },
-        "elapsedMs": 3684,
+        "elapsedMs": 6744,
         "eqOutputs": 1,
         "disagreement": null,
         "metrics": [
           {
             "gvm": {
               "host": {
-                "time": 909
+                "time": 1134
               },
               "llm_module": {
                 "calls": 1,
-                "time": 2803038
+                "time": 5907038
               },
               "supervisor": {
                 "compilation_time": 0,
@@ -763,14 +520,14 @@
               },
               "web_module": {
                 "calls": 1,
-                "time": 100572
+                "time": 101201
               }
             },
             "llm": {
               "Ok": {
                 "scripting": {
                   "requests_count": 1,
-                  "requests_time": 2761168
+                  "requests_time": 5864906
                 }
               }
             },
@@ -788,7 +545,7 @@
       },
       "result": {
         "as_of": "2026-10-07",
-        "caveats": "The evidence is from a reliable source (NASA) but is not dated within the source text. The 'as_of' date of 2026 10 07 is in the future relative to typical model training data, but the scientific fact being adjudicated is a long-established, stable astronomical principle. The source does not discuss other forms of light (e.g., thermal radiation), but the claim specifically refers to 'visible light'.",
+        "caveats": "The evidence is limited to a single source and does not address other potential mechanisms of light emission (e.g., reflected earthshine, which is still reflected sunlight). The source's publication date is not provided, but the scientific fact is time-invariant for the context of this claim.",
         "evidence": [
           {
             "quote": "During a \"full moon,\" the hemisphere of the Moon we can see from Earth is fully illuminated by the Sun.",
@@ -797,8 +554,8 @@
             "url": "https://science.nasa.gov/moon/facts/"
           }
         ],
-        "explanation": "The supplied evidence from NASA explicitly states that the visible light from the Moon is reflected sunlight, not light produced by the Moon itself. Passage p38 states: 'During a \"full moon,\" the hemisphere of the Moon we can see from Earth is fully illuminated by the Sun.' This directly refutes the material element of the claim that the Moon produces its own visible light.",
-        "input_hash": "97b6d324c80b6266181c202267dd697722763bb631c788a59f48557a71ca85e7",
+        "explanation": "The provided source from NASA explicitly states that the Moon's illumination comes from the Sun, not from light produced by the Moon itself. Passage p38 directly refutes the claim by stating that during a full moon, the hemisphere we see is 'fully illuminated by the Sun.' This is a reliable, primary source from a scientific authority.",
+        "input_hash": "6436728311a621e566c3feb94451aa75e90b6dae4516d6230f212f305715cf27",
         "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
         "policy": "claimlens-evidence-v1",
         "verdict": "Contradicted"
@@ -808,18 +565,18 @@
           "code": 0,
           "message": "success"
         },
-        "elapsedMs": 5842,
+        "elapsedMs": 3223,
         "eqOutputs": 0,
         "disagreement": null,
         "metrics": [
           {
             "gvm": {
               "host": {
-                "time": 989
+                "time": 901
               },
               "llm_module": {
                 "calls": 1,
-                "time": 4391349
+                "time": 2313271
               },
               "supervisor": {
                 "compilation_time": 0,
@@ -828,14 +585,14 @@
               },
               "web_module": {
                 "calls": 1,
-                "time": 104992
+                "time": 98965
               }
             },
             "llm": {
               "Ok": {
                 "scripting": {
                   "requests_count": 1,
-                  "requests_time": 4348865
+                  "requests_time": 2271713
                 }
               }
             },
@@ -861,7 +618,7 @@
           "code": 1,
           "message": "SOURCE_ACCESS_FAILED"
         },
-        "elapsedMs": 1833,
+        "elapsedMs": 1509,
         "eqOutputs": 0
       },
       "result": null,
@@ -876,18 +633,18 @@
           "code": 0,
           "message": "success"
         },
-        "elapsedMs": 5076,
+        "elapsedMs": 12417,
         "eqOutputs": 1,
         "disagreement": null,
         "metrics": [
           {
             "gvm": {
               "host": {
-                "time": 1156
+                "time": 1023
               },
               "llm_module": {
-                "calls": 1,
-                "time": 3968515
+                "calls": 2,
+                "time": 11314731
               },
               "supervisor": {
                 "compilation_time": 0,
@@ -896,14 +653,14 @@
               },
               "web_module": {
                 "calls": 2,
-                "time": 236252
+                "time": 235733
               }
             },
             "llm": {
               "Ok": {
                 "scripting": {
-                  "requests_count": 1,
-                  "requests_time": 3925583
+                  "requests_count": 2,
+                  "requests_time": 11270009
                 }
               }
             },
@@ -921,23 +678,17 @@
       },
       "result": {
         "as_of": "2026-10-07",
-        "caveats": "The evidence is from a truncated NASA webpage and a truncated Wikipedia entry. The information is presented as established scientific fact, but the sources are not primary research records. The 'as_of' date (2026-10-07) is in the future relative to the likely publication dates of these sources; however, the claim describes a fundamental, stable astronomical fact unlikely to change by that date. The Wikipedia page's introductory passage also explicitly identifies the Moon as Earth's natural satellite.",
+        "caveats": "The evidence is from a single source (NASA) and is presented as a factual statement without discussion of potential temporary natural satellites (like small captured asteroids) or historical debate. The source is truncated, and the 'as_of' date (2026-10-07) is in the future, so we cannot assess if this information remains current beyond the source's publication date.",
         "evidence": [
           {
             "quote": "The Moon is Earth's only natural satellite.",
             "relation": "supports",
             "title": "Moon Facts",
             "url": "https://science.nasa.gov/moon/facts/"
-          },
-          {
-            "quote": "Moon - Wikipedia Jump to content From Wikipedia, the free encyclopedia Natural satellite orbiting Earth This article is about Earth's natural satellite.",
-            "relation": "supports",
-            "title": "Moon - Wikipedia",
-            "url": "https://en.wikipedia.org/wiki/Moon"
           }
         ],
-        "explanation": "The provided evidence from NASA directly states the claim as a factual description.",
-        "input_hash": "f0528109cadd67fe474b963eff3246aedebae9cb3d0970ce6c4477e9e31acbfa",
+        "explanation": "The provided evidence from NASA's Moon facts page explicitly states 'The Moon is Earth's only natural satellite.' This directly supports the claim's single factual assertion.",
+        "input_hash": "953dfb48d3b9ccc4b4c652da5705bb1ed143da170cde35a789a8cf3e48a4ba83",
         "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
         "policy": "claimlens-evidence-v1",
         "verdict": "Supported"
@@ -947,18 +698,18 @@
           "code": 0,
           "message": "success"
         },
-        "elapsedMs": 2766,
+        "elapsedMs": 6892,
         "eqOutputs": 0,
         "disagreement": null,
         "metrics": [
           {
             "gvm": {
               "host": {
-                "time": 943
+                "time": 932
               },
               "llm_module": {
                 "calls": 1,
-                "time": 1586611
+                "time": 5727467
               },
               "supervisor": {
                 "compilation_time": 0,
@@ -967,14 +718,14 @@
               },
               "web_module": {
                 "calls": 2,
-                "time": 230917
+                "time": 232634
               }
             },
             "llm": {
               "Ok": {
                 "scripting": {
                   "requests_count": 1,
-                  "requests_time": 1543136
+                  "requests_time": 5685365
                 }
               }
             },
@@ -991,8 +742,133 @@
         "runtime": "v0.2.11-x86_64-linux-release"
       },
       "ok": true
+    },
+    {
+      "name": "football-international",
+      "claim": "As of 7 October 2026, Cristiano Ronaldo has scored more senior international goals than Neymar.",
+      "expected": "Supported",
+      "leader": {
+        "status": {
+          "code": 0,
+          "message": "success"
+        },
+        "elapsedMs": 6395,
+        "eqOutputs": 1,
+        "disagreement": null,
+        "metrics": [
+          {
+            "gvm": {
+              "host": {
+                "time": 1032
+              },
+              "llm_module": {
+                "calls": 1,
+                "time": 4682591
+              },
+              "supervisor": {
+                "compilation_time": 0,
+                "compiled_modules": 0,
+                "precompile_hits": 3
+              },
+              "web_module": {
+                "calls": 2,
+                "time": 161620
+              }
+            },
+            "llm": {
+              "Ok": {
+                "scripting": {
+                  "requests_count": 1,
+                  "requests_time": 4639627
+                }
+              }
+            },
+            "web": {
+              "Ok": {
+                "scripting": {
+                  "requests_count": 0,
+                  "requests_time": 0
+                }
+              }
+            }
+          }
+        ],
+        "runtime": "v0.2.11-x86_64-linux-release"
+      },
+      "result": {
+        "as_of": "2026-10-07",
+        "caveats": "The evidence is from Wikipedia, a user-edited encyclopedia. The Ronaldo page states he is the 'highest overall men's international goalscorer in history' with 146 goals, and the Neymar page states he scored 80 goals for Brazil. The 'as of' date in the claim (7 October 2026) is in the future relative to the likely publication date of these sources. The evidence does not contain a specific update timestamped to that future date, so it assumes the totals are current and unchanged up to that point.",
+        "evidence": [
+          {
+            "quote": "international goalscorer in history , having scored 146 goals in 234 appearances.",
+            "relation": "supports",
+            "title": "List of international goals scored by Cristiano Ronaldo",
+            "url": "https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Cristiano_Ronaldo"
+          },
+          {
+            "quote": "appearances, making him Brazil's all-time top scorer.",
+            "relation": "supports",
+            "title": "List of international goals scored by Neymar",
+            "url": "https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Neymar"
+          }
+        ],
+        "explanation": "The supplied evidence from Wikipedia lists Cristiano Ronaldo's senior international goal total as 146 and Neymar's as 80. These figures are directly comparable and show Ronaldo with a higher total.",
+        "input_hash": "0c09cdd5c56e8c85b7c6ba7835a382b4d92961190b266e39de08bde09b8edca2",
+        "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
+        "policy": "claimlens-evidence-v1",
+        "verdict": "Supported"
+      },
+      "validator": {
+        "status": {
+          "code": 0,
+          "message": "success"
+        },
+        "elapsedMs": 3132,
+        "eqOutputs": 0,
+        "disagreement": 0,
+        "metrics": [
+          {
+            "gvm": {
+              "host": {
+                "time": 881
+              },
+              "llm_module": {
+                "calls": 1,
+                "time": 2053399
+              },
+              "supervisor": {
+                "compilation_time": 0,
+                "compiled_modules": 0,
+                "precompile_hits": 3
+              },
+              "web_module": {
+                "calls": 2,
+                "time": 163722
+              }
+            },
+            "llm": {
+              "Ok": {
+                "scripting": {
+                  "requests_count": 1,
+                  "requests_time": 2010700
+                }
+              }
+            },
+            "web": {
+              "Ok": {
+                "scripting": {
+                  "requests_count": 0,
+                  "requests_time": 0
+                }
+              }
+            }
+          }
+        ],
+        "runtime": "v0.2.11-x86_64-linux-release"
+      }
     }
   ],
-  "ok": true,
-  "completedAt": "2026-10-07T10:11:26.200Z"
+  "ok": false,
+  "error": "Expected values to be strictly equal:\n\n0 !== null\n",
+  "completedAt": "2026-10-07T10:07:28.043Z"
 }

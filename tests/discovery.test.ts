@@ -5,8 +5,15 @@ import {discover} from '../lib/discovery.ts';
 import {runWithRuntime,type RuntimeEnv} from '../lib/runtime.ts';
 
 test('comparisons search both entities as well as the complete claim',()=>{
- assert.deepEqual(discoveryQueries('neymar has scored more goals than CR7'),['neymar','CR7','neymar has scored more goals than CR7']);
+ assert.deepEqual(discoveryQueries('neymar has scored more goals than CR7'),['neymar career goals statistics','Cristiano Ronaldo career goals statistics','neymar has scored more goals than CR7']);
  assert.deepEqual(discoveryQueries('France is larger than Japan.'),['France','Japan','France is larger than Japan.']);
+});
+
+test('football comparisons seek matching records without changing the submitted statement',()=>{
+ const claim='As of 7 October 2026, Cristiano Ronaldo has scored more senior international goals than Neymar.';
+ assert.deepEqual(discoveryQueries(claim),['List of international goals scored by Cristiano Ronaldo','List of international goals scored by Neymar',claim]);
+ const club='Neymar has scored more club goals than CR7 as of 2026-10-07.';
+ assert.deepEqual(discoveryQueries(club),['Neymar club goals statistics','Cristiano Ronaldo club goals statistics',club]);
 });
 
 test('ordinary claims and their assertions remain intact during discovery',()=>{

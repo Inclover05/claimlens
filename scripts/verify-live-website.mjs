@@ -108,12 +108,14 @@ await context.addInitScript(() => {
   window.ethereum = provider;
 });
 const scenarios = [
+  { name: 'football-international', claim: 'As of 7 October 2026, Cristiano Ronaldo has scored more senior international goals than Neymar.', source: 'https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Cristiano_Ronaldo', sources: ['https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Cristiano_Ronaldo','https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Neymar'], expected: 'Supported' },
+  { name: 'x-independent', claim: 'Argentina won the 2022 FIFA World Cup.', source: 'https://x.com/FIFAWorldCup/status/1604535989480955908', sources: ['https://en.wikipedia.org/wiki/2022_FIFA_World_Cup'], expected: 'Supported', linkMode: true },
   { name: 'supported', claim: "The Moon is Earth's only natural satellite.", source: 'https://science.nasa.gov/moon/facts/', expected: 'Supported' },
-  { name: 'x-post', claim: 'Argentina won the 2022 FIFA World Cup.', source: 'https://x.com/FIFAWorldCup/status/1604535989480955908', expected: 'Supported', linkMode: true },
+  { name: 'x-post', claim: 'Argentina won the 2022 FIFA World Cup.', source: 'https://x.com/FIFAWorldCup/status/1604535989480955908', expected: 'Supported', linkMode: true, manualOnly: true },
   { name: 'contradicted', claim: 'The Moon produces its own visible light.', source: 'https://science.nasa.gov/moon/facts/', expected: 'Contradicted' },
   { name: 'opinion', claim: 'Chocolate tastes better than vanilla.', source: 'https://science.nasa.gov/moon/facts/', expected: 'Not a factual claim' },
   { name: 'irrelevant-evidence', claim: 'At 09:00 UTC on 1 October 2026, the temperature at North Sentinel Island was exactly 20 degrees Celsius.', source: 'https://science.nasa.gov/moon/facts/', expected: 'Insufficient evidence' },
-].filter(item => !process.env.CLAIMLENS_CASES || process.env.CLAIMLENS_CASES.split(',').includes(item.name));
+].filter(item => process.env.CLAIMLENS_CASES ? process.env.CLAIMLENS_CASES.split(',').includes(item.name) : !item.manualOnly);
 assert.ok(scenarios.length);
 report.requestedCases = scenarios.map(item => item.name);
 try {
@@ -177,7 +179,7 @@ try {
       continue;
     }
     if (detail.state === 'draft') {
-      const sources = scenario.name === 'neymar-comparison' ? ['https://en.wikipedia.org/wiki/Neymar','https://en.wikipedia.org/wiki/Cristiano_Ronaldo'] : scenario.name === 'x-post' ? [scenario.source,'https://en.wikipedia.org/wiki/2022_FIFA_World_Cup'] : [scenario.source];
+      const sources = scenario.sources || (scenario.name === 'x-post' ? [scenario.source,'https://en.wikipedia.org/wiki/2022_FIFA_World_Cup'] : [scenario.source]);
       const response=await api('checks/'+id+'/sources',{sourceUrls:sources});assert.equal(response.status,200);
       await page.reload();await page.getByLabel('I understand that my claim').waitFor();
 
@@ -225,7 +227,7 @@ try {
     await page.getByText(scenario.expected, { exact: true }).first().waitFor();
     assert.equal(await page.getByRole('link', { name: /^GenLayer transaction/ }).getAttribute('href'), 'https://explorer-bradbury.genlayer.com/tx/' + detail.gen_hash);
     await page.screenshot({ path: `outputs/live/${scenario.name}.png`, fullPage: true });
-    report.cases.push({ name: scenario.name, id, claim: scenario.claim, state: detail.state, verdict: detail.verdict, evmHash: detail.evm_hash, genHash: detail.gen_hash, inputHash: detail.input_hash, executionResult: consensus.txExecutionResultName, networkFeeGEN: formatEther(receipt.gasUsed * receipt.effectiveGasPrice), independentReadBackMatched: true, result, guestDenied: true, publicFeedExcluded: true });
+    report.cases.push({ name: scenario.name, id, claim: scenario.claim, originalSource: detail.source, selectedSourceUrls: JSON.parse(detail.payload).source_urls, state: detail.state, verdict: detail.verdict, evmHash: detail.evm_hash, genHash: detail.gen_hash, inputHash: detail.input_hash, executionResult: consensus.txExecutionResultName, networkFeeGEN: formatEther(receipt.gasUsed * receipt.effectiveGasPrice), independentReadBackMatched: true, result, guestDenied: true, publicFeedExcluded: true });
     console.log(JSON.stringify({ event: 'live_scenario_verified', scenario: scenario.name, verdict: detail.verdict }));
   }
   const supported = report.cases.find(item => item.name === 'supported');
@@ -263,7 +265,7 @@ try {
 } finally {
   report.completedAt = new Date().toISOString();
   report.consoleErrors = errors;
-  await writeFile('reports/bounded-live-verification.json', JSON.stringify(report, null, 2) + '\n');
+  await writeFile(`reports/live-${contract.toLowerCase()}.json`, JSON.stringify(report, null, 2) + '\n');
   await api('auth/logout', {}).catch(() => {});
   await browser.close();
   console.log(JSON.stringify({ event: 'live_browser_complete', ok: report.ok, error: report.error, cases: report.cases.map(item => ({ name: item.name, state: item.state, verdict: item.verdict })) }));

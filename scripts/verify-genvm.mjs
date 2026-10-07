@@ -9,6 +9,8 @@ const source=await readFile('contracts/claimlens.py','utf8');
 const sourceSha256=createHash('sha256').update(source).digest('hex');
 const nasa='https://science.nasa.gov/moon/facts/';
 const cases=[
+ {name:'football-international',claim:'As of 7 October 2026, Cristiano Ronaldo has scored more senior international goals than Neymar.',urls:['https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Cristiano_Ronaldo','https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Neymar'],expected:'Supported'},
+ {name:'x-independent',claim:'Argentina won the 2022 FIFA World Cup.',urls:['https://en.wikipedia.org/wiki/2022_FIFA_World_Cup'],expected:'Supported'},
  {name:'supported',claim:"The Moon is Earth's only natural satellite.",urls:[nasa],expected:'Supported'},
  {name:'contradicted',claim:'The Moon produces its own visible light.',urls:[nasa],expected:'Contradicted'},
  {name:'opinion',claim:'Chocolate tastes better than vanilla.',urls:[nasa],expected:'Not a factual claim'},

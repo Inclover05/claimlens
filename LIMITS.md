@@ -11,6 +11,7 @@ ClaimLens adjudicates a submitted statement against selected evidence. It cannot
 - Source discovery supplies candidates, not proof. Without Brave Search configuration, it uses Wikipedia and the original link. Multiple Wikipedia pages are not independent primary sources. Search can fail, miss a source or choose irrelevant pages.
 - X posts may be blocked or require sign-in. The user must quote the claim. Independent evidence may establish that claim without authenticating the post, account, media or author.
 - Comparisons need a metric, scope and date. Common ambiguous comparisons are flagged before payment; the heuristic cannot recognize every ambiguity. If the submitted statement is still ambiguous or evidence is incomplete, Insufficient evidence is an appropriate result.
+- Football comparisons search for matching international, club or career statistics. Prefer narrow record pages over biographies, and use the same competition, counting rules and date for both players. Wikipedia can help discovery; official FIFA, UEFA, league or federation records and specialist statistics pages can be supplied as evidence. A site's name does not guarantee that its tables are accessible within the text budget.
 - Misleading requires interpretation of omitted context. It can overlap with a false statement or insufficient evidence. The rubric and validators determine the outcome; the website does not force an expected label.
 
 ## Consensus and execution
