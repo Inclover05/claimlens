@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-07T10:54:45.153Z",
+  "origin": "https://claimlens-inclover05s-projects.vercel.app",
+  "contract": "0x3E2C5298063d25e1111CFbe54526e46efe35eD3E",
+  "id": "178b5a81-472a-4b8e-aa83-6179fcdd643d",
+  "genHash": "0x94616c46f71e6b1ccbb71c84fd102e6568970c5ff5b740f56169d60f6cbdc767",
+  "scope": "Real production browser consent and one dedicated-wallet appeal on the pinned stable Bradbury ABI. No repeat payment. A zero quoted bond does not test nonzero bond settlement.",
+  "checks": [
+    "Real owner browser quote, explicit bond-risk consent, metadata stripping, wallet signing and persisted hash",
+    "Successful appeal EVM receipt, observed protocol appeal committee, refreshed website state and provenance when available"
+  ],
+  "evmHash": "0x80a66390e5b54b8177570664126672cd2320f4717be487d98e6d642669370943",
+  "evmStatus": "success",
+  "bondGEN": "0",
+  "networkFeeGEN": "0.000305203440387",
+  "transactionSent": true,
+  "observedStates": [
+    "APPEAL_COMMITTING",
+    "APPEAL_REVEALING",
+    "COMMITTING",
+    "UNDETERMINED"
+  ],
+  "appealCommitteeObserved": true,
+  "websiteState": "undetermined",
+  "verdict": null,
+  "ok": true,
+  "completedAt": "2026-10-07T11:00:14.371Z",
+  "consoleErrors": []
+}

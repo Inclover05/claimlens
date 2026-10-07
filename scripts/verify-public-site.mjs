@@ -18,6 +18,18 @@ try{
  await page.goto(base+'/how-it-works');await page.getByRole('heading',{name:'A bounded judgment.'}).waitFor();await page.getByText(/Career goals, league goals and international goals/).waitFor();report.checks.push('Evidence, football scope, X access, privacy and appeal limits are visible in the guide');
  await page.setViewportSize({width:390,height:844});await page.goto(base);await page.getByRole('heading',{name:'A claim deserves a closer look.'}).waitFor();assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));await page.getByRole('button',{name:'Open menu'}).click();await page.getByRole('button',{name:'Close menu'}).click();await page.getByLabel('Search public checks').fill('Moon');await page.locator('a[href="/checks/65ad7eca-ffa7-419b-8053-791ce0773550"]').waitFor();await page.screenshot({path:'outputs/release/home-mobile.png',fullPage:true});report.checks.push('Anonymous mobile layout, public feed and navigation');
  const old='65ad7eca-ffa7-419b-8053-791ce0773550';const check=await fetch(base+'/api/checks/'+old).then(r=>r.json());assert.equal(check.check.state,'finalized');assert.equal(check.check.verdict,'Supported');await page.goto(base+'/checks/'+old);await page.getByText('Supported',{exact:true}).first().waitFor();report.checks.push('Existing public finalized NASA example remains accessible');
+ await page.setViewportSize({width:1440,height:1000});report.examples=[];
+ for(const [name,id] of [['current-nasa','29821f47-106c-461f-8d6e-be4b868c6223'],['football','7b3c3c81-2ccb-4b42-ac2f-42f836acbc9e'],['x-appealed','178b5a81-472a-4b8e-aa83-6179fcdd643d']]){
+  const r=await fetch(base+'/api/checks/'+id);assert.equal(r.status,200);const {check}=await r.json();assert.equal(check.contract.toLowerCase(),expected.toLowerCase());
+  if(name==='current-nasa'){assert.equal(check.state,'finalized');assert.equal(check.verdict,'Supported');}
+  if(name==='football'){assert.ok(['accepted','finalized'].includes(check.state));assert.equal(check.verdict,'Supported');}
+  const hasVerdict=['accepted','finalized'].includes(check.state);if(!hasVerdict){assert.ok(!check.result);assert.ok(!check.verdict);}
+  await page.goto(base+'/checks/'+id);await page.getByRole('heading',{name:check.claim,exact:true}).waitFor();
+  if(hasVerdict)await page.getByText(check.verdict,{exact:true}).first().waitFor();else await page.getByText('No fact-check verdict is available for this attempt.',{exact:true}).waitFor();
+  assert.equal(await page.getByRole('button',{name:'Make private',exact:true}).count(),0);
+  await page.screenshot({path:`outputs/release/${name}-public.png`,fullPage:true});report.examples.push({name,id,state:check.state,verdict:check.verdict||null,guestVerified:true,staleVerdictAbsent:!hasVerdict});
+ }
+ report.checks.push('Current finalized NASA, scoped football and appealed X records render anonymously with current consensus state; no stale verdict after lost agreement');
  const reduced=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});const rp=await reduced.newPage();await rp.goto(base);await rp.getByRole('heading',{name:'A claim deserves a closer look.'}).waitFor();assert.equal(await rp.getByRole('button',{name:'Pause lens animation'}).count(),0);await reduced.close();report.checks.push('Reduced motion keeps a static homepage');
  assert.deepEqual(errors,[]);report.consoleErrors=errors;report.ok=true;
 }catch(error){report.ok=false;report.error=error.message;process.exitCode=1;}

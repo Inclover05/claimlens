@@ -1,0 +1,11 @@
+{
+  "checkedAt": "2026-10-07T10:38:57.730Z",
+  "repository": "Inclover05/claimlens",
+  "branch": "main",
+  "commit": "a91196f1f925cdb4d17b85b13361464590ce63b3",
+  "sourceUrl": "https://raw.githubusercontent.com/Inclover05/claimlens/a91196f1f925cdb4d17b85b13361464590ce63b3/contracts/claimlens.py",
+  "sourceSha256": "49ddcba217c0b1070ff70bfaf623b24e4c387a190075514165ac5778408b9ca3",
+  "exactPublishedBytesMatch": true,
+  "scope": "Public GitHub main source compared byte-for-byte with the local deployed-source artifact.",
+  "ok": true
+}

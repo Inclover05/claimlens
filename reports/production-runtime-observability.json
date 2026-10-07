@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-10-07T10:56:40.029Z",
+  "projectId": "prj_9AE3crJA0FmAzQsY1ovJDW29PFOL",
+  "environment": "production",
+  "windowStart": "2026-10-07T10:26:40.029Z",
+  "windowEnd": "2026-10-07T10:56:40.029Z",
+  "levels": [
+    "error",
+    "fatal"
+  ],
+  "reviewedRecords": 10,
+  "expectedValidationRejections": 10,
+  "unexpectedErrorsObserved": 0,
+  "fixtureId": "c22b640e-551f-4f67-8b83-b9915fce6d28",
+  "evidence": "All ten returned messages match the negative API regression's authentication, privacy, ambiguity, unsafe evidence, stale hash, concurrent attempt and draft appeal cases between 10:34:05 and 10:34:11 UTC. The fixture report confirms these intentional rejections and cleanup.",
+  "scope": "Bounded Vercel runtime-log scan, not continuous monitoring or proof of absence outside the window. Client validation rejections currently log at error severity.",
+  "ok": true
+}

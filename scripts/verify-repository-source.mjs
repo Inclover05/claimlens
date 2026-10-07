@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFile,writeFile} from 'node:fs/promises';
+const repository='Inclover05/claimlens';
+const commit=await fetch(`https://api.github.com/repos/${repository}/commits/main`,{signal:AbortSignal.timeout(15000)}).then(r=>{assert.equal(r.status,200);return r.json();});
+const sourceUrl=`https://raw.githubusercontent.com/${repository}/${commit.sha}/contracts/claimlens.py`;
+const bytes=await fetch(sourceUrl,{signal:AbortSignal.timeout(15000)}).then(async r=>{assert.equal(r.status,200);return new Uint8Array(await r.arrayBuffer());});
+const hash=value=>createHash('sha256').update(value).digest('hex');
+const sourceSha256=hash(bytes);assert.equal(sourceSha256,hash(await readFile('contracts/claimlens.py')));
+const report={checkedAt:new Date().toISOString(),repository,branch:'main',commit:commit.sha,sourceUrl,sourceSha256,exactPublishedBytesMatch:true,scope:'Public GitHub main source compared byte-for-byte with the local deployed-source artifact.',ok:true};
+await writeFile('reports/repository-source-verification.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

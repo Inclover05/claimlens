@@ -1,6 +1,6 @@
 # ClaimLens deployment preparation
 
-Current revision: **date-reference**, deployed on 7 October 2026 at `0x3E2C5298063d25e1111CFbe54526e46efe35eD3E`, source SHA-256 `49ddcba217c0b1070ff70bfaf623b24e4c387a190075514165ac5778408b9ca3`. Exact source and policy read-back pass. See reports/bradbury-deployment.json and the dated release report for its current consensus state. Accepted deployment and check states remain provisional until protocol finality.
+Current revision: **date-reference**, deployed and finalized on 7 October 2026 at `0x3E2C5298063d25e1111CFbe54526e46efe35eD3E`, source SHA-256 `49ddcba217c0b1070ff70bfaf623b24e4c387a190075514165ac5778408b9ca3`. Exact source and policy read-back pass. See reports/bradbury-deployment.json and the dated release report for individual check states. Accepted checks remain provisional until their own protocol finality.
 
 The revision preserves earlier source extraction fixes, selects exact source passages rather than asking models to invent quotation strings, caps text at 6,000 characters per page and 12,000 overall, and limits each validator to one substantive model audit. The date policy prevents models from treating the reference date as future based on their training clock. Missing or old source dates still require caveats or abstention. Archived deployed bytes are in contracts/releases; earlier deployment and unsuccessful test reports remain available.
 
@@ -32,7 +32,7 @@ node scripts/deploy-bradbury.mjs deploy date-reference
 node scripts/deploy-bradbury.mjs status date-reference
 ```
 
-The active journal revision is `source-extraction`; inspecting the initial journal cannot overwrite the current source's release record. Saved balances are explicitly labeled as before-deployment balances; current wallet status is read separately.
+The active journal revision is `date-reference`; inspecting an earlier journal cannot overwrite the current source's release record. Saved balances are explicitly labeled as before-deployment balances; current wallet status is read separately.
 
 The deployment helper uses the pinned SDK's contract encoding, checks the chain, source hash and available balance, and requires a successful live gas estimate before signing. It records the deterministic EVM hash before broadcasting and resumes an existing attempt rather than signing another deployment. It records a verified contract address only after successful execution, finalization, and exact source/policy read-back. The encrypted signer is local to this Windows account and must never be placed in hosted environment variables or frontend code.
 

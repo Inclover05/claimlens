@@ -191,7 +191,9 @@ try {
       await page.getByLabel('Wallet transaction hash').fill(ledger[scenario.name].evmHash);
       await page.getByRole('button', { name: 'Link transaction', exact: true }).click();
     }
-    const deadline = Date.now() + 15 * 60 * 1000;
+    // A resumed tracker retains the original time budget; it must not silently
+    // wait another 15 minutes or resend a previously broadcast request.
+    const deadline = detail.created_at * 1000 + 15 * 60 * 1000;
     let previousState = '';
     while (Date.now() < deadline) {
       const response = await api('checks/' + id);
@@ -201,10 +203,15 @@ try {
       await save();
       if (detail.state !== previousState) { console.log(JSON.stringify({ event: 'live_check_state', scenario: scenario.name, state: detail.state, verdict: detail.verdict, genHash: detail.gen_hash })); previousState = detail.state; }
       if (['accepted', 'finalized'].includes(detail.state) && detail.result) break;
-      if (['execution_failed', 'undetermined', 'finalized_no_consensus'].includes(detail.state)) { report.failedCase = { name: scenario.name, id, state: detail.state, error: detail.error, evmHash: detail.evm_hash, genHash: detail.gen_hash }; throw new Error('Live consensus did not produce a verdict for ' + scenario.name); }
+      if (['execution_failed', 'undetermined', 'finalized_no_consensus'].includes(detail.state)) break;
       await new Promise(resolve => setTimeout(resolve, 15000));
     }
-    assert.ok(['accepted', 'finalized'].includes(detail.state), 'Consensus decision timed out; resume the saved transaction');
+    if (!['accepted','finalized'].includes(detail.state)||!detail.result) {
+      (report.unverifiedCases ||= []).push({name:scenario.name,id,state:detail.state,error:detail.error,evmHash:detail.evm_hash,genHash:detail.gen_hash,reason:'No agreed result observed within 15 minutes of draft creation; this is a bounded test observation, not invented protocol finality.'});
+      console.log(JSON.stringify({event:'live_scenario_unverified',scenario:scenario.name,state:detail.state,genHash:detail.gen_hash}));
+      await writeFile(`reports/live-${contract.toLowerCase()}.json`,JSON.stringify(report,null,2)+'\n');
+      continue;
+    }
     assert.equal(detail.verdict, scenario.expected);
     const result = JSON.parse(detail.result);
     assert.equal(result.input_hash, detail.input_hash);
@@ -229,6 +236,7 @@ try {
     await page.screenshot({ path: `outputs/live/${scenario.name}.png`, fullPage: true });
     report.cases.push({ name: scenario.name, id, claim: scenario.claim, originalSource: detail.source, selectedSourceUrls: JSON.parse(detail.payload).source_urls, state: detail.state, verdict: detail.verdict, evmHash: detail.evm_hash, genHash: detail.gen_hash, inputHash: detail.input_hash, executionResult: consensus.txExecutionResultName, networkFeeGEN: formatEther(receipt.gasUsed * receipt.effectiveGasPrice), independentReadBackMatched: true, result, guestDenied: true, publicFeedExcluded: true });
     console.log(JSON.stringify({ event: 'live_scenario_verified', scenario: scenario.name, verdict: detail.verdict }));
+    await writeFile(`reports/live-${contract.toLowerCase()}.json`,JSON.stringify(report,null,2)+'\n');
   }
   const supported = report.cases.find(item => item.name === 'supported');
   if (supported) {
@@ -255,8 +263,9 @@ try {
   }
   assert.deepEqual(errors, []);
   report.checks.push('Actual claim submission, signed EVM transactions, provenance-checked consensus results, private access and rendered verdicts');
-  report.liveDecisionVerified = true;
-  report.ok = true;
+  report.liveDecisionVerified = report.cases.some(item=>item.independentReadBackMatched);
+  report.ok = !report.unverifiedCases?.length;
+  if(!report.ok){report.error='Some live attempts produced no agreed result within the test observation window. Their existing transaction IDs are preserved; no automatic resend.';process.exitCode=1;}
 } catch (error) {
   report.ok = false;
   report.error = error instanceof Error ? error.message : 'Live verification failed';

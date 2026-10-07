@@ -22,7 +22,7 @@ This follows the [adjudication-layer architecture](https://docs.genlayer.com/dev
 
 ## Reviewer walkthrough
 
-1. Open the public website and inspect the public finalized example linked in the release report.
+1. Open the public website and inspect the [current-contract finalized NASA example](https://claimlens-inclover05s-projects.vercel.app/checks/29821f47-106c-461f-8d6e-be4b868c6223) and [scoped football check](https://claimlens-inclover05s-projects.vercel.app/checks/7b3c3c81-2ccb-4b42-ac2f-42f836acbc9e). Check each page's current finality state.
 2. Connect an EVM wallet, sign the domain-bound login message and select Bradbury. Testing a new check requires test GEN.
 3. Submit one English factual statement. For football, specify career/club/international scope, competition where relevant, and date. For X, paste the post URL and quote its exact claim.
 4. Review or replace one to four evidence pages. A post URL can remain the original source while independent pages provide the evidence.
@@ -31,7 +31,7 @@ This follows the [adjudication-layer architecture](https://docs.genlayer.com/dev
 
 ## Evidence and boundaries
 
-The dated [verification report](reports/verification.md), machine-readable reports and [operating limits](LIMITS.md) distinguish direct tests, runtime simulations and real committee outcomes. Misleading is implemented and covered by direct fixtures; do not claim real committee coverage unless the release matrix includes it. The appeal quote and browser recovery path are verified separately from an actual paid appeal, which has not been tested.
+The dated [verification report](reports/release-2026-10-07.md), [architecture verification](reports/architecture-verification.md), machine-readable reports and [operating limits](LIMITS.md) distinguish direct tests, runtime simulations and real committee outcomes. Five of six initial current-revision cases produced agreed verdicts; one timed out. Misleading is implemented and covered by direct fixtures but has no verified real committee example. An actual production appeal transaction started a fresh committee and moved the prior X decision to no majority. The quoted bond was zero, so nonzero bond settlement is unverified.
 
 Text budgets can omit long tables. X can block access. Undated statistics may not establish a precise date. Models can disagree, and validators can time out. A failed check can still cost a network fee. Website-private checks remain publicly inspectable on-chain. The app uses the stable Bradbury SDK/ABI family; Consensus v0.6 requires a coordinated migration and separate fee profiling.
 

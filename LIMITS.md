@@ -6,7 +6,7 @@ ClaimLens adjudicates a submitted statement against selected evidence. It cannot
 
 - One English statement per request. Up to 600 characters without an original link, or 2,400 with a link.
 - One to four public HTTPS evidence links. The owner can select or replace them while the check is a draft. Starting a wallet attempt fixes the request and its SHA-256 hash.
-- The bounded revision reads at most 1 MB of HTML per page, extracts at most 6,000 text characters per page, and uses at most 12,000 text characters overall, in source order. Sources beyond the text budget may not be fetched. These are limits, not exhaustive document review.
+- The contract processes the first 1 MB of returned HTML per page, extracts at most 6,000 text characters per page, and uses at most 12,000 text characters overall, in source order. The HTML cap applies after retrieval; it does not bound the network response size. Sources beyond the text budget may not be fetched. These are limits, not exhaustive document review.
 - Only fetched text supports a verdict. Images, video, audio, attachments, embedded charts and later table sections are not analyzed. No historical snapshot is retained. The exact input and short quotations are recorded, but live pages can change.
 - Source discovery supplies candidates, not proof. Without Brave Search configuration, it uses Wikipedia and the original link. Multiple Wikipedia pages are not independent primary sources. Search can fail, miss a source or choose irrelevant pages.
 - X posts may be blocked or require sign-in. The user must quote the claim. Independent evidence may establish that claim without authenticating the post, account, media or author.
@@ -31,7 +31,7 @@ ClaimLens adjudicates a submitted statement against selected evidence. It cannot
 - The stable Bradbury integration is pinned to genlayer-js 1.1.8 and its deployed consensus ABI. It estimates that deployment's EVM gas. Receipt costs are measured separately in reports/test-wallet-costs.json.
 - The Consensus v0.6 release candidate has a different fee distribution, profiling, deposit/refund and appeal API. It must be tested with its matching Studio-dev/SDK family before a coordinated migration. The legacy gas measurements are **not** a v0.6 fee-profile.json.
 - A wallet timeout is an uncertain outcome. Preserve and link the existing EVM hash. The app never automatically pays again to recover a check or appeal.
-- Appeals are available before finality and require a separately approved transaction and any quoted bond. The UI and quote path are implemented; an actual paid appeal must be distinguished from simulated browser coverage in the release report.
+- Appeals are available before finality and require a separately approved transaction and any quoted bond. A real production appeal with a zero quoted bond triggered a fresh committee and removed an earlier accepted verdict when reconsideration reached no majority. This tests the stable-network appeal path; nonzero bond settlement remains unverified. Simulated rejection and uncertainty recovery have separate evidence.
 - Private means owner-only access on the website. Blockchain claims, links, wallet addresses, evidence and results remain publicly inspectable. Submit no confidential information.
 
 ## Observed examples

@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-07T10:13:30.284Z",
+  "checkedAt": "2026-10-07T10:43:36.788Z",
   "sdkVersion": "1.1.8",
   "network": "testnet-bradbury",
   "chainId": 4221,
@@ -19,14 +19,16 @@
   "gasPriceWei": "150352500",
   "maximumNetworkFeeGEN": "0.002220090881865",
   "nonce": 20,
-  "state": "accepted",
+  "state": "finalized",
   "startedAt": "2026-10-07T10:12:58.910Z",
   "evmHash": "0x932e450ea464e3c7d2792b15c888d030d8145c2321eb6954979eabb41aa046e3",
   "evmStatus": "success",
   "gasUsed": "11562401",
   "networkFeeGEN": "0.0017384358963525",
   "genHash": "0xb5801f8b2fe1d4096ad4d8b88a46eb0de7aaa3b22d981b0046445f80547bcf71",
-  "consensusStatus": "ACCEPTED",
+  "consensusStatus": "FINALIZED",
   "executionResult": "FINISHED_WITH_RETURN",
-  "contractAddress": "0x3E2C5298063d25e1111CFbe54526e46efe35eD3E"
+  "contractAddress": "0x3E2C5298063d25e1111CFbe54526e46efe35eD3E",
+  "sourceAndPolicyVerified": true,
+  "sourceMatchesCurrent": true
 }

@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-10-07T10:23:10.391Z",
+  "checkedAt": "2026-10-07T10:57:06.071Z",
   "network": "Bradbury testnet",
   "chainId": 4221,
   "wallet": "0xfA47B90A45F11e1B8E5f1FeFCC8f248C6ddbcdf1",
   "initialFundingGEN": "5",
-  "balanceGEN": "4.98869216400344165",
-  "measuredEVMFeesGEN": "0.01130783599655835",
+  "balanceGEN": "4.9876943646693104",
+  "measuredEVMFeesGEN": "0.0123056353306896",
   "transactions": [
     {
       "purpose": "initial-deployment",
@@ -46,6 +46,14 @@
       "gasUsed": "1092222",
       "gasPriceWei": "155604300",
       "feeGEN": "0.0001699544397546"
+    },
+    {
+      "purpose": "0x94616c46f71e6b1ccbb71c84fd102e6568970c5ff5b740f56169d60f6cbdc767.appeal",
+      "hash": "0x80a66390e5b54b8177570664126672cd2320f4717be487d98e6d642669370943",
+      "status": "success",
+      "gasUsed": "1783556",
+      "gasPriceWei": "171120750",
+      "feeGEN": "0.000305203440387"
     },
     {
       "purpose": "0xcec3af1231d7489e6958a41d7fb3859a1252f141c38ac4487aacb25e5e465634.idleness",
@@ -102,6 +110,38 @@
       "gasUsed": "1046485",
       "gasPriceWei": "146315550",
       "feeGEN": "0.00015311702834175"
+    },
+    {
+      "purpose": "opinion",
+      "hash": "0xb032c9e480e1783dfc22f44e70987ab92b105bf4110bdaebcfdf57045e135275",
+      "status": "success",
+      "gasUsed": "1046426",
+      "gasPriceWei": "140901600",
+      "feeGEN": "0.0001474430976816"
+    },
+    {
+      "purpose": "irrelevant-evidence",
+      "hash": "0x3a8a061f2ed1f6e3a81114ef0550b6a82c9ae5274bf0f32d9ba814fbc047f958",
+      "status": "success",
+      "gasUsed": "1092222",
+      "gasPriceWei": "140901600",
+      "feeGEN": "0.0001538958273552"
+    },
+    {
+      "purpose": "football-international",
+      "hash": "0xa7e5fe4618f2865e74b4769f38e69013fee47b1635ec7a1ac7b3b4786f445cbb",
+      "status": "success",
+      "gasUsed": "1229098",
+      "gasPriceWei": "170231850",
+      "feeGEN": "0.0002092316263713"
+    },
+    {
+      "purpose": "x-independent",
+      "hash": "0x8e309cd3df4650a6d371553e0a947e665eafaddfa746a6ea09d6b0c2baf3a7b7",
+      "status": "success",
+      "gasUsed": "1069279",
+      "gasPriceWei": "170231850",
+      "feeGEN": "0.00018202534233615"
     },
     {
       "purpose": "supported",
