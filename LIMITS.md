@@ -23,6 +23,7 @@ ClaimLens adjudicates a submitted statement against selected evidence. It cannot
 - No consensus is different from Insufficient evidence. The former has no agreed verdict; the latter is an agreed decision that the evidence does not establish the claim.
 - Live GenVM simulation proves one execution/replay, not a real committee vote. Direct tests mock evidence/models and do not prove live reliability. Reports identify their scope.
 - Protocol finality is asynchronous. There is no guaranteed completion time. The app refreshes every 15 seconds while visible and does not invent finality from a local timer.
+- Checks use one Intelligent Contract and share its protocol execution queue. The app has not been load-tested. The sample tests establish individual flows, not a throughput or reliability percentage.
 
 ## Wallets, fees and privacy
 

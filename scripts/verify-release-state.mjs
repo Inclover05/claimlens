@@ -8,14 +8,16 @@ const contract=process.env.CLAIMLENS_CONTRACT;
 assert.match(contract||'',/^0x[0-9a-f]{40}$/i);
 const client=createClient({chain:{...testnetBradbury,rpcUrls:{default:{http:['https://rpc-bradbury.genlayer.com']}}}});
 const ledger=JSON.parse(await readFile(`.claimlens-wallet/live-checks-${contract.toLowerCase()}.json`,'utf8'));
-const sourceSha256=createHash('sha256').update(await readFile('contracts/claimlens.py')).digest('hex');
+const sourceFile=process.argv[2]||'contracts/claimlens.py';
+const sourceSha256=createHash('sha256').update(await readFile(sourceFile)).digest('hex');
 const deployedSha256=createHash('sha256').update(await client.getContractCode(contract)).digest('hex');
 assert.equal(deployedSha256,sourceSha256);assert.equal(await client.readContract({address:contract,functionName:'get_policy',args:[]}), 'claimlens-evidence-v1');
-const report={checkedAt:new Date().toISOString(),contract,sourceSha256,sourceAndPolicyVerified:true,sdkVersion:'1.1.8',scope:'Read-only current committee receipts and independent contract-state reads. Raw votes are preserved; SDK vote labels alone do not establish root cause.',cases:[]};
+const report={checkedAt:new Date().toISOString(),contract,sourceFile,sourceSha256,sourceAndPolicyVerified:true,sdkVersion:'1.1.8',scope:'Read-only current committee receipts and independent contract-state reads. Raw votes are preserved; SDK vote labels alone do not establish root cause.',cases:[]};
 for(const [name,saved] of Object.entries(ledger)){
  if(!saved.genHash){report.cases.push({name,id:saved.id,state:saved.state,evmHash:saved.evmHash});continue;}
  const tx=await client.getTransaction({hash:saved.genHash});
- const record={name,id:saved.id,genHash:saved.genHash,evmHash:saved.evmHash,status:tx.statusName,execution:tx.txExecutionResultName,consensus:tx.resultName,rawVotes:tx.lastRound?.validatorVotes?.map(Number),sdkVoteLabels:tx.lastRound?.validatorVotesName};
+ const createdTimestamp=Number(tx.createdTimestamp),lastVoteTimestamp=Number(tx.lastVoteTimestamp);
+ const record={name,id:saved.id,genHash:saved.genHash,evmHash:saved.evmHash,status:tx.statusName,execution:tx.txExecutionResultName,consensus:tx.resultName,rawVotes:tx.lastRound?.validatorVotes?.map(Number),sdkVoteLabels:tx.lastRound?.validatorVotesName,createdTimestamp,lastVoteTimestamp,...(lastVoteTimestamp>=createdTimestamp?{secondsToLastVote:lastVoteTimestamp-createdTimestamp}:{})};
  const agreed=['AGREE','MAJORITY_AGREE'].includes(tx.resultName)&&tx.txExecutionResultName==='FINISHED_WITH_RETURN'&&['ACCEPTED','FINALIZED'].includes(tx.statusName);
  const text=await client.readContract({address:contract,functionName:'get_check',args:['0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1',saved.id],transactionHashVariant:tx.statusName==='FINALIZED'?'latest-final':'latest-nonfinal'});
  record.emptyContractResult=text==='';

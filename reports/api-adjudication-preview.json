@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-07T10:34:05.576Z",
-  "origin": "https://claimlens-inclover05s-projects.vercel.app",
-  "fixtureAddress": "0x7d66f8fec7ddd7686fb6a6606657924321341190",
+  "checkedAt": "2026-10-07T10:19:31.459Z",
+  "origin": "https://claimlens-bu70gubqy-inclover05s-projects.vercel.app",
+  "fixtureAddress": "0xaa9cd18959988f4dc4787cdde4cc6bee45af9545",
   "scope": "Real API, EOA signature and Neon; ephemeral unfunded account; no chain transaction.",
   "checks": [
     "Origin-bound sign-in and nonce replay protection",
@@ -12,8 +12,8 @@
     "Wallet attempt fixes evidence and prevents duplicate attempts",
     "Drafts cannot be appealed and explicit wallet rejection unlocks a draft"
   ],
-  "fixtureId": "c22b640e-551f-4f67-8b83-b9915fce6d28",
+  "fixtureId": "d3649fa4-e590-4666-88e7-bbe7dba3e04d",
   "ok": true,
   "fixtureDraftRemoved": true,
-  "completedAt": "2026-10-07T10:34:13.545Z"
+  "completedAt": "2026-10-07T10:19:38.833Z"
 }

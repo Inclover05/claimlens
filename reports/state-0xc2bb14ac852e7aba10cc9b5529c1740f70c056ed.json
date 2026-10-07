@@ -1,0 +1,210 @@
+{
+  "checkedAt": "2026-10-07T10:32:52.736Z",
+  "contract": "0xC2bB14Ac852e7ABa10cC9b5529c1740F70C056Ed",
+  "sourceFile": "contracts/releases/claimlens-38a2ee22.py",
+  "sourceSha256": "38a2ee2221b706fad8bdd6b81fad06cb704cd987714b7b1632e7a03f457c91ea",
+  "sourceAndPolicyVerified": true,
+  "sdkVersion": "1.1.8",
+  "scope": "Read-only current committee receipts and independent contract-state reads. Raw votes are preserved; SDK vote labels alone do not establish root cause.",
+  "cases": [
+    {
+      "name": "supported",
+      "id": "889245c8-2f54-4e52-a06f-496e40c317f8",
+      "genHash": "0xdaa4ce1195e7f359d1269fcf62363c19eaff2f95f0acda5b407515c927e4e72f",
+      "evmHash": "0xd233ce292117fd39501c0611a632e9bb61f1b1b61cae25e784ae77fb433adb47",
+      "status": "FINALIZED",
+      "execution": "FINISHED_WITH_RETURN",
+      "consensus": "AGREE",
+      "rawVotes": [
+        3,
+        1,
+        1,
+        1,
+        3
+      ],
+      "sdkVoteLabels": [
+        "TIMEOUT",
+        "AGREE",
+        "AGREE",
+        "AGREE",
+        "TIMEOUT"
+      ],
+      "createdTimestamp": 1791365878,
+      "lastVoteTimestamp": 1791365930,
+      "secondsToLastVote": 52,
+      "emptyContractResult": false,
+      "verdict": "Supported",
+      "provenanceMatched": true
+    },
+    {
+      "name": "neymar-comparison",
+      "id": "1f929806-4c31-40b4-82a9-d40b91b268f4",
+      "genHash": "0xb5770f322b623a764008566392032bd01f4fe82c02c5e94f03b5dad7a99ccd6b",
+      "evmHash": "0x0bb1d569df11c0d2d38eebbcdabfe62155a6b943df96d61eb1ea9ae33da0759b",
+      "status": "FINALIZED",
+      "execution": "FINISHED_WITH_RETURN",
+      "consensus": "AGREE",
+      "rawVotes": [
+        3,
+        1,
+        3,
+        1,
+        1
+      ],
+      "sdkVoteLabels": [
+        "TIMEOUT",
+        "AGREE",
+        "TIMEOUT",
+        "AGREE",
+        "AGREE"
+      ],
+      "createdTimestamp": 1791365949,
+      "lastVoteTimestamp": 1791366113,
+      "secondsToLastVote": 164,
+      "emptyContractResult": false,
+      "verdict": "Insufficient evidence",
+      "provenanceMatched": true
+    },
+    {
+      "name": "x-post",
+      "id": "ed38a507-511b-4ba2-a6d0-f04d4c568224",
+      "genHash": "0xebdcb2e7560c8e5eba1959a85ed856f0fee929ff1fc66c48293d270bd730f38c",
+      "evmHash": "0x675a7e6a1e1ad728f064bc6d009047dd3865326469a72d6dd936f045d0d29abd",
+      "status": "FINALIZED",
+      "execution": "FINISHED_WITH_RETURN",
+      "consensus": "DISAGREE",
+      "rawVotes": [
+        3,
+        4,
+        4,
+        4,
+        1
+      ],
+      "sdkVoteLabels": [
+        "TIMEOUT",
+        "DETERMINISTIC_VIOLATION",
+        "DETERMINISTIC_VIOLATION",
+        "DETERMINISTIC_VIOLATION",
+        "AGREE"
+      ],
+      "createdTimestamp": 1791366236,
+      "lastVoteTimestamp": 1791366512,
+      "secondsToLastVote": 276,
+      "emptyContractResult": true
+    },
+    {
+      "name": "contradicted",
+      "id": "d7cbe2b5-3639-4efc-adfb-d08f0b92bf0a",
+      "genHash": "0x7cb1b781d8fdb5c898d3438461650d672dc70f48c9db3e11e0f9eaa4fc1274b1",
+      "evmHash": "0x7f05129618a583cae3b28ddc5686f24617167497f7d52a2581d6dda0ceb65823",
+      "status": "FINALIZED",
+      "execution": "FINISHED_WITH_RETURN",
+      "consensus": "AGREE",
+      "rawVotes": [
+        1,
+        3,
+        3,
+        1,
+        1
+      ],
+      "sdkVoteLabels": [
+        "AGREE",
+        "TIMEOUT",
+        "TIMEOUT",
+        "AGREE",
+        "AGREE"
+      ],
+      "createdTimestamp": 1791366665,
+      "lastVoteTimestamp": 1791366690,
+      "secondsToLastVote": 25,
+      "emptyContractResult": false,
+      "verdict": "Contradicted",
+      "provenanceMatched": true
+    },
+    {
+      "name": "opinion",
+      "id": "d50ffeec-b870-410c-a74a-55e63e4446e9",
+      "genHash": "0x1f72921da5ffdf550d2ef4b04fc644db166100c3fbc72bfcf5a438ff4b07d6c6",
+      "evmHash": "0xf25a202862819e825b5a329b17ba3eeabb1d0837a86faf2a6ec1d054f530b5f6",
+      "status": "FINALIZED",
+      "execution": "FINISHED_WITH_RETURN",
+      "consensus": "AGREE",
+      "rawVotes": [
+        1,
+        1,
+        1,
+        3,
+        1
+      ],
+      "sdkVoteLabels": [
+        "AGREE",
+        "AGREE",
+        "AGREE",
+        "TIMEOUT",
+        "AGREE"
+      ],
+      "createdTimestamp": 1791366719,
+      "lastVoteTimestamp": 1791366749,
+      "secondsToLastVote": 30,
+      "emptyContractResult": false,
+      "verdict": "Not a factual claim",
+      "provenanceMatched": true
+    },
+    {
+      "name": "irrelevant-evidence",
+      "id": "95a191e6-eedc-43cb-a320-cf7fad661d40",
+      "genHash": "0x687a1a4545246374dd41d8b22d05d2436a264c9f0f5b339917530970654967ff",
+      "evmHash": "0x457a776dfa0b5186815e0c13f708ebaf0292461af90bf0d117c3171bf71257fb",
+      "status": "FINALIZED",
+      "execution": "FINISHED_WITH_RETURN",
+      "consensus": "AGREE",
+      "rawVotes": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "sdkVoteLabels": [
+        "AGREE",
+        "AGREE",
+        "AGREE",
+        "AGREE",
+        "AGREE"
+      ],
+      "createdTimestamp": 1791366774,
+      "lastVoteTimestamp": 1791366817,
+      "secondsToLastVote": 43,
+      "emptyContractResult": false,
+      "verdict": "Insufficient evidence",
+      "provenanceMatched": true
+    },
+    {
+      "name": "football-international",
+      "id": "3287e986-fbfb-437c-a5dc-982d4e03b0a5",
+      "genHash": "0xaf29c8024752a9e98d1aae2f09a74118b13e19621a4f70e17833ce5d73a53614",
+      "evmHash": "0x399c17c0f1a1730a44a5c59aeef4a6c149e5c32fcaf9ddda3a1d15b27b8df46b",
+      "status": "VALIDATORS_TIMEOUT",
+      "execution": "FINISHED_WITH_RETURN",
+      "consensus": "TIMEOUT",
+      "rawVotes": [
+        3,
+        4,
+        4,
+        3,
+        3
+      ],
+      "sdkVoteLabels": [
+        "TIMEOUT",
+        "DETERMINISTIC_VIOLATION",
+        "DETERMINISTIC_VIOLATION",
+        "TIMEOUT",
+        "TIMEOUT"
+      ],
+      "createdTimestamp": 1791367194,
+      "lastVoteTimestamp": 1791367435,
+      "secondsToLastVote": 241,
+      "emptyContractResult": true
+    }
+  ]
+}

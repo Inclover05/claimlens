@@ -1,0 +1,22 @@
+{
+  "observedDate": "2026-10-07",
+  "claim": "As of 7 October 2026, Cristiano Ronaldo has scored more senior international goals than Neymar.",
+  "sources": [
+    "https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Cristiano_Ronaldo",
+    "https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Neymar"
+  ],
+  "precedingSourceSha256": "38a2ee2221b706fad8bdd6b81fad06cb704cd987714b7b1632e7a03f457c91ea",
+  "scope": "Instrumented GenVM simulation, not a committee result or proof of the cause of every on-chain failure.",
+  "validatorDiagnostic": {
+    "independentVerdict": "Insufficient evidence",
+    "valid": false,
+    "reason": "The claim's 'as of' date is 7 October 2026, which is in the future. The provided sources lack publication dates and are truncated, making it impossible to verify if the goal totals (Ronaldo: 146, Neymar: 80) are accurate and current as of that future date. The evidence is therefore inconclusive for the specified timeframe."
+  },
+  "finding": "The validator assumed a current date instead of using the supplied evaluation reference date. Missing publication dates remain a legitimate limitation; an assumed model clock does not establish that the requested date is in the future.",
+  "revisedSourceSha256": "49ddcba217c0b1070ff70bfaf623b24e4c387a190075514165ac5778408b9ca3",
+  "revisedReplay": {
+    "leaderVerdict": "Supported",
+    "validatorAgreed": true,
+    "report": "genvm-adjudication-verification.json"
+  }
+}

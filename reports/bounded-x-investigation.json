@@ -1,0 +1,72 @@
+{
+  "checkedAt": "2026-10-07T09:51:00.176Z",
+  "id": "ed38a507-511b-4ba2-a6d0-f04d4c568224",
+  "claim": "Argentina won the 2022 FIFA World Cup.",
+  "origin": "https://claimlens-vm4rp4lnt-inclover05s-projects.vercel.app",
+  "contract": "0xC2bB14Ac852e7ABa10cC9b5529c1740F70C056Ed",
+  "inputHash": "8fc2723117befdbec424e5fe2a56aa82da6a234aa4e8d87e9ad84ce776eae6c2",
+  "sourceUrls": [
+    "https://x.com/FIFAWorldCup/status/1604535989480955908",
+    "https://en.wikipedia.org/wiki/2022_FIFA_World_Cup"
+  ],
+  "evmHash": "0x675a7e6a1e1ad728f064bc6d009047dd3865326469a72d6dd936f045d0d29abd",
+  "nonce": 15,
+  "maximumNetworkFeeGEN": "0.0002450297818056",
+  "state": "undetermined",
+  "genHash": "0xebdcb2e7560c8e5eba1959a85ed856f0fee929ff1fc66c48293d270bd730f38c",
+  "status": "UNDETERMINED",
+  "execution": "FINISHED_WITH_RETURN",
+  "consensus": "DISAGREE",
+  "round": "2",
+  "votes": [
+    "TIMEOUT",
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION",
+    "AGREE"
+  ],
+  "resultHashes": [
+    "0x9fc8d2d92c2ea25ae2ac3d9b20370cb9cb1e53d073b5c1a20b03621ca750f8df",
+    "0xa3889fd6d9331856330fa2c445a51bf52bd9e0b90763854d3612e17caa4b3563",
+    "0xa3889fd6d9331856330fa2c445a51bf52bd9e0b90763854d3612e17caa4b3563",
+    "0xa3889fd6d9331856330fa2c445a51bf52bd9e0b90763854d3612e17caa4b3563",
+    "0xb14be4c0b1593122f352f0825451992ca9adf2a264d5700e791a0b4611e254f2"
+  ],
+  "emptyContractResult": true,
+  "debugReplay": {
+    "kind": "Return",
+    "error": null,
+    "proposed": {
+      "as_of": "2026-10-07",
+      "caveats": "The Wikipedia page is truncated and may not include all details, but the relevant passages containing the championship result are present. As of 2026-10-07, no subsequent events have altered this outcome.",
+      "evidence": [
+        {
+          "quote": "FIFA World Cup @FIFAWorldCup ARGENTINA ARE WORLD CHAMPIONS!!",
+          "relation": "supports",
+          "title": "FIFA World Cup on X",
+          "url": "https://x.com/FIFAWorldCup/status/1604535989480955908"
+        },
+        {
+          "quote": "Teams 32 (from 5 confederations) Venues 8 (in 5 host cities) Final positions Champions Argentina (3rd title) Runners-up France Third place Croatia Fourth place",
+          "relation": "supports",
+          "title": "2022 FIFA World Cup - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/2022_FIFA_World_Cup"
+        },
+        {
+          "quote": "[ 3 ] Argentina were crowned the champions after winning the final against the title holder France 4–2 on penalties following a 3–3 draw after extra time.",
+          "relation": "supports",
+          "title": "2022 FIFA World Cup - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/2022_FIFA_World_Cup"
+        }
+      ],
+      "explanation": "The claim that Argentina won the 2022 FIFA World Cup is directly confirmed by multiple reliable sources. The official FIFA World Cup X (formerly Twitter) account stated 'ARGENTINA ARE WORLD CHAMPIONS!!' on December 18, 2022, shortly after the final. The Wikipedia article on the tournament, which summarizes the event, explicitly notes 'Champions Argentina (3rd title)' and 'Argentina were crowned the champions after winning the final...'. These sources are consistent and provide authoritative confirmation of the factual claim.",
+      "input_hash": "8fc2723117befdbec424e5fe2a56aa82da6a234aa4e8d87e9ad84ce776eae6c2",
+      "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
+      "policy": "claimlens-evidence-v1",
+      "verdict": "Supported"
+    },
+    "runTime": "0s",
+    "scope": "A debug replay is diagnostic, not an agreed verdict."
+  },
+  "scope": "Actual unsuccessful X-plus-Wikipedia submission, retained without resend."
+}
