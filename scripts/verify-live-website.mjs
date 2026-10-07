@@ -108,13 +108,13 @@ await context.addInitScript(() => {
   window.ethereum = provider;
 });
 const scenarios = [
-  { name: 'football-international', claim: 'As of 7 October 2026, Cristiano Ronaldo has scored more senior international goals than Neymar.', source: 'https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Cristiano_Ronaldo', sources: ['https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Cristiano_Ronaldo','https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Neymar'], expected: 'Supported' },
-  { name: 'x-independent', claim: 'Argentina won the 2022 FIFA World Cup.', source: 'https://x.com/FIFAWorldCup/status/1604535989480955908', sources: ['https://en.wikipedia.org/wiki/2022_FIFA_World_Cup'], expected: 'Supported', linkMode: true },
   { name: 'supported', claim: "The Moon is Earth's only natural satellite.", source: 'https://science.nasa.gov/moon/facts/', expected: 'Supported' },
   { name: 'x-post', claim: 'Argentina won the 2022 FIFA World Cup.', source: 'https://x.com/FIFAWorldCup/status/1604535989480955908', expected: 'Supported', linkMode: true, manualOnly: true },
   { name: 'contradicted', claim: 'The Moon produces its own visible light.', source: 'https://science.nasa.gov/moon/facts/', expected: 'Contradicted' },
   { name: 'opinion', claim: 'Chocolate tastes better than vanilla.', source: 'https://science.nasa.gov/moon/facts/', expected: 'Not a factual claim' },
   { name: 'irrelevant-evidence', claim: 'At 09:00 UTC on 1 October 2026, the temperature at North Sentinel Island was exactly 20 degrees Celsius.', source: 'https://science.nasa.gov/moon/facts/', expected: 'Insufficient evidence' },
+  { name: 'football-international', claim: 'As of 7 October 2026, Cristiano Ronaldo has scored more senior international goals than Neymar.', source: 'https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Cristiano_Ronaldo', sources: ['https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Cristiano_Ronaldo','https://en.wikipedia.org/wiki/List_of_international_goals_scored_by_Neymar'], expected: 'Supported' },
+  { name: 'x-independent', claim: 'Argentina won the 2022 FIFA World Cup.', source: 'https://x.com/FIFAWorldCup/status/1604535989480955908', sources: ['https://en.wikipedia.org/wiki/2022_FIFA_World_Cup'], expected: 'Supported', linkMode: true },
 ].filter(item => process.env.CLAIMLENS_CASES ? process.env.CLAIMLENS_CASES.split(',').includes(item.name) : !item.manualOnly);
 assert.ok(scenarios.length);
 report.requestedCases = scenarios.map(item => item.name);

@@ -4,15 +4,17 @@ A fact-checking application built for GenLayer Bradbury. People submit one Engli
 
 ## Current state
 
-The cinematic interface, private/public drafts, wallet sign-in, profile, source discovery, lifecycle display and transaction recovery are implemented. The corrected Bradbury contract is deployed at `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598`, finalized with successful execution and matching source/policy. It replaces an initial deployment whose live test exposed premature HTML truncation. A real NASA-backed check has a finalized Supported result with independent final-state read-back. A fresh irrelevant-evidence check returned Insufficient evidence and is accepted. Two separate paid X-post checks produced no consensus; both debug traces record UNGROUNDED_QUOTE, and the app displays no verdict. X verdicts are not verified as working.
+ClaimLens is an adjudication layer: its Intelligent Contract independently fetches selected evidence, proposes an evidence-grounded decision, has validators independently derive and audit it, and stores the agreed result with request provenance. The website discovers candidates, manages wallet requests and displays that record.
+
+The current date-reference revision is `0x3E2C5298063d25e1111CFbe54526e46efe35eD3E`, source SHA-256 `49ddcba217c0b1070ff70bfaf623b24e4c387a190075514165ac5778408b9ca3`. It bounds evidence and model work, resolves citations from source passages, and gives both leader and validators the same explicit evaluation-date policy. See the dated release evidence in [reports/verification.md](reports/verification.md) for actual committee outcomes and finality; a deployment or a passing simulation alone is not live verdict proof.
 
 The [public GitHub repository](https://github.com/Inclover05/claimlens) deploys automatically to [Vercel](https://claimlens-inclover05s-projects.vercel.app). A dedicated Neon Free-plan database is connected and the deployed sign-in and private draft API checks pass. The website is publicly accessible without Vercel sign-in. A [real finalized example](https://claimlens-inclover05s-projects.vercel.app/checks/65ad7eca-ffa7-419b-8053-791ce0773550) is available for review. Fresh anonymous browser checks pass for the homepage, themes, mobile layout, motion controls, configuration and public feed.
 
-See [PROJECT_BRIEF.md](PROJECT_BRIEF.md) for the accepted design brief, [DEPLOYMENT.md](DEPLOYMENT.md) for network and deployment preparation, and [reports/verification.md](reports/verification.md) for verified capabilities and remaining live checks.
+See [PROJECT_BRIEF.md](PROJECT_BRIEF.md) for the design brief, [DEPLOYMENT.md](DEPLOYMENT.md) for deployment, [LIMITS.md](LIMITS.md) for operating limits, [INTEGRATION.md](INTEGRATION.md) for consuming the adjudication record, and [SUBMISSION.md](SUBMISSION.md) for the Builder Portal submission draft.
 
 ## Run locally
 
-Node.js 22.13 or later is required. Dependencies are pinned in package-lock.json.
+Use Node.js 24, as configured in CI and Vercel. Dependencies are pinned in package-lock.json.
 
 ```powershell
 npm ci

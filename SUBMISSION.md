@@ -1,43 +1,38 @@
-# ClaimLens — submission draft
+# ClaimLens — Builder Portal submission draft
+
+**Project:** ClaimLens
+
+**Website:** https://claimlens-inclover05s-projects.vercel.app/
+
+**Public source:** https://github.com/Inclover05/claimlens
+
+**Network:** GenLayer Bradbury testnet, chain ID 4221
+
+**Intelligent Contract:** `0x3E2C5298063d25e1111CFbe54526e46efe35eD3E`
 
 ## Short description
 
-ClaimLens checks a factual claim against independently fetched evidence through GenLayer consensus. Users see the verdict, supporting quotations, limits and the transaction record behind the result.
+ClaimLens is an evidence-based adjudication layer for factual claims. Users review public evidence links and approve a Bradbury transaction. The Intelligent Contract fetches evidence, proposes a bounded judgment, and asks validators to independently adjudicate the statement and audit its reasoning and citations. The resulting record includes its verdict, explanation, source quotations, limitations and immutable request hash.
 
-## What GenLayer does
+## Why GenLayer is central
 
-The Python Intelligent Contract fetches 1–4 public HTTPS sources itself. A leader proposes a fact-check; validators independently fetch and assess the evidence, compare verdicts and review the proposed explanation. Quoted evidence must occur in the fetched text. Successful consensus stores the result with the submitting wallet, original input SHA-256, date and policy version.
+The backend does not use a private LLM to decide truth. Non-deterministic evidence retrieval and judgment happen inside GenLayer execution. Independent verification rejects ungrounded, malformed or unsupported proposals. Agreed decisions become shared contract state; other applications can read the owner/check record and apply their own downstream rules. ClaimLens distinguishes provisional acceptance, successful finalization, agreed insufficient evidence, execution failure and absence of consensus.
 
-The five labels are Supported, Contradicted, Misleading, Insufficient evidence and Not a factual claim. A receipt alone is not a verdict: the website requires successful execution and matching result provenance. Accepted results remain visibly provisional until GenLayer finalizes them. Failed execution or absent consensus is shown separately.
+This follows the [adjudication-layer architecture](https://docs.genlayer.com/developers/intelligent-contracts/when-to-use-genlayer) and [independent verification principle](https://docs.genlayer.com/developers/intelligent-contracts/equivalence-principle). It does not claim that every optional protocol feature is mandatory or that Builder Portal acceptance has been certified.
 
-## User journey
+## Reviewer walkthrough
 
-1. Enter one factual claim and an optional source link.
-2. Connect a browser wallet, sign in and choose a profile name.
-3. Review candidate evidence, website visibility and the Bradbury network fee.
-4. Submit through the selected wallet. The website retains the transaction identifier for recovery after a lost response.
-5. Read the evidence, limitations, consensus status and explorer records.
+1. Open the public website and inspect the public finalized example linked in the release report.
+2. Connect an EVM wallet, sign the domain-bound login message and select Bradbury. Testing a new check requires test GEN.
+3. Submit one English factual statement. For football, specify career/club/international scope, competition where relevant, and date. For X, paste the post URL and quote its exact claim.
+4. Review or replace one to four evidence pages. A post URL can remain the original source while independent pages provide the evidence.
+5. Read the privacy disclosure and fee estimate, then approve one wallet transaction. Follow the separate wallet and GenLayer transaction links.
+6. Inspect the verdict, short quotations, caveats, input hash and consensus/finality state. No consensus has no verdict. An owner can review an appeal quote while a decision is accepted and not finalized.
 
-Website-private checks require their owner's session. Blockchain claims, source links, wallet addresses and results can still be public.
+## Evidence and boundaries
 
-## Project links and deployment
+The dated [verification report](reports/verification.md), machine-readable reports and [operating limits](LIMITS.md) distinguish direct tests, runtime simulations and real committee outcomes. Misleading is implemented and covered by direct fixtures; do not claim real committee coverage unless the release matrix includes it. The appeal quote and browser recovery path are verified separately from an actual paid appeal, which has not been tested.
 
-- Repository: https://github.com/Inclover05/claimlens
-- Website: https://claimlens-inclover05s-projects.vercel.app
-- Hosting dashboard: https://vercel.com/inclover05s-projects/claimlens
-- Network: GenLayer Bradbury, chain ID 4221.
-- Contract: `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598`.
-- Policy: `claimlens-evidence-v1`.
-- Deployed source SHA-256: `62054246cfd48fdfd8d4e00aa4b668d0d70b897901345549b400292e9aabc1e2`.
+Text budgets can omit long tables. X can block access. Undated statistics may not establish a precise date. Models can disagree, and validators can time out. A failed check can still cost a network fee. Website-private checks remain publicly inspectable on-chain. The app uses the stable Bradbury SDK/ABI family; Consensus v0.6 requires a coordinated migration and separate fee profiling.
 
-The website is publicly accessible without Vercel sign-in. Review a [real finalized check](https://claimlens-inclover05s-projects.vercel.app/checks/65ad7eca-ffa7-419b-8053-791ce0773550). Wallet sign-in is required to save and submit a claim, while public results can be viewed as a guest.
-
-## Verification and limits
-
-See `reports/verification.md` for the current evidence ledger, `reports/live-website-verification.json` for real browser/chain checks and `reports/bradbury-deployment.json` for finalized deployment evidence. The NASA Supported example is finalized; the separate Insufficient evidence result is accepted and provisional. Two real paid X-post tests failed quote validation and produced no agreed verdict. X verdicts are not verified as working. Use the actual statuses in those reports rather than treating this draft as a release certificate.
-
-The app currently checks one claim in English. X-post checks accept a public post URL and a manually quoted factual claim; automatic post-text extraction is not implemented. Search without a configured search service is limited to the supplied link and Wikipedia candidates. Page text is bounded; inaccessible, irrelevant or unreliable sources and unsuccessful consensus may prevent a conclusion. Consensus does not guarantee absolute truth.
-
-The interface combines selective glass materials, a short logo reveal and a React Three Fiber lens, with a light theme, responsive layouts, reduced-motion fallbacks and an animation pause control.
-
-This is a draft for the owner to adapt. The project has not been submitted to or accepted by the Builder Portal.
+This is the submission text and review guide. It is not a record of a completed portal submission.

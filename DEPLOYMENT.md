@@ -1,10 +1,10 @@
 # ClaimLens deployment preparation
 
-Status: corrected Bradbury deployment finalized with successful execution and exact source/policy verification on 6 October 2026 at 20:40 UTC. A real production Supported result is finalized with final-state read-back. A fresh irrelevant-evidence case has an accepted Insufficient evidence result. Two paid X-post checks failed to reach consensus with UNGROUNDED_QUOTE in their debug replays. Their identifiers, fees and no-verdict browser checks are retained in reports/x-post-live-verification.json and the two X consensus-investigation reports. X verdicts are not verified as working.
+Current revision: **date-reference**, deployed on 7 October 2026 at `0x3E2C5298063d25e1111CFbe54526e46efe35eD3E`, source SHA-256 `49ddcba217c0b1070ff70bfaf623b24e4c387a190075514165ac5778408b9ca3`. Exact source and policy read-back pass. See reports/bradbury-deployment.json and the dated release report for its current consensus state. Accepted deployment and check states remain provisional until protocol finality.
 
-Contract: `0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598`. This replaces the initial contract after real testing found that raw HTML truncation excluded the NASA article. Assets are now removed before the evidence-text limit, article/main content is preferred, entities are decoded and truncation is disclosed. The seven direct runtime tests include large page assets, title-only evidence and incomplete styles. Historical deployment and live-test evidence is retained in `reports/bradbury-deployment-initial.json` and `reports/live-website-verification-initial.json`.
+The revision preserves earlier source extraction fixes, selects exact source passages rather than asking models to invent quotation strings, caps text at 6,000 characters per page and 12,000 overall, and limits each validator to one substantive model audit. The date policy prevents models from treating the reference date as future based on their training clock. Missing or old source dates still require caveats or abstention. Archived deployed bytes are in contracts/releases; earlier deployment and unsuccessful test reports remain available.
 
-For this explicit replacement revision, use `node scripts/deploy-bradbury.mjs status source-extraction`. The revision preserves the initial attempt journal and prevents duplicate replacement deployments. Run `node scripts/finalize-bradbury.mjs <GenLayer-ID>` only when normal protocol finalization is available; it records any submitted hash before broadcast.
+For this revision use `node scripts/deploy-bradbury.mjs status date-reference`. Its journal prevents duplicate deployment after an uncertain response. Run `node scripts/finalize-bradbury.mjs <GenLayer-ID>` only when normal protocol finalization is available; it records any submitted hash before broadcast. Every new source revision needs fresh direct tests, linter, GenVM replay, deployment/source verification and website/committee testing.
 
 ClaimLens asks whether one factual claim is supported by sources independently fetched and assessed inside the Intelligent Contract. The website discovers candidates, saves the immutable request, signs through the selected wallet, and tracks the contract's result. The contract uses custom leader/validator comparison, not exact equality between freely worded AI responses.
 
@@ -27,9 +27,9 @@ For the dedicated local Bradbury test wallet, Windows encrypts the private key f
 
 ```powershell
 node scripts/bradbury-wallet.mjs status
-node scripts/deploy-bradbury.mjs prepare source-extraction
-node scripts/deploy-bradbury.mjs deploy source-extraction
-node scripts/deploy-bradbury.mjs status source-extraction
+node scripts/deploy-bradbury.mjs prepare date-reference
+node scripts/deploy-bradbury.mjs deploy date-reference
+node scripts/deploy-bradbury.mjs status date-reference
 ```
 
 The active journal revision is `source-extraction`; inspecting the initial journal cannot overwrite the current source's release record. Saved balances are explicitly labeled as before-deployment balances; current wallet status is read separately.
