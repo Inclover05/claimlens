@@ -1,10 +1,12 @@
 .git
+.vercel
 .claimlens-wallet
 .env*
 .dev.vars*
 .agents
 .codex
-.openai
+.openai/*
+!.openai/hosting.json
 .sites-runtime
 tmp
 outputs

@@ -1,4 +1,10 @@
-# Verification ledger — 6 October 2026
+# Verification ledger
+
+## Current release — 7 October 2026
+
+Read [the dated release report](release-2026-10-07.md), [operating limits](../LIMITS.md) and [diagnostic interpretation](diagnostic-interpretation.md) for the current contract, test scope and remaining limits. Machine-readable deployment, committee, website and fee records are linked there. The material below records earlier milestones and superseded deployments; it must not be read as the current release matrix.
+
+## Historical verification — 6 October 2026 onward
 
 ## Verified locally
 
