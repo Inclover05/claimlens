@@ -1,0 +1,48 @@
+{
+  "checkedAt": "2026-10-06T22:04:36.844Z",
+  "genHash": "0xcec3af1231d7489e6958a41d7fb3859a1252f141c38ac4487aacb25e5e465634",
+  "round": 2,
+  "scope": "Read-only debug replay is diagnostic and does not establish committee agreement or a stored chain verdict.",
+  "resultCode": 0,
+  "kind": "Return",
+  "fingerprint": {},
+  "proposed": {
+    "as_of": "2026-10-06",
+    "caveats": "The evidence is limited to the provided sources and the 'as_of' date of 2026-10-06. The Wikipedia page discusses 'quasi-satellites,' 'temporary satellites,' and other co-orbital objects, but clarifies these are not true natural satellites in stable orbit around Earth. The definition of a 'natural satellite' here excludes temporary captured objects and co-orbital asteroids.",
+    "evidence": [
+      {
+        "quote": "The Moon is Earth's only natural satellite.",
+        "relation": "supports",
+        "title": "Moon Facts",
+        "url": "https://science.nasa.gov/moon/facts/"
+      },
+      {
+        "quote": "[ 1 ] Although the Moon is Earth's only natural satellite, there are a number of near-Earth objects (NEOs) with orbits that are in resonance with Earth.",
+        "relation": "supports",
+        "title": "Claimed moons of Earth",
+        "url": "https://en.wikipedia.org/wiki/Claimed_moons_of_Earth"
+      },
+      {
+        "quote": "Several candidates have been proposed, but none have been confirmed.",
+        "relation": "supports",
+        "title": "Claimed moons of Earth",
+        "url": "https://en.wikipedia.org/wiki/Claimed_moons_of_Earth"
+      }
+    ],
+    "explanation": "The claim 'The Moon is Earth's only natural satellite' is directly supported by a substantive passage from the NASA source, which states 'The Moon is Earth's only natural satellite.' The Wikipedia page on claimed moons of Earth confirms that no other natural satellites have been confirmed, stating 'Although the Moon is Earth's only natural satellite, there are a number of near-Earth objects...' and that claims of others 'have existed for some time... but none have been confirmed.' The evidence confirms the Moon's unique status as Earth's only confirmed natural satellite.",
+    "input_hash": "6cd6ed6c30312b221c69a402011b4e257f5cbffad0a7b315bf57a6f8949da141",
+    "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
+    "policy": "claimlens-evidence-v1",
+    "verdict": "Supported"
+  },
+  "stdout": "",
+  "stderr": "",
+  "runTime": "0s",
+  "eqOutputCount": 0,
+  "logKeys": [
+    "0",
+    "1",
+    "2",
+    "3"
+  ]
+}

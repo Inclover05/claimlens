@@ -20,6 +20,12 @@ export function safeSource(value:string):string {
 export function validateClaim(claim:string,source:string) {
  if(claim.trim().length<8) throw new Error('Please enter a clear claim of at least 8 characters.');
  if(claim.length>2400 || (!source && claim.length>600)) throw new Error('Keep short claims under 600 characters. Longer claims need a source link and must stay under 2,400 characters.');
+ const guidance=claimGuidance(claim);if(guidance)throw new Error(guidance);
+}
+export function claimGuidance(claim:string):string|null {
+ const vague=/\b(?:more powerful|stronger|bigger|larger)\b.{0,80}\bthan\b/i.test(claim);
+ const metric=/\b(?:gdp|gross domestic product|military spending|defen[cs]e spending|nuclear warheads|population|area|square|km2|km²|goals|points|wins|height|weight|mass|revenue|income|score|rank|index|percent|percentage|rate|capacity|kilomet|kilomet|meters|metres)\b/i.test(claim);
+ return vague&&!metric?'Define the comparison before checking: name the measure and time period. For example, compare GDP in a specified year, military spending, or career goals as of a date.':null;
 }
 export function lifecycle(status:string,execution:string,consensus='UNKNOWN'):string {
  if(['CANCELED','UNDETERMINED'].includes(status))return status.toLowerCase();

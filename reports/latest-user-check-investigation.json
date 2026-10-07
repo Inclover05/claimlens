@@ -1,0 +1,38 @@
+{
+  "checkedAt": "2026-10-07T09:03:51.303Z",
+  "id": "b9bd369f-1a84-4186-8362-babafa3b4fb1",
+  "url": "https://claimlens-inclover05s-projects.vercel.app/checks/b9bd369f-1a84-4186-8362-babafa3b4fb1",
+  "claim": "is russia more powerful than usa",
+  "source": "",
+  "owner": "0x2b01a6d4731d1603269b4ffb686522a3ed9d5f3e",
+  "contract": "0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598",
+  "inputHash": "c6443b7f95ead880686204c1dffb2801ac9062e0889731c550de75d793d39b4d",
+  "evmHash": "0x484aee53cc35de3ad694024811ebb0290c0ede5f1342b5b815ba9106cd469f01",
+  "genHash": "0xcd229a0d9742e602d11c6057769bd8dd91bca0a83a79229f81c0f67c0291b06e",
+  "websiteState": "finalized_no_consensus",
+  "status": "FINALIZED",
+  "execution": "FINISHED_WITH_RETURN",
+  "consensus": "DISAGREE",
+  "round": "4",
+  "votes": [
+    "TIMEOUT",
+    "DETERMINISTIC_VIOLATION",
+    "TIMEOUT",
+    "DETERMINISTIC_VIOLATION",
+    "DETERMINISTIC_VIOLATION"
+  ],
+  "resultHashes": [
+    "0x9fc8d2d92c2ea25ae2ac3d9b20370cb9cb1e53d073b5c1a20b03621ca750f8df",
+    "0x52a930c95bea4ab3735c422b49f10a921b4c15afe8eb3ae815c2019729a76219",
+    "0x9fc8d2d92c2ea25ae2ac3d9b20370cb9cb1e53d073b5c1a20b03621ca750f8df",
+    "0x52a930c95bea4ab3735c422b49f10a921b4c15afe8eb3ae815c2019729a76219",
+    "0x52a930c95bea4ab3735c422b49f10a921b4c15afe8eb3ae815c2019729a76219"
+  ],
+  "emptyFinalContractResult": true,
+  "debugReplay": {
+    "kind": "Return",
+    "error": null,
+    "storageChanges": 4
+  },
+  "scope": "Actual receipt and final-state contract read; debug replay is diagnostic and does not prove the cause of cross-validator fingerprint differences."
+}

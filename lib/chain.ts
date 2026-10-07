@@ -26,7 +26,20 @@ export async function quote(check:SavedCheck) {
  const [gas,price,balance]=await Promise.all([publicClient.estimateGas({account:check.owner as Hex,to:consensus.address,data,value:0n}),publicClient.getGasPrice(),publicClient.getBalance({address:check.owner as Hex})]);
  const gasLimit=gas*120n/100n;
  if(balance<gasLimit*price)throw new HttpError(402,'Your wallet needs Bradbury GEN for the network fee.');
- return {from:check.owner,to:consensus.address,data,value:'0x0',gas:toHex(gasLimit),chainId:'0x107d',gasPrice:toHex(price),feeGen:Number(gasLimit*price)/1e18,expiresAt:now()+300};
+ return {from:check.owner,to:consensus.address,data,value:'0x0',gas:toHex(gasLimit),chainId:'0x107d',gasPrice:toHex(price),feeGen:Number(gasLimit*price)/1e18,expiresAt:now()+300,inputHash:check.input_hash};
+}
+export async function quoteAppeal(check:SavedCheck) {
+ if(!check.gen_hash)throw new HttpError(409,'This check has no GenLayer decision to appeal.');
+ const transaction=await lifecycleClient.getTransaction({hash:check.gen_hash as Hash});
+ if(transaction.statusName!=='ACCEPTED')throw new HttpError(409,'An appeal is available only while a decision is accepted and has not finalized. Refresh the status.');
+ // Bradbury's pinned 1.1.8 deployment uses submitAppeal and an authoritative
+ // minimum bond. Consensus v0.6 uses a different operation and fee policy.
+ const bond=await lifecycleClient.getMinAppealBond({txId:check.gen_hash as Hex});
+ const data=encodeFunctionData({abi:consensus.abi,functionName:'submitAppeal',args:[check.gen_hash as Hex]});
+ const [gas,price,balance]=await Promise.all([publicClient.estimateGas({account:check.owner as Hex,to:consensus.address,data,value:bond}),publicClient.getGasPrice(),publicClient.getBalance({address:check.owner as Hex})]);
+ const gasLimit=gas*120n/100n;
+ if(balance<bond+gasLimit*price)throw new HttpError(402,'Your wallet needs enough Bradbury GEN for the appeal bond and network fee.');
+ return {from:check.owner,to:consensus.address,data,value:toHex(bond),gas:toHex(gasLimit),gasPrice:toHex(price),chainId:'0x107d',feeGen:Number(gasLimit*price)/1e18,bondGen:Number(bond)/1e18,expiresAt:now()+60,genHash:check.gen_hash};
 }
 const createdABI=[{anonymous:false,type:'event',name:'CreatedTransaction',inputs:[{indexed:true,name:'txId',type:'bytes32'},{indexed:false,name:'txSlot',type:'uint256'}]}] as const;
 async function readResult(check:SavedCheck,final:boolean):Promise<CheckResult> {

@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-06T22:03:38.660Z",
+  "origin": "https://claimlens-3y2bklsn0-inclover05s-projects.vercel.app",
+  "id": "b252cdb1-67d7-47b2-bae8-fce59137ea01",
+  "activeContract": "0x56Aa2086c64EB0E8098dfB486aab6e850058bBc6",
+  "savedContract": "0x9d707FdFF0d5C851DDAe081616CCdb60A4B09598",
+  "prepareStatus": 409,
+  "attemptStatus": 409,
+  "immutableFieldsPreserved": true,
+  "transactionSent": false,
+  "ok": true
+}

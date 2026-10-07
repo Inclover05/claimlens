@@ -2,7 +2,7 @@ import { isAddress } from 'viem';
 import { authenticate, body, clientIp, db, digest, HttpError, identity, json, now, rate, requireUser, requestUrl, runtime, sameOrigin } from '@/lib/server';
 import { discover } from '@/lib/discovery';
 import { POLICY, safeSource, validateClaim, submissionContractError, type SavedCheck } from '@/lib/domain';
-import { quote, reconcile } from '@/lib/chain';
+import { quote, quoteAppeal, reconcile } from '@/lib/chain';
 export const dynamic='force-dynamic';
 type Context={params:Promise<{path:string[]}>};
 const string=(value:unknown)=>typeof value==='string'?value:'';
@@ -75,6 +75,18 @@ async function handler(req:Request,ctx:Context){
     if(path[2]==='visibility'){
      const visibility=data.visibility==='private'?'private':'public';await db().prepare('UPDATE checks SET visibility = ?, updated_at = ? WHERE id = ?').bind(visibility,now(),check.id).run();return json({ok:true});
     }
+    if(path[2]==='sources'){
+     if(check.state!=='draft')throw new HttpError(409,'Evidence is fixed once a wallet attempt starts.');
+     if(!Array.isArray(data.sourceUrls)||!data.sourceUrls.length||data.sourceUrls.length>4)throw new HttpError(400,'Choose one to four public evidence links.');
+     let urls:string[];
+     try{urls=[...new Set(data.sourceUrls.map(value=>{if(typeof value!=='string'||!value)throw new Error('Choose public HTTPS evidence links.');return safeSource(value);} ))];}
+     catch{throw new HttpError(400,'Choose one to four public HTTPS evidence links.');}
+     const payload=JSON.stringify({...JSON.parse(check.payload!),source_urls:urls});const inputHash=await digest(payload);
+     const updated=await db().prepare("UPDATE checks SET payload = ?, input_hash = ?, updated_at = ? WHERE id = ? AND state = 'draft' RETURNING id").bind(payload,inputHash,now(),check.id).first();
+     if(!updated)throw new HttpError(409,'A wallet attempt has already fixed this evidence.');
+     return json({ok:true,inputHash});
+    }
+    if(path[2]==='appeal')return json({transaction:await quoteAppeal(check)});
     if(['prepare','attempt'].includes(path[2])){
      const contractError=submissionContractError(check.contract,runtime().GENLAYER_CONTRACT);
      if(contractError)throw new HttpError(runtime().GENLAYER_CONTRACT&&check.contract?409:503,contractError);
@@ -86,7 +98,8 @@ async function handler(req:Request,ctx:Context){
      const transaction=await quote(check);return json({transaction});
     }
     if(path[2]==='attempt'){
-     const result=await db().prepare("UPDATE checks SET state = 'awaiting_wallet', updated_at = ? WHERE id = ? AND state = 'draft' RETURNING id").bind(now(),check.id).first();if(!result)throw new HttpError(409,'A wallet attempt is already in progress.');return json({ok:true});
+     if(data.inputHash!==check.input_hash)throw new HttpError(409,'The evidence changed. Review it and request a fresh fee estimate.');
+     const result=await db().prepare("UPDATE checks SET state = 'awaiting_wallet', updated_at = ? WHERE id = ? AND state = 'draft' AND input_hash = ? RETURNING id").bind(now(),check.id,check.input_hash).first();if(!result)throw new HttpError(409,'A wallet attempt is already in progress or the evidence changed.');return json({ok:true});
     }
     if(path[2]==='rejected'){
      if(check.evm_hash)throw new HttpError(409,'A transaction was already broadcast.');

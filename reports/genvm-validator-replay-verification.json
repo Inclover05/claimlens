@@ -1,0 +1,125 @@
+{
+  "checkedAt": "2026-10-07T09:06:34.730Z",
+  "contract": "0x56Aa2086c64EB0E8098dfB486aab6e850058bBc6",
+  "inputHash": "6cd6ed6c30312b221c69a402011b4e257f5cbffad0a7b315bf57a6f8949da141",
+  "scope": "Live GenVM write simulation and validator replay only; no blockchain write, signature or GEN payment.",
+  "leader": {
+    "status": {
+      "code": 0,
+      "message": "success"
+    },
+    "keys": [
+      "data",
+      "eqOutputs",
+      "status",
+      "stdout",
+      "stderr",
+      "logs",
+      "events",
+      "messages",
+      "nondetDisagreementCallNo",
+      "syncedBlock"
+    ],
+    "eqOutputCount": 1,
+    "nondetDisagreementCallNo": null,
+    "runtime": "v0.2.11-x86_64-linux-release",
+    "metrics": [
+      {
+        "gvm": {
+          "host": {
+            "time": 24765
+          },
+          "llm_module": {
+            "calls": 1,
+            "time": 13520010
+          },
+          "supervisor": {
+            "compilation_time": 0,
+            "compiled_modules": 0,
+            "precompile_hits": 3
+          },
+          "web_module": {
+            "calls": 4,
+            "time": 444918
+          }
+        },
+        "llm": {
+          "Ok": {
+            "scripting": {
+              "requests_count": 1,
+              "requests_time": 13515528
+            }
+          }
+        },
+        "web": {
+          "Ok": {
+            "scripting": {
+              "requests_count": 0,
+              "requests_time": 0
+            }
+          }
+        }
+      }
+    ]
+  },
+  "validator": {
+    "status": {
+      "code": 0,
+      "message": "success"
+    },
+    "keys": [
+      "data",
+      "eqOutputs",
+      "status",
+      "stdout",
+      "stderr",
+      "logs",
+      "events",
+      "messages",
+      "nondetDisagreementCallNo",
+      "syncedBlock"
+    ],
+    "eqOutputCount": 0,
+    "nondetDisagreementCallNo": null,
+    "runtime": "v0.2.11-x86_64-linux-release",
+    "metrics": [
+      {
+        "gvm": {
+          "host": {
+            "time": 13190
+          },
+          "llm_module": {
+            "calls": 2,
+            "time": 7324755
+          },
+          "supervisor": {
+            "compilation_time": 0,
+            "compiled_modules": 0,
+            "precompile_hits": 3
+          },
+          "web_module": {
+            "calls": 4,
+            "time": 263915
+          }
+        },
+        "llm": {
+          "Ok": {
+            "scripting": {
+              "requests_count": 2,
+              "requests_time": 7316377
+            }
+          }
+        },
+        "web": {
+          "Ok": {
+            "scripting": {
+              "requests_count": 0,
+              "requests_time": 0
+            }
+          }
+        }
+      }
+    ]
+  },
+  "completedAt": "2026-10-07T09:06:59.558Z"
+}

@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-06T21:00:29.992Z",
+  "checkedAt": "2026-10-06T22:03:07.393Z",
   "genHash": "0x11421407d5b999d4696a312fad847301fde6a86a50d4bbbb68e35fa2c3525387",
-  "status": "ACCEPTED",
+  "status": "FINALIZED",
   "result": "AGREE",
   "execution": "FINISHED_WITH_RETURN",
   "round": "0",

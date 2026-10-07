@@ -9,7 +9,7 @@ import SiteHeader from './site-header';
 import SiteFooter from './site-footer';
 import CheckCard from './check-card';
 import { api } from '@/lib/client-api';
-import { safeSource, type SavedCheck } from '@/lib/domain';
+import { claimGuidance, safeSource, type SavedCheck } from '@/lib/domain';
 
 const examples = [
   {topic:'Football',claim:'Argentina won the 2022 FIFA World Cup.'},
@@ -36,7 +36,8 @@ export default function ClaimLens() {
   let sourceError = '';
   if (source.trim()) {try {safeSource(source.trim());} catch {sourceError='Use a public HTTPS link, such as https://x.com/…';}}
   const tooLong = claim.length > lengthLimit;
-  const ready = !walletLoading && claim.trim().length >= 8 && !tooLong && !sourceError && (mode!=='link' || !!source.trim());
+  const guidance = claimGuidance(claim);
+  const ready = !walletLoading && claim.trim().length >= 8 && !tooLong && !sourceError && !guidance && (mode!=='link' || !!source.trim());
 
   useEffect(()=>{
     const controller = new AbortController();
@@ -88,7 +89,7 @@ export default function ClaimLens() {
           {mode==='link'&&<div className="link-mode-input"><label htmlFor="post-link">Post or article link</label><div className={`source-input ${sourceError?'invalid':''}`}><Link2 size={16}/><input id="post-link" type="url" value={source} onChange={e=>setSource(e.target.value)} placeholder="https://x.com/username/status/…" aria-describedby="claim-help"/><ArrowUpRight size={14}/></div></div>}
           <label className="claim-label" htmlFor="claim">{mode==='link'?'The claim in the post':'What would you like to fact-check?'}</label>
           <textarea ref={textarea} id="claim" value={claim} onChange={e=>{setClaim(e.target.value);if(error)setError('');}} maxLength={2400} placeholder={mode==='link'?'Quote the exact statement you want checked…':'Write one clear, factual statement…'} aria-describedby="claim-help claim-counter" aria-invalid={tooLong} onKeyDown={e=>{if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){e.preventDefault();void submit();}}}/>
-          <div className={`input-hint ${tooLong?'invalid-hint':''}`}><span id="claim-help">{sourceError|| (tooLong?'Add a source link for a claim over 600 characters.':mode==='link'?'Quote one claim; a link alone is not enough.':'English only · one factual statement at a time.')}</span><span id="claim-counter">{claim.length}<span> / {lengthLimit.toLocaleString('en')}</span></span></div>
+          <div className={`input-hint ${tooLong?'invalid-hint':''}`}><span id="claim-help">{sourceError||guidance|| (tooLong?'Add a source link for a claim over 600 characters.':mode==='link'?'Quote one claim; a link alone is not enough.':'English only · one factual statement at a time.')}</span><span id="claim-counter">{claim.length}<span> / {lengthLimit.toLocaleString('en')}</span></span></div>
           {mode==='text'&&<div className={`source-input ${sourceError?'invalid':''}`}><Link2 size={16}/><input aria-label="Source link" type="url" value={source} onChange={e=>setSource(e.target.value)} placeholder="Add a source link (optional)"/><ArrowUpRight size={14}/></div>}
           <div className="composer-bottom">
             <div className="visibility"><Switch id="private" checked={privateCheck} onCheckedChange={setPrivateCheck} aria-label="Keep this check private"/><label htmlFor="private">{privateCheck?<LockKeyhole size={14}/>:<Globe2 size={14}/>} {privateCheck?'Private':'Public'}</label></div>

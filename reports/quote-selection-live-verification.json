@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-10-06T21:56:32.581Z",
+  "origin": "https://claimlens-dytxpfv10-inclover05s-projects.vercel.app",
+  "contract": "0x56Aa2086c64EB0E8098dfB486aab6e850058bBc6",
+  "address": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
+  "scope": "Real public Vercel browser, wallet signature, API, Neon and Bradbury writes; no Vercel session or bypass headers",
+  "cases": [],
+  "checks": [
+    "Real browser wallet sign-in and saved profile"
+  ],
+  "liveDecisionVerified": false,
+  "requestedCases": [
+    "supported",
+    "neymar-comparison",
+    "x-post",
+    "contradicted",
+    "opinion",
+    "irrelevant-evidence"
+  ],
+  "ok": false,
+  "error": "Consensus decision timed out; resume the saved transaction",
+  "completedAt": "2026-10-06T22:11:44.255Z",
+  "consoleErrors": []
+}

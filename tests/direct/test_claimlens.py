@@ -23,7 +23,7 @@ def mock_answer(vm, value):
 def mocks(vm,verdict='Contradicted',body=TEXT,status=200):
     vm.mock_web('nasa.gov',{'status':status,'body':body})
     mock_answer(vm,answer(verdict))
-    vm.mock_llm('^Verify the proposed',json.dumps({'valid':True}))
+    vm.mock_llm('^Verify the proposed',json.dumps({'valid':True,'independent_verdict':verdict,'reason':'The source supports this conclusion and its explanation.'}))
 
 @pytest.fixture(scope="module")
 def base_case():
@@ -122,7 +122,7 @@ def test_insufficient_evidence_can_be_an_honest_result(case):
     vm,contract,payload=case
     vm.mock_web('nasa.gov',{'status':200,'body':TEXT})
     value={'verdict':'Insufficient evidence','explanation':'The accessible source is unrelated to the requested assertion.','caveats':'No relevant primary evidence.','evidence':[]}
-    vm.mock_llm('^Adjudicate ONE',json.dumps(value));vm.mock_llm('^Verify the proposed',json.dumps({'valid':True}))
+    vm.mock_llm('^Adjudicate ONE',json.dumps(value));vm.mock_llm('^Verify the proposed',json.dumps({'valid':True,'independent_verdict':value['verdict'],'reason':'The source supports this conclusion and its explanation.'}))
     contract.check_claim(payload)
     assert vm.run_validator() is True
 
@@ -131,7 +131,7 @@ def test_large_page_assets_do_not_displace_article_evidence(case):
     body='<html><head><style>'+('.asset{color:red}'*16000)+'</style></head><body><nav>Navigation only</nav><main><article><p>'+TEXT.replace('sunlight','sunlight &amp; reflected light')+'</p></article></main></body></html>'
     value=answer()
     vm.mock_web('nasa.gov',{'status':200,'body':body})
-    vm.mock_llm('^Adjudicate ONE',json.dumps(value));vm.mock_llm('^Verify the proposed',json.dumps({'valid':True}))
+    vm.mock_llm('^Adjudicate ONE',json.dumps(value));vm.mock_llm('^Verify the proposed',json.dumps({'valid':True,'independent_verdict':value['verdict'],'reason':'The source supports this conclusion and its explanation.'}))
     contract.check_claim(payload)
     request=json.loads(payload)
     result=json.loads(contract.get_check(request['owner'],request['id']))
@@ -157,7 +157,7 @@ def test_invalid_reference_is_repaired_without_changing_source_text(case):
     bad=answer();bad['evidence'][0]['passage_id']='missing'
     vm.mock_llm('^Adjudicate ONE',json.dumps(bad))
     vm.mock_llm('^Repair the invalid',json.dumps(answer()))
-    vm.mock_llm('^Verify the proposed',json.dumps({'valid':True}))
+    vm.mock_llm('^Verify the proposed',json.dumps({'valid':True,'independent_verdict':'Contradicted','reason':'The source supports this conclusion and its explanation.'}))
     contract.check_claim(payload)
     request=json.loads(payload)
     result=json.loads(contract.get_check(request['owner'],request['id']))
@@ -168,7 +168,7 @@ def test_model_cannot_replace_a_selected_quote_with_fabricated_text(case):
     vm,contract,payload=case
     vm.mock_web('nasa.gov',{'status':200,'body':TEXT})
     value=answer();value['evidence'][0]['quote']='An invented statistic that is absent from this source.'
-    mock_answer(vm,value);vm.mock_llm('^Verify the proposed',json.dumps({'valid':True}))
+    mock_answer(vm,value);vm.mock_llm('^Verify the proposed',json.dumps({'valid':True,'independent_verdict':'Contradicted','reason':'The source supports this conclusion and its explanation.'}))
     contract.check_claim(payload)
     request=json.loads(payload)
     assert json.loads(contract.get_check(request['owner'],request['id']))['evidence'][0]['quote']==QUOTE
@@ -176,7 +176,7 @@ def test_model_cannot_replace_a_selected_quote_with_fabricated_text(case):
 def test_passages_are_bounded_exact_unicode_substrings():
     tree=ast.parse(CONTRACT.read_text(encoding='utf-8'))
     nodes=[item for item in tree.body if isinstance(item,ast.FunctionDef) and item.name in ['clean','source_text','passages']]
-    namespace={'re':re,'unescape':unescape}
+    namespace={'re':re,'unescape':unescape,'MAX_PAGE_TEXT':6000}
     exec(compile(ast.Module(body=nodes,type_ignores=[]),str(CONTRACT),'exec'),namespace)
     text=('Neymar’s career totals require a defined competition and date. '+('A long substantive sentence with statistical context '*20)+'. '+('x'*175)+'.')
     parts=namespace['passages'](text)
@@ -195,4 +195,36 @@ def test_label_roundtrip_with_resolved_citations(case,label):
     request=json.loads(payload)
     assert json.loads(contract.get_check(request['owner'],request['id']))['verdict']==label
     assert vm.run_validator() is True
+
+@pytest.mark.parametrize('judgment',[
+    {'valid':False,'independent_verdict':'Contradicted','reason':'The explanation invents a fact.'},
+    {'valid':True,'independent_verdict':'Supported','reason':'The independent decision differs.'},
+    {'valid':True},
+    {'valid':'true','independent_verdict':'Contradicted','reason':'Incorrect boolean type.'},
+    {'valid':True,'independent_verdict':'Contradicted','reason':''},
+])
+def test_validator_requires_independent_decision_and_substantive_audit(case,judgment):
+    vm,contract,payload=case
+    mocks(vm);contract.check_claim(payload)
+    vm.clear_mocks();vm.mock_web('nasa.gov',{'status':200,'body':TEXT})
+    vm.mock_llm('^Verify the proposed',json.dumps(judgment))
+    assert vm.run_validator() is False
+
+def test_evidence_text_budget_marks_truncation(case):
+    vm,contract,payload=case
+    mocks(vm,body=TEXT*200)
+    contract.check_claim(payload)
+    assert vm.run_validator() is True
+    tree=ast.parse(CONTRACT.read_text(encoding='utf-8'))
+    nodes=[item for item in tree.body if isinstance(item,ast.FunctionDef) and item.name in ['clean','source_text']]
+    namespace={'re':re,'unescape':unescape,'MAX_PAGE_TEXT':6000}
+    exec(compile(ast.Module(body=nodes,type_ignores=[]),str(CONTRACT),'exec'),namespace)
+    text,truncated=namespace['source_text']((TEXT*200).encode())
+    assert len(text)==6000 and truncated is True
+
+def test_claim_cannot_supply_owner_or_replace_policy(case):
+    vm,contract,payload=case
+    for changed in [{'owner':str(create_address('attacker')).lower()},{'policy':'attacker-policy'},{'schema':2}]:
+        with pytest.raises(Exception,match='INVALID_PROVENANCE'):
+            contract.check_claim(json.dumps({**json.loads(payload),**changed}))
 
