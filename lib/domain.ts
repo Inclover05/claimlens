@@ -23,6 +23,7 @@ export function validateClaim(claim:string,source:string) {
  const guidance=claimGuidance(claim);if(guidance)throw new Error(guidance);
 }
 export function claimGuidance(claim:string):string|null {
+ if(/\b(?:more|fewer|less)\b.{0,30}\b(?:goals|points|wins|titles)\b.{0,80}\bthan\b/i.test(claim)&&!/\b(?:career|club|international|league|season|tournament|world cup|premier|champions)\b/i.test(claim))return 'Define which statistics count before checking: career totals, club or international records, or a named competition and season. Include the date of the comparison.';
  const vague=/\b(?:more powerful|stronger|bigger|larger)\b.{0,80}\bthan\b/i.test(claim);
  const metric=/\b(?:gdp|gross domestic product|military spending|defen[cs]e spending|nuclear warheads|population|area|square|km2|km²|goals|points|wins|height|weight|mass|revenue|income|score|rank|index|percent|percentage|rate|capacity|kilomet|kilomet|meters|metres)\b/i.test(claim);
  return vague&&!metric?'Define the comparison before checking: name the measure and time period. For example, compare GDP in a specified year, military spending, or career goals as of a date.':null;

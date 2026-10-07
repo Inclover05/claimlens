@@ -35,6 +35,7 @@ export async function quoteAppeal(check:SavedCheck) {
  // Bradbury's pinned 1.1.8 deployment uses submitAppeal and an authoritative
  // minimum bond. Consensus v0.6 uses a different operation and fee policy.
  const bond=await lifecycleClient.getMinAppealBond({txId:check.gen_hash as Hex});
+ if(await publicClient.getBalance({address:check.owner as Hex})<bond)throw new HttpError(402,'Your wallet needs enough Bradbury GEN for the appeal bond and network fee.');
  const data=encodeFunctionData({abi:consensus.abi,functionName:'submitAppeal',args:[check.gen_hash as Hex]});
  const [gas,price,balance]=await Promise.all([publicClient.estimateGas({account:check.owner as Hex,to:consensus.address,data,value:bond}),publicClient.getGasPrice(),publicClient.getBalance({address:check.owner as Hex})]);
  const gasLimit=gas*120n/100n;

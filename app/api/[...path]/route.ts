@@ -11,6 +11,7 @@ async function handler(req:Request,ctx:Context){
   const {path}=await ctx.params;const route=path.join('/');const url=requestUrl(req);
   if(req.method==='GET'){
    if(route==='config')return json({chainId:4221,contract:runtime().GENLAYER_CONTRACT||null,searchEnabled:!!runtime().BRAVE_SEARCH_API_KEY,policy:POLICY});
+   if(route==='capabilities')return json({network:'Bradbury testnet',chainId:4221,contract:runtime().GENLAYER_CONTRACT||null,policy:POLICY,language:'English',maximumSources:4,maximumTextCharactersPerPage:6000,maximumTotalTextCharacters:12000,maximumQuoteCharacters:160,websitePrivacy:'Owner-only website access; blockchain data remains public',results:'Evidence adjudication; accepted results are provisional until finality',limitations:['Evidence is limited to selected accessible pages','X links can be blocked; quote the claim and provide independent evidence','No consensus or failed execution produces no verdict','Historical page versions and exhaustive web search are not guaranteed']});
    if(route==='auth/me')return json({user:await identity(req)});
    if(route==='checks'){
     const mine=url.searchParams.get('mine')==='true';const user=mine?await requireUser(req):null;

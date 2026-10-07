@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {claimGuidance,validateClaim} from '../lib/domain.ts';
 test('ambiguous comparisons require a measure before a paid check',()=>{
- for(const claim of ['is russia more powerful than usa','France is larger than Japan.','Is one team stronger than the other?'])assert.ok(claimGuidance(claim));
+ for(const claim of ['is russia more powerful than usa','France is larger than Japan.','Is one team stronger than the other?','neymar has scored more goals than CR7','Team A has more points than Team B'])assert.ok(claimGuidance(claim));
  assert.throws(()=>validateClaim('is russia more powerful than usa',''),/Define the comparison/);
 });
 test('measured comparisons, factual claims and opinion classification remain possible',()=>{

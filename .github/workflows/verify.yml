@@ -1,0 +1,23 @@
+name: Verify ClaimLens
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm test
+      - run: node node_modules/typescript/bin/tsc --noEmit
+      - run: npx eslint lib/domain.ts lib/discovery.ts lib/discovery-queries.ts lib/chain.ts 'app/api/[...path]/route.ts' components/claimlens.tsx components/check-detail.tsx components/appeal-control.tsx
+      - run: npm run build:vercel

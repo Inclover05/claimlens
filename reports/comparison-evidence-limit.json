@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-07T09:43:50.846Z",
+  "id": "1f929806-4c31-40b4-82a9-d40b91b268f4",
+  "genHash": "0xb5770f322b623a764008566392032bd01f4fe82c02c5e94f03b5dad7a99ccd6b",
+  "inputHash": "c7cbed4a67fbf8d9639931b442371e24b882f42e8aeca19e33d32cdb64ca6765",
+  "sourceUrls": [
+    "https://en.wikipedia.org/wiki/Neymar",
+    "https://en.wikipedia.org/wiki/Cristiano_Ronaldo"
+  ],
+  "result": {
+    "as_of": "2026-10-07",
+    "caveats": "The evidence is truncated Wikipedia pages, which may omit data from other competitions (e.g., domestic cups, continental cups). The 'as_of' date is 2026-10-07, but the source data may have different update timestamps (e.g., club stats updated September 2026). The claim's lack of specificity makes a factual adjudication impossible.",
+    "evidence": [],
+    "explanation": "The claim 'Neymar has scored more goals than CR7' is ambiguous. It does not specify the scope of the comparison (e.g., total career goals, goals for club and country, goals in a specific league, or goals as of a specific date). The provided Wikipedia sources contain statistical data for each player, but they are structured differently and may not cover all competitions. The Neymar page (passages p39-p43) lists his senior club league goals and international goals (p41). The Cristiano Ronaldo page (passages p25-p31) lists his senior club league goals and international goals (p39-p40). However, without a clear definition of what 'goals' are being counted and a complete, directly comparable total from a reliable source, the evidence is insufficient to adjudicate the claim.",
+    "input_hash": "c7cbed4a67fbf8d9639931b442371e24b882f42e8aeca19e33d32cdb64ca6765",
+    "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
+    "policy": "claimlens-evidence-v1",
+    "verdict": "Insufficient evidence"
+  },
+  "scope": "Actual agreed abstention; this test did not establish the requested Contradicted outcome."
+}

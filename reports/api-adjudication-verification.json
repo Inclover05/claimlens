@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-10-07T09:38:47.203Z",
+  "origin": "https://claimlens-vm4rp4lnt-inclover05s-projects.vercel.app",
+  "fixtureAddress": "0x4ff82be2c8de9a9eefdbe5778d3195817e85c197",
+  "scope": "Real API, EOA signature and Neon; ephemeral unfunded account; no chain transaction.",
+  "checks": [
+    "Origin-bound sign-in and nonce replay protection",
+    "Ambiguous comparisons blocked before a paid check",
+    "Private checks and evidence edit authorization; unsafe and oversized source lists rejected",
+    "Evidence edits recompute exact immutable-request provenance",
+    "Stale fee quote cannot start a wallet attempt",
+    "Wallet attempt fixes evidence and prevents duplicate attempts",
+    "Drafts cannot be appealed and explicit wallet rejection unlocks a draft"
+  ],
+  "fixtureId": "cadfddad-e00b-4dc1-989e-d1c63563bbcf",
+  "ok": true,
+  "fixtureDraftRemoved": true,
+  "completedAt": "2026-10-07T09:38:55.002Z"
+}

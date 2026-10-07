@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-10-07T09:37:44.717Z",
+  "origin": "https://claimlens-vm4rp4lnt-inclover05s-projects.vercel.app",
+  "contract": "0xC2bB14Ac852e7ABa10cC9b5529c1740F70C056Ed",
+  "address": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
+  "scope": "Real public Vercel browser, wallet signature, API, Neon and Bradbury writes; no Vercel session or bypass headers",
+  "cases": [
+    {
+      "name": "supported",
+      "id": "889245c8-2f54-4e52-a06f-496e40c317f8",
+      "claim": "The Moon is Earth's only natural satellite.",
+      "state": "accepted",
+      "verdict": "Supported",
+      "evmHash": "0xd233ce292117fd39501c0611a632e9bb61f1b1b61cae25e784ae77fb433adb47",
+      "genHash": "0xdaa4ce1195e7f359d1269fcf62363c19eaff2f95f0acda5b407515c927e4e72f",
+      "inputHash": "42abe915fcc6e2bc96b575c961c92744004793705cfede4be5c4745d37d46eac",
+      "executionResult": "FINISHED_WITH_RETURN",
+      "networkFeeGEN": "0.00019724217914445",
+      "independentReadBackMatched": true,
+      "result": {
+        "as_of": "2026-10-07",
+        "caveats": "The evidence is from a single source, NASA's science website, which is authoritative for this domain. The 'as_of' date of 2026-10-07 is in the future relative to the source's likely publication date, but the factual statement about Earth's Moon is a long-established scientific fact unlikely to change. The source's content may be truncated, but the relevant passage is complete and unambiguous.",
+        "evidence": [
+          {
+            "quote": "The Moon is Earth's only natural satellite.",
+            "relation": "supports",
+            "title": "Earth's Moon Moon Facts",
+            "url": "https://science.nasa.gov/moon/facts/"
+          }
+        ],
+        "explanation": "The provided source from NASA's Moon facts page explicitly states, 'The Moon is Earth's only natural satellite.' This is a direct factual assertion from a reliable scientific authority. No evidence from the source contradicts this claim.",
+        "input_hash": "42abe915fcc6e2bc96b575c961c92744004793705cfede4be5c4745d37d46eac",
+        "owner": "0xfa47b90a45f11e1b8e5f1fefcc8f248c6ddbcdf1",
+        "policy": "claimlens-evidence-v1",
+        "verdict": "Supported"
+      },
+      "guestDenied": true,
+      "publicFeedExcluded": true
+    }
+  ],
+  "checks": [
+    "Real browser wallet sign-in and saved profile"
+  ],
+  "liveDecisionVerified": false,
+  "requestedCases": [
+    "supported",
+    "neymar-comparison",
+    "x-post",
+    "contradicted",
+    "opinion",
+    "irrelevant-evidence"
+  ],
+  "ok": false,
+  "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Insufficient evidence'\n- 'Contradicted'\n",
+  "completedAt": "2026-10-07T09:42:14.442Z",
+  "consoleErrors": []
+}
